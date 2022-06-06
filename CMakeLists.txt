@@ -21,6 +21,7 @@ set(PROJECT_SOURCES
         widget.cpp
         widget.h
         widget.ui
+        resources.qrc
         ${TS_FILES}
 )
 
