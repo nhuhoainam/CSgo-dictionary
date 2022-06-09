@@ -3,8 +3,11 @@
 
 #include <QWidget>
 #include <QButtonGroup>
-#include <vector>
-#include <array>
+#include <QButtonGroup>
+#include <QKeyEvent>
+#include <QLabel>
+#include <queue>
+#include <stack>
 
 namespace Ui {
 class Game;
@@ -22,27 +25,36 @@ private slots:
     void checkAnswer(int i);
 
 public slots:
-    void nextQuestionSet(const QString &keyword,
-                         const QString &answer,
-                         const QString &option1,
-                         const QString &option2,
-                         const QString &option3,
-                         const QString &option4);
+    void nextQuestionSet();
+
+    void addQuestionSets(std::vector<std::array<QString, 6>> questions) {
+        for (std::array<QString, 6> a : questions) {
+            m_questionSets.push(a);
+        }
+    }
 
 signals:
     void answerChosen(int option);
-    void requestNextQuestionSet();
+    void requestNextQuestionSets(int n=1);
     void correct();
     void wrong();
+    void thresholdReached();
+    void outOfQuestions();
 
 private:
     void mousePressEvent(QMouseEvent *event) override;
     void keyPressEvent(QKeyEvent *event) override;
+    void resizeEvent(QResizeEvent *event) override;
 
     QString m_answer;
     QButtonGroup *m_optionButtons;
+
+    QLabel *startScreen;
+    QWidget *emptyScreen;
     QWidget *blocker;
-    std::vector<std::array<QString, 6>> m_history;
+    std::vector<std::array<QString, 6>> m_polledQuestionSets;
+    std::queue<std::array<QString, 6>> m_questionSets;
+    int m_requestThreshold = 5;
     Ui::Game *ui;
 };
 

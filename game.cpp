@@ -1,8 +1,7 @@
 #include "game.h"
 #include "ui_game.h"
 
-#include <QButtonGroup>
-#include <QKeyEvent>
+#include <iostream>
 
 Game::Game(QWidget *parent) :
     QWidget(parent),
@@ -21,32 +20,55 @@ Game::Game(QWidget *parent) :
     blocker->resize( width(), height());
     blocker->hide();
 
+    startScreen = new QLabel("Press any key to start...", this);
+    startScreen->setStyleSheet("background-color: rgba(61,61, 61, 100); color: white");
+    startScreen->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
+    startScreen->setFont(QFont("Sans serif", 42, 100));
+    startScreen->resize(width(), height());
+    startScreen->show();
+
+    emptyScreen = new QWidget(this);
+    emptyScreen->setStyleSheet("background-color: rgba(61,61, 61, 100);");
+    emptyScreen->resize(width(), height());
+    emptyScreen->hide();
+
+
     connect(m_optionButtons, &QButtonGroup::idClicked, this, [=](int id) {
         emit answerChosen(id);
         blocker->show();
     });
 
+    connect(this, &Game::thresholdReached, this, [=]() {
+        emit requestNextQuestionSets(10);
+    });
+
     connect(this, &Game::answerChosen, this, &Game::checkAnswer);
+    connect(this, &Game::outOfQuestions, this, [=]() {
+        emptyScreen->show();
+    });
 }
 
-void Game::nextQuestionSet(const QString &keyword,
-                           const QString &answer,
-                           const QString &option1,
-                           const QString &option2,
-                           const QString &option3,
-                           const QString &option4)
+void Game::nextQuestionSet()
 {
-    ui->word->setText(keyword);
-    m_optionButtons->button(1)->setText(option1);
-    m_optionButtons->button(2)->setText(option2);
-    m_optionButtons->button(3)->setText(option3);
-    m_optionButtons->button(4)->setText(option4);
+     std::cout << "SET TEXT" << std::endl;
+    if (!m_questionSets.empty()) {
+        auto currentSet = m_questionSets.front();
+        for (int i = 1; i <= 4; i++) {
+            m_optionButtons->button(i)->setText(currentSet[i+1]);
+        }
+        ui->word->setText(currentSet[0]);
+        m_answer = currentSet[1];
+    }
 
     for (auto btn : m_optionButtons->buttons()) {
         btn->setStyleSheet("");
     }
 
-    m_answer = answer;
+    if (!m_questionSets.empty())
+        m_questionSets.pop();
+    else {
+        emit outOfQuestions();
+    }
 }
 
 void Game::checkAnswer(int i) {
@@ -54,7 +76,7 @@ void Game::checkAnswer(int i) {
     if (m_answer != m_optionButtons->button(i)->text()) {
         emit wrong();
 
-        int correctIndex;
+        int correctIndex = 1;
         for (int i = 1; i <= 4; i++) {
             if (m_optionButtons->button(i)->text() == m_answer) {
                 correctIndex = i;
@@ -77,8 +99,13 @@ Game::~Game()
 }
 
 void Game::mousePressEvent(QMouseEvent *event) {
+    if (!startScreen->isHidden()) {
+        startScreen->hide();
+        nextQuestionSet();
+    }
     if (!blocker->isHidden()) {
         blocker->hide();
+        nextQuestionSet();
     }
 
     for (auto btn : m_optionButtons->buttons()) {
@@ -90,6 +117,7 @@ void Game::mousePressEvent(QMouseEvent *event) {
 void Game::keyPressEvent(QKeyEvent *event) {
     if (!blocker->isHidden()) {
         blocker->hide();
+        nextQuestionSet();
     }
 
     for (auto btn : m_optionButtons->buttons()) {
@@ -110,3 +138,13 @@ void Game::keyPressEvent(QKeyEvent *event) {
         break;
     }
 }
+
+void Game::resizeEvent(QResizeEvent *event) {
+    blocker->resize(event->size());
+    startScreen->resize(event->size());
+    emptyScreen->resize(width(), height());
+    ui->btnLayout->setSpacing(event->size().width() / 15);
+    ui->btnLayout->setMargin(event->size().width() / 15);
+    QWidget::resizeEvent(event);
+}
+
