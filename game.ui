@@ -38,7 +38,8 @@
     <widget class="QLabel" name="word">
      <property name="font">
       <font>
-       <pointsize>16</pointsize>
+       <pointsize>22</pointsize>
+       <bold>false</bold>
       </font>
      </property>
      <property name="text">
@@ -88,7 +89,7 @@
       </widget>
      </item>
      <item>
-      <layout class="QGridLayout" name="gridLayout">
+      <layout class="QGridLayout" name="btnLayout">
        <property name="spacing">
         <number>40</number>
        </property>
@@ -99,6 +100,11 @@
            <horstretch>0</horstretch>
            <verstretch>0</verstretch>
           </sizepolicy>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>16</pointsize>
+          </font>
          </property>
          <property name="text">
           <string>Answer 4</string>
@@ -113,6 +119,11 @@
            <verstretch>0</verstretch>
           </sizepolicy>
          </property>
+         <property name="font">
+          <font>
+           <pointsize>16</pointsize>
+          </font>
+         </property>
          <property name="text">
           <string>Answer 1</string>
          </property>
@@ -126,6 +137,11 @@
            <verstretch>0</verstretch>
           </sizepolicy>
          </property>
+         <property name="font">
+          <font>
+           <pointsize>16</pointsize>
+          </font>
+         </property>
          <property name="text">
           <string>Answer 2</string>
          </property>
@@ -138,6 +154,11 @@
            <horstretch>0</horstretch>
            <verstretch>0</verstretch>
           </sizepolicy>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>16</pointsize>
+          </font>
          </property>
          <property name="text">
           <string>Answer 3</string>
