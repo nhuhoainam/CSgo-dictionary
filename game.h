@@ -3,6 +3,8 @@
 
 #include <QWidget>
 #include <QButtonGroup>
+#include <vector>
+#include <array>
 
 namespace Ui {
 class Game;
@@ -40,6 +42,7 @@ private:
     QString m_answer;
     QButtonGroup *m_optionButtons;
     QWidget *blocker;
+    std::vector<std::array<QString, 6>> m_history;
     Ui::Game *ui;
 };
 

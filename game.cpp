@@ -21,7 +21,7 @@ Game::Game(QWidget *parent) :
     blocker->resize( width(), height());
     blocker->hide();
 
-    connect(m_optionButtons, &QButtonGroup::idClicked, [=](int id) {
+    connect(m_optionButtons, &QButtonGroup::idClicked, this, [=](int id) {
         emit answerChosen(id);
         blocker->show();
     });
@@ -42,6 +42,10 @@ void Game::nextQuestionSet(const QString &keyword,
     m_optionButtons->button(3)->setText(option3);
     m_optionButtons->button(4)->setText(option4);
 
+    for (auto btn : m_optionButtons->buttons()) {
+        btn->setStyleSheet("");
+    }
+
     m_answer = answer;
 }
 
@@ -49,8 +53,21 @@ void Game::checkAnswer(int i) {
 
     if (m_answer != m_optionButtons->button(i)->text()) {
         emit wrong();
+
+        int correctIndex;
+        for (int i = 1; i <= 4; i++) {
+            if (m_optionButtons->button(i)->text() == m_answer) {
+                correctIndex = i;
+                break;
+            }
+        }
+
+        m_optionButtons->button(correctIndex)->setStyleSheet("background-color: green;");
+        m_optionButtons->button(i)->setStyleSheet("background-color: red");
     } else {
         emit correct();
+
+        m_optionButtons->button(i)->setStyleSheet("background-color: green");
     }
 }
 
@@ -63,12 +80,20 @@ void Game::mousePressEvent(QMouseEvent *event) {
     if (!blocker->isHidden()) {
         blocker->hide();
     }
+
+    for (auto btn : m_optionButtons->buttons()) {
+        btn->setStyleSheet("");
+    }
     QWidget::mousePressEvent(event);
 }
 
 void Game::keyPressEvent(QKeyEvent *event) {
     if (!blocker->isHidden()) {
         blocker->hide();
+    }
+
+    for (auto btn : m_optionButtons->buttons()) {
+        btn->setStyleSheet("");
     }
     switch (event->key()) {
     case Qt::Key_1:
@@ -85,5 +110,3 @@ void Game::keyPressEvent(QKeyEvent *event) {
         break;
     }
 }
-
-
