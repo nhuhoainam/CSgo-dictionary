@@ -43,7 +43,7 @@
       </font>
      </property>
      <property name="text">
-      <string>Word</string>
+      <string/>
      </property>
      <property name="alignment">
       <set>Qt::AlignCenter</set>
@@ -107,7 +107,7 @@
           </font>
          </property>
          <property name="text">
-          <string>Answer 4</string>
+          <string/>
          </property>
         </widget>
        </item>
@@ -125,7 +125,7 @@
           </font>
          </property>
          <property name="text">
-          <string>Answer 1</string>
+          <string/>
          </property>
         </widget>
        </item>
@@ -143,7 +143,7 @@
           </font>
          </property>
          <property name="text">
-          <string>Answer 2</string>
+          <string/>
          </property>
         </widget>
        </item>
@@ -161,7 +161,7 @@
           </font>
          </property>
          <property name="text">
-          <string>Answer 3</string>
+          <string/>
          </property>
         </widget>
        </item>

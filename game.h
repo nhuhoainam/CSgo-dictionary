@@ -20,26 +20,17 @@ class Game : public QWidget
 public:
     explicit Game(QWidget *parent = nullptr);
     ~Game();
+    void addQuestionSets(std::vector<std::array<QString, 6>> questions);
 
 private slots:
     void checkAnswer(int i);
+    void nextQuestion();
+    void prevQuestion();
 
 public slots:
-    void nextQuestionSet();
-
-    void addQuestionSets(std::vector<std::array<QString, 6>> questions) {
-        for (std::array<QString, 6> a : questions) {
-            m_questionSets.push(a);
-        }
-    }
 
 signals:
-    void answerChosen(int option);
-    void requestNextQuestionSets(int n=1);
-    void correct();
-    void wrong();
-    void thresholdReached();
-    void outOfQuestions();
+    void requestNewQuestionSets(int n=1);
 
 private:
     void mousePressEvent(QMouseEvent *event) override;
