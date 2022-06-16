@@ -25,6 +25,8 @@ set(PROJECT_SOURCES
         game.h
         game.cpp
         game.ui
+        wordcard.cpp
+        wordcard.h
         ${TS_FILES}
 )
 
