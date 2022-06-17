@@ -49,11 +49,13 @@ void Game::checkAnswer(int i) {
             }
         }
 
-        m_optionButtons->button(correctIndex)->setStyleSheet("background-color: green;");
-        m_optionButtons->button(i)->setStyleSheet("background-color: red");
+        std::cout << "CORRECT" << std::endl;
+        m_optionButtons->button(correctIndex)->setProperty("ansState", true);
+        m_optionButtons->button(i)->setProperty("ansState", false);
     } else {
-        m_optionButtons->button(i)->setStyleSheet("background-color: green");
+        m_optionButtons->button(i)->setProperty("ansState", true);
     }
+    setStyleSheet(STYLE);
 }
 
 Game::~Game()
@@ -62,23 +64,22 @@ Game::~Game()
 }
 
 void Game::nextQuestion() {
-    if (!m_questionSets.empty()) {
-        auto currentSet = m_questionSets.front();
-        for (int i = 1; i <= 4; i++) {
-            m_optionButtons->button(i)->setText(currentSet[i+1]);
-        }
-        ui->word->setText(currentSet[0]);
-        m_answer = currentSet[1];
-    }
+    if (m_questionSets.empty())
+        return;
 
-    if (!m_questionSets.empty())
-        m_questionSets.pop();
+    auto currentSet = m_questionSets.front();
+    for (int i = 1; i <= 4; i++) {
+        m_optionButtons->button(i)->setText(currentSet[i+1]);
+        m_optionButtons->button(i)->setProperty("ansState", "");
+    }
+    ui->word->setText(currentSet[0]);
+    m_answer = currentSet[1];
+
+    m_questionSets.pop();
 
     startScreen->hide();
     blocker->hide();
-    for (auto btn : m_optionButtons->buttons()) {
-        btn->setStyleSheet("");
-    }
+    setStyleSheet(STYLE);
 }
 
 void Game::addQuestionSets(std::vector<std::array<QString, 6>> questions) {
@@ -88,13 +89,15 @@ void Game::addQuestionSets(std::vector<std::array<QString, 6>> questions) {
 }
 
 void Game::mousePressEvent(QMouseEvent *event) {
-    nextQuestion();
+    if (!blocker->isHidden() || !startScreen->isHidden())
+        nextQuestion();
 
     QWidget::mousePressEvent(event);
 }
 
 void Game::keyPressEvent(QKeyEvent *event) {
-    nextQuestion();
+    if (!blocker->isHidden()|| !startScreen->isHidden())
+        nextQuestion();
     switch (event->key()) {
     case Qt::Key_1:
         checkAnswer(1);
@@ -116,12 +119,6 @@ void Game::resizeEvent(QResizeEvent *event) {
     blocker->resize(event->size());
     startScreen->resize(event->size());
     emptyScreen->resize(width(), height());
-    ui->btnLayout->setSpacing(event->size().width() / 15);
-    QMargins newMargins(size.width()/15,
-                       size.height()/10,
-                       size.width()/15,
-                       size.height()/10);
-    ui->btnLayout->setContentsMargins(newMargins);
     QWidget::resizeEvent(event);
 }
 

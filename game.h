@@ -8,6 +8,27 @@
 #include <QLabel>
 #include <queue>
 #include <stack>
+#include <string>
+
+const QString STYLE =
+        "QPushButton {"
+        "	border-style: solid;"
+        "	border-width: 2px;"
+        "	border-radius: 10px;"
+        "	border-color: #FFDEBA;"
+        "	font: bold 14px;"
+        "	padding: 6px;"
+        "}"
+        "*[ansState=\"true\"] {"
+        "	background-color: green;"
+        "}"
+        "*[ansState=\"false\"] {"
+        "	background-color: red;"
+        "}"
+        "QPushButton:hover {"
+        "	background-color: orange;"
+        "}"
+;
 
 namespace Ui {
 class Game;
