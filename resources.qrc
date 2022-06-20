@@ -1,7 +1,12 @@
 <RCC>
-    <qresource prefix="/resources">
+    <qresource prefix="/images">
         <file>img/CSgo.png</file>
         <file>img/icon.png</file>
         <file>img/icon2.png</file>
+        <file>img/home_icon.png</file>
+        <file>img/bookmarks_icon.png</file>
+        <file>img/cards_icon.png</file>
+        <file>img/edit_icon.png</file>
+        <file>img/history_icon.png</file>
     </qresource>
 </RCC>
