@@ -3,6 +3,7 @@
 
 #include <QWidget>
 #include <QPushButton>
+#include <QLabel>
 
 class WordCard : public QWidget
 {
@@ -11,17 +12,15 @@ class WordCard : public QWidget
 private:
     QIcon on_icon;
     QIcon off_icon;
-    QPushButton *favBtn;
-    QString word;
-    QString definition;
     QColor keywordColor;
     QColor textColor;
     QColor borderColor;
     QFont keywordFont = QFont("Times, Serif", 28, QFont::Bold);
     QFont textFont = QFont("Sans", 12);
+    QPushButton *favBtn;
+    QLabel *keyword;
+    QLabel *meaning;
 
-    void drawWord();
-    void drawDefinition();
 public:
     explicit WordCard(QWidget *parent = nullptr);
     explicit WordCard(QString word,

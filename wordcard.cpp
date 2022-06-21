@@ -13,8 +13,14 @@ WordCard::WordCard(QWidget *parent)
 WordCard::WordCard(QString word, QString definition, bool favorite, QWidget *parent)
     : QWidget{parent}
 {
-    this->word = word;
-    this->definition = definition;
+    keyword = new QLabel(word, this);
+    keyword->setFont(keywordFont);
+    keyword->move(QPoint(20, 20));
+
+    meaning = new QLabel(definition, this);
+    meaning->setFont(textFont);
+    meaning->move(QPoint(20, 75));
+    meaning->setWordWrap(true);
 
     favBtn = new QPushButton(this);
     on_icon = QIcon("bookmark_solid.svg");
@@ -28,6 +34,7 @@ WordCard::WordCard(QString word, QString definition, bool favorite, QWidget *par
     favBtn->setFlat(true);
     favBtn->move(320, 30);
     favBtn->setIconSize(QSize(24, 24));
+
     connect(favBtn, &QPushButton::clicked, this, [=](bool checked) {
         emit favoriteStateChanged(checked);
         if (checked)
@@ -37,27 +44,8 @@ WordCard::WordCard(QString word, QString definition, bool favorite, QWidget *par
     });
 }
 
-void WordCard::drawWord() {
-    QPainter painter(this);
-    painter.setPen(keywordColor);
-    QRect wrect = rect();
-    wrect.setTopLeft(QPoint(35, 30));
-    painter.setFont(keywordFont);
-
-    painter.drawText(wrect, Qt::TextWordWrap, word);
-}
-
-void WordCard::drawDefinition() {
-    QPainter painter(this);
-    painter.setPen(textColor);
-    QRect wrect = rect();
-    wrect.setTopLeft(QPoint(35, 80));
-    painter.setFont(textFont);
-
-    painter.drawText(wrect, Qt::TextWordWrap, definition);
-}
-
 void WordCard::paintEvent(QPaintEvent *event) {
+    QWidget::paintEvent(event);
     QPainter painter(this);
     QPen pen;
     pen.setWidth(2);
@@ -66,8 +54,6 @@ void WordCard::paintEvent(QPaintEvent *event) {
     boundaryRect.adjust(painter.pen().width(), painter.pen().width(), -painter.pen().width(), -painter.pen().width());
     painter.setRenderHint(QPainter::Antialiasing);
     painter.drawRoundedRect(boundaryRect, 10.0, 10.0);
-    drawDefinition();
-    drawWord();
 }
 
 QSize WordCard::minimumSizeHint() const {
