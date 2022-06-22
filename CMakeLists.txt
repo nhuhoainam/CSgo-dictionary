@@ -27,6 +27,17 @@ set(PROJECT_SOURCES
         game.ui
         wordcard.cpp
         wordcard.h
+        home.h
+        home.cpp
+        home.ui
+        favoritelist.cpp
+        favoritelist.h
+        favoritelist.ui
+        searchbox.cpp
+        searchbox.h
+        history.cpp
+        history.h
+        history.ui
         ${TS_FILES}
 )
 
