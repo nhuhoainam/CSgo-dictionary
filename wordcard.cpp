@@ -64,7 +64,10 @@ void WordCard::paintEvent(QPaintEvent *event) {
 
 
     QRect boundaryRect = rect();
-    boundaryRect.adjust(painter.pen().width(), painter.pen().width(), -painter.pen().width(), -painter.pen().width());
+    boundaryRect.adjust(painter.pen().width(),
+                        painter.pen().width(),
+                        -painter.pen().width(),
+                        -painter.pen().width());
     painter.setRenderHint(QPainter::Antialiasing);
     painter.drawRoundedRect(boundaryRect, 10.0, 10.0);
     QWidget::paintEvent(event);
