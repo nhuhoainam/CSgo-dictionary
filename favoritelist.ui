@@ -15,7 +15,7 @@
   </property>
   <layout class="QVBoxLayout" name="verticalLayout" stretch="1,1,10,1">
    <item>
-    <widget class="SearchBox" name="lineEdit"/>
+    <widget class="SearchBox" name="searchBox"/>
    </item>
    <item>
     <widget class="QLabel" name="label">
@@ -31,7 +31,7 @@
     </widget>
    </item>
    <item>
-    <widget class="WordCardGroup" name="gridWidget" native="true"/>
+    <widget class="WordCardGroup" name="wordGroup" native="true"/>
    </item>
    <item>
     <spacer name="verticalSpacer">

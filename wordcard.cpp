@@ -48,7 +48,7 @@ WordCard::WordCard(QString word, QString definition, bool favorite, QWidget *par
     favBtn->setStyleSheet("border: none;");
 
     connect(favBtn, &QPushButton::clicked, this, [=](bool checked) {
-        emit favoriteStateChanged(checked);
+        emit favoriteStateChanged(keyword->text(), checked);
         if (checked)
             favBtn->setIcon(on_icon);
         else
@@ -61,7 +61,6 @@ void WordCard::paintEvent(QPaintEvent *event) {
 
     painter.setBrush(Qt::white);
     painter.setPen(Qt::NoPen);
-
 
     QRect boundaryRect = rect();
     boundaryRect.adjust(painter.pen().width(),

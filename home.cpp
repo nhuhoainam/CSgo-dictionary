@@ -13,14 +13,14 @@ Home::Home(QWidget *parent) :
     ui->setupUi(this);
 
     for (int i = 0; i < 4; i++) {
-        ui->cardGroup->addCard("heightist", "Someone who believes that people are superior to or inferior to others on account of their respective heights, or that people of differing heights have different moral qualities and intellectual capabilities.", true);
+        ui->wordGroup->addCard("heightist", "Someone who believes that people are superior to or inferior to others on account of their respective heights, or that people of differing heights have different moral qualities and intellectual capabilities.", true);
     }
-    connect(ui->cardGroup, &WordCardGroup::wordSelected, this, [=](const QString &word) {
-        std::cout << word.toStdString() << " ";
-    });
-    connect(ui->resetBtn, &QPushButton::clicked, this, [=](bool) {
-        std::cout << "RESET ";
-    });
+    connect(ui->searchBox, &SearchBox::searchFinished,
+            this, &Home::searchRequest);
+    connect(ui->wordGroup, &WordCardGroup::wordSelected,
+            this, &Home::wordSelected);
+    connect(ui->wordGroup, &WordCardGroup::wordToggleFavorite,
+            this, &Home::wordToggleFavorite);
 }
 
 Home::~Home()

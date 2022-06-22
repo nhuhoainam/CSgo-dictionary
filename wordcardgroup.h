@@ -21,9 +21,9 @@ public:
 private:
     list<WordCard*> wordList;
     WordCardLayout *layout;
-
 signals:
-    void wordSelected(const QString &word);
+    void wordSelected(const QString&);
+    void wordToggleFavorite(const QString &, bool on);
 };
 
 #endif // WORDCARDGROUP_H

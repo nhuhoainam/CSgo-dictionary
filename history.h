@@ -18,7 +18,10 @@ public:
 
 private:
     Ui::History *ui;
-    SearchBox *searchBox;
+signals:
+    void searchRequest(const QString&);
+    void wordSelected(const QString&);
+    void wordToggleFavorite(const QString&, bool);
 };
 
 #endif // HISTORY_H

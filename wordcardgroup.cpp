@@ -14,6 +14,7 @@ void WordCardGroup::addCard(const QString &keyword,
                             bool favorite) {
     auto *w = new WordCard(keyword, meaning, favorite);
     connect(w, &WordCard::wordSelected, this, &WordCardGroup::wordSelected);
+    connect(w, &WordCard::favoriteStateChanged, this, &WordCardGroup::wordToggleFavorite);
     wordList.push_back(w);
     layout->addWidget(w);
 }

@@ -43,7 +43,7 @@ public:
     void mousePressEvent(QMouseEvent*) override;
     void mouseReleaseEvent(QMouseEvent*) override;
 signals:
-    void favoriteStateChanged(bool checked);
+    void favoriteStateChanged(const QString &word, bool checked);
     void wordSelected(const QString &word);
 };
 
