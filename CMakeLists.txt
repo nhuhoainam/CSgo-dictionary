@@ -22,6 +22,11 @@ set(PROJECT_SOURCES
         widget.h
         widget.ui
         resources.qrc
+        game.h
+        game.cpp
+        game.ui
+        wordcard.cpp
+        wordcard.h
         ${TS_FILES}
 )
 
