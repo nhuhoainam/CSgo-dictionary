@@ -3,6 +3,7 @@
 
 #include <QWidget>
 
+class SearchBox;
 namespace Ui {
 class History;
 }
@@ -17,6 +18,7 @@ public:
 
 private:
     Ui::History *ui;
+    SearchBox *searchBox;
 };
 
 #endif // HISTORY_H

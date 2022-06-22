@@ -5,11 +5,11 @@
 #include <QWidget>
 
 class WordCard;
-class WordcardLayout : public QGridLayout
+class WordCardLayout : public QGridLayout
 {
     Q_OBJECT
 public:
-    WordcardLayout();
+    WordCardLayout();
 
     void addWidget(WordCard *widget);
     void clearWidgets();

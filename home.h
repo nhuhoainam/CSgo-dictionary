@@ -1,6 +1,8 @@
 #ifndef HOME_H
 #define HOME_H
 
+#include "searchbox.h"
+
 #include <QWidget>
 
 namespace Ui {
@@ -17,6 +19,7 @@ public:
 
 private:
     Ui::Home *ui;
+    SearchBox *searchBox;
 };
 
 #endif // HOME_H

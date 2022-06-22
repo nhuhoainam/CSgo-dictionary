@@ -1,6 +1,8 @@
 #ifndef FAVORITELIST_H
 #define FAVORITELIST_H
 
+#include "searchbox.h"
+
 #include <QWidget>
 
 namespace Ui {
@@ -17,6 +19,7 @@ public:
 
 private:
     Ui::FavoriteList *ui;
+    SearchBox *searchBox;
 };
 
 #endif // FAVORITELIST_H

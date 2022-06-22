@@ -1,17 +1,16 @@
 #include "wordcardlayout.h"
-
 #include "wordcard.h"
 
-WordcardLayout::WordcardLayout() : QGridLayout()
+WordCardLayout::WordCardLayout() : QGridLayout()
 {
+    setSpacing(30);
 }
 
-void WordcardLayout::addWidget(WordCard *widget) {
-    connect(widget, &WordCard::wordSelected, this, &WordcardLayout::wordSelected);
+void WordCardLayout::addWidget(WordCard *widget) {
     QGridLayout::addWidget(widget, count()/2, count()%2);
 }
 
-void WordcardLayout::clearWidgets() {
+void WordCardLayout::clearWidgets() {
     QLayoutItem *item;
     while ((item = takeAt(0)) != nullptr) {
         delete item->widget();
