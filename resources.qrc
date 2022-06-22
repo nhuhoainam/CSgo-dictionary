@@ -10,6 +10,10 @@
         <file>img/home.svg</file>
         <file>img/people-outline.svg</file>
         <file>img/CSgo1.svg</file>
+        <file>img/bookmark_hollow.svg</file>
+        <file>img/bookmark_solid.svg</file>
+        <file>img/reset.svg</file>
+        <file>img/search.svg</file>
     </qresource>
     <qresource prefix="/fonts">
         <file>fonts/PlayfairDisplay-Italic-VariableFont_wght.ttf</file>

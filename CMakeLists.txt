@@ -24,6 +24,25 @@ set(PROJECT_SOURCES
         widget.h
         widget.ui
         resources.qrc
+        game.h
+        game.cpp
+        game.ui
+        wordcard.cpp
+        wordcard.h
+        home.h
+        home.cpp
+        home.ui
+        favoritelist.cpp
+        favoritelist.h
+        favoritelist.ui
+        searchbox.cpp
+        searchbox.h
+        history.cpp
+        history.h
+        history.ui
+        dictionaryeditor.cpp
+        dictionaryeditor.h
+        dictionaryeditor.ui
         ${TS_FILES}
 )
 
