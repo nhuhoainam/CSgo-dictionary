@@ -174,7 +174,7 @@ QLineEdit {
            <string/>
           </property>
           <property name="pixmap">
-           <pixmap>reset.svg</pixmap>
+           <pixmap resource="resources.qrc">:/resources/img/reset.svg</pixmap>
           </property>
          </widget>
         </item>
@@ -286,6 +286,8 @@ QLineEdit {
    </item>
   </layout>
  </widget>
- <resources/>
+ <resources>
+  <include location="resources.qrc"/>
+ </resources>
  <connections/>
 </ui>

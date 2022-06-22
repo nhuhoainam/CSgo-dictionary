@@ -3,5 +3,9 @@
         <file>img/CSgo.png</file>
         <file>img/icon.png</file>
         <file>img/icon2.png</file>
+        <file>img/bookmark_hollow.svg</file>
+        <file>img/bookmark_solid.svg</file>
+        <file>img/reset.svg</file>
+        <file>img/search.svg</file>
     </qresource>
 </RCC>
