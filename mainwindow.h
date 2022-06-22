@@ -4,6 +4,8 @@
 #include "home.h"
 #include "favoritelist.h"
 #include "history.h"
+#include "dictionaryeditor.h"
+#include "singlewordview.h"
 
 #include <QWidget>
 #include <QStackedWidget>
@@ -25,6 +27,8 @@ private:
     Home *home;
     FavoriteList *favoriteList;
     History *history;
+    DictionaryEditor *dictEditor;
+    SingleWordView *wordViewer;
     QStackedWidget *container;
 };
 
