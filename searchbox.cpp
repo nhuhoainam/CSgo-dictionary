@@ -31,8 +31,8 @@ SearchBox::SearchBox(QWidget *parent)
     layout->addWidget(textInp);
     layout->addWidget(searchBtn);
     layout->setSpacing(0);
-    layout->setContentsMargins(20, 0, 7, 0);
-    setFixedHeight(40);
+    layout->setContentsMargins(16, 0, 7, 0);
+    setFixedHeight(32);
 
     connect(searchBtn, &QPushButton::clicked, this, [=]() {
         emit searchFinished(textInp->text());
@@ -49,7 +49,7 @@ SearchBox::SearchBox(QWidget *parent)
 
 void SearchBox::setStyle() {
     QString backgroundColor = "white";
-    auto frameStyleSheet = QString("border-radius: 20px;"
+    auto frameStyleSheet = QString("border-radius: 16px;"
                                    "border: 1px solid rgba(231, 231, 231, 64);"
                                    "background-color: white;");
     auto textInpStyleSheet = QString("border: none;"
