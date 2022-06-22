@@ -38,6 +38,9 @@ set(PROJECT_SOURCES
         history.cpp
         history.h
         history.ui
+        dictionaryeditor.cpp
+        dictionaryeditor.h
+        dictionaryeditor.ui
         ${TS_FILES}
 )
 
