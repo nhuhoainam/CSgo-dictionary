@@ -18,6 +18,8 @@ set(TS_FILES CSgo-dictionary_en_US.ts)
 
 set(PROJECT_SOURCES
         main.cpp
+        sidebar.cpp
+        sidebar.h
         widget.cpp
         widget.h
         widget.ui
