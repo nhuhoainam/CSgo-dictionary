@@ -10,6 +10,8 @@ DictionaryEditor::DictionaryEditor(QWidget *parent) :
     connect(ui->addBtn, &QPushButton::clicked, [=]() {
         auto key = ui->keywordEdit->text();
         auto def = ui->definitionEdit->text();
+        ui->keywordEdit->setText("");
+        ui->definitionEdit->setText("");
         emit addNewWord(key, def);
     });
     connect(ui->resetBtn,
