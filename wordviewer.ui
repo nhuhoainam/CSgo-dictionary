@@ -70,7 +70,7 @@ QPushButton {
         <string/>
        </property>
        <property name="icon">
-        <iconset resource="resources.qrc">
+        <iconset>
          <normaloff>:/resources/img/bookmark_hollow.svg</normaloff>:/resources/img/bookmark_hollow.svg</iconset>
        </property>
        <property name="iconSize">
@@ -93,7 +93,7 @@ QPushButton {
         <string/>
        </property>
        <property name="icon">
-        <iconset resource="resources.qrc">
+        <iconset>
          <normaloff>:/resources/img/bookmark_hollow.svg</normaloff>:/resources/img/bookmark_hollow.svg</iconset>
        </property>
        <property name="iconSize">
@@ -116,7 +116,7 @@ QPushButton {
         <string/>
        </property>
        <property name="icon">
-        <iconset resource="resources.qrc">
+        <iconset>
          <normaloff>:/resources/img/bookmark_hollow.svg</normaloff>:/resources/img/bookmark_hollow.svg</iconset>
        </property>
        <property name="iconSize">
@@ -124,6 +124,9 @@ QPushButton {
          <width>24</width>
          <height>24</height>
         </size>
+       </property>
+       <property name="checkable">
+        <bool>true</bool>
        </property>
       </widget>
      </item>
@@ -152,8 +155,6 @@ QPushButton {
    </item>
   </layout>
  </widget>
- <resources>
-  <include location="resources.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>

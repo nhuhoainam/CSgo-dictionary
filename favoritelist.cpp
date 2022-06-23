@@ -25,3 +25,13 @@ FavoriteList::~FavoriteList()
 SearchBox *FavoriteList::getSearchBox() const {
     return searchBox;
 }
+
+void FavoriteList::setWordList(vector<tuple<QString, QString, bool>> words) {
+    ui->wordGroup->clear();
+    for (auto item : words) {
+        auto keyword = std::get<0>(item);
+        auto meaning = std::get<1>(item);
+        auto favorite = std::get<2>(item);
+        ui->wordGroup->addCard(keyword, meaning, favorite);
+    }
+}

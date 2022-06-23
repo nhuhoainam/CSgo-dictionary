@@ -8,6 +8,28 @@ WordViewer::WordViewer(QWidget *parent) :
     ui(new Ui::WordViewer)
 {
     ui->setupUi(this);
+
+    connect(ui->deleteBtn,
+            &QPushButton::clicked,
+            this,
+            [=]() {
+        auto keyword = ui->keyword->text();
+        emit deleteRequest(keyword);
+    });
+    connect(ui->editBtn,
+            &QPushButton::clicked,
+            this,
+            [=]() {
+        auto keyword = ui->keyword->text();
+        emit editRequest(keyword);
+    });
+    connect(ui->favBtn,
+            &QPushButton::clicked,
+            this,
+            [=](bool state) {
+        auto keyword = ui->keyword->text();
+        emit favoriteToggle(keyword, state);
+    });
 }
 
 WordViewer::~WordViewer()

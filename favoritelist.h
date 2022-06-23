@@ -4,6 +4,10 @@
 #include "searchbox.h"
 
 #include <QWidget>
+#include <tuple>
+#include <vector>
+using std::tuple;
+using std::vector;
 
 namespace Ui {
 class FavoriteList;
@@ -18,6 +22,7 @@ public:
     ~FavoriteList();
 
     SearchBox *getSearchBox() const;
+    void setWordList(vector<tuple<QString, QString, bool>>);
 
 private:
     Ui::FavoriteList *ui;

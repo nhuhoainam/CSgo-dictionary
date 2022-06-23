@@ -2,6 +2,10 @@
 #define HISTORY_H
 
 #include <QWidget>
+#include <tuple>
+#include <vector>
+using std::tuple;
+using std::vector;
 
 class SearchBox;
 namespace Ui {
@@ -15,6 +19,7 @@ class History : public QWidget
 public:
     explicit History(QWidget *parent = nullptr);
     ~History();
+    void setWordList(vector<tuple<QString, QString, bool>>);
 
 private:
     Ui::History *ui;

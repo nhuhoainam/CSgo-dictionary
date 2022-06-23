@@ -40,6 +40,7 @@ private:
 
 private slots:
     void handleHomeFocus();
+    void handleHomeRefresh();
     void handleHomeSearchRequest(const QString&);
     void handleHomeWordSelected(const QString&);
     void handleHomeWordFavorite(const QString&, bool);
@@ -58,6 +59,10 @@ private slots:
     void handleEditorReset();
     void handleEditorAdd(const QString&, const QString&);
     void handleGameFocus();
+
+    void handleWordViewerEdit(const QString&);
+    void handleWordViewerDelete(const QString&);
+    void handleWordViewerFavorite(const QString&, bool on);
 };
 
 #endif // MAINWINDOW_H

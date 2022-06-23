@@ -21,9 +21,21 @@ Home::Home(QWidget *parent) :
             this, &Home::wordSelected);
     connect(ui->wordGroup, &WordCardGroup::wordToggleFavorite,
             this, &Home::wordToggleFavorite);
+    connect(ui->resetBtn, &QPushButton::clicked,
+            this, &Home::refreshRequest);
 }
 
 Home::~Home()
 {
     delete ui;
+}
+
+void Home::setWordList(vector<tuple<QString, QString, bool>> words) {
+    ui->wordGroup->clear();
+    for (auto item : words) {
+        auto keyword = std::get<0>(item);
+        auto meaning = std::get<1>(item);
+        auto favorite = std::get<2>(item);
+        ui->wordGroup->addCard(keyword, meaning, favorite);
+    }
 }

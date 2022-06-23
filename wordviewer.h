@@ -19,6 +19,11 @@ public:
 
 private:
     Ui::WordViewer *ui;
+signals:
+    void searchRequest(const QString&);
+    void deleteRequest(const QString&);
+    void editRequest(const QString&);
+    void favoriteToggle(const QString&, bool checked);
 };
 
 #endif // WORDVIEWER_H

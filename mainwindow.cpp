@@ -33,6 +33,7 @@ void MainWindow::setupUI() {
     container->addWidget(history);
     container->addWidget(dictEditor);
     container->addWidget(game);
+    // placeholder
     container->addWidget(new QWidget);
     container->addWidget(wordViewer);
 
@@ -118,6 +119,10 @@ void MainWindow::connectSignalAndSlot() {
             &Home::wordToggleFavorite,
             this,
             &MainWindow::handleHomeWordFavorite);
+    connect(home,
+            &Home::refreshRequest,
+            this,
+            &MainWindow::handleHomeRefresh);
 
     connect(dictEditor,
             &DictionaryEditor::addNewWord,
@@ -127,11 +132,25 @@ void MainWindow::connectSignalAndSlot() {
             &DictionaryEditor::resetDictionary,
             this,
             &MainWindow::handleEditorReset);
+
+    connect(wordViewer,
+            &SingleWordView::deleteRequest,
+            this,
+            &MainWindow::handleWordViewerDelete);
+    connect(wordViewer,
+            &SingleWordView::editRequest,
+            this,
+            &MainWindow::handleWordViewerEdit);
+    connect(wordViewer,
+            &SingleWordView::favoriteToggle,
+            this,
+            &MainWindow::handleWordViewerFavorite);
 }
 
 
 void MainWindow::handleHomeSearchRequest(const QString &keyword) {
     qDebug() << "Search " << keyword << " in home";
+    container->setCurrentIndex(6);
 }
 
 void MainWindow::handleFavoriteListSearchRequest(const QString &keyword) {
@@ -170,6 +189,11 @@ void MainWindow::handleHistoryWordFavorite(const QString &keyword, bool on) {
 void MainWindow::handleHomeFocus() {
     qDebug() << "Home focus";
 }
+
+void MainWindow::handleHomeRefresh() {
+    qDebug() << "Home refresh request";
+}
+
 void MainWindow::handleFavoriteListFocus() {
     qDebug() << "Favorite list focus";
 }
@@ -192,4 +216,15 @@ void MainWindow::handleEditorAdd(const QString &keyword,
 
 void MainWindow::handleGameFocus() {
     qDebug() << "Game focus";
+}
+
+void MainWindow::handleWordViewerEdit(const QString &keyword) {
+    qDebug() << "Edit " << keyword;
+}
+void MainWindow::handleWordViewerDelete(const QString &keyword) {
+    qDebug() << "Delete " << keyword;
+}
+void MainWindow::handleWordViewerFavorite(const QString &keyword, bool on) {
+    QString state = on ? "on" : "off";
+    qDebug() << "Set favorite to " << state << " " << keyword;
 }
