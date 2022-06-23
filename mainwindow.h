@@ -6,6 +6,8 @@
 #include "history.h"
 #include "dictionaryeditor.h"
 #include "singlewordview.h"
+#include "sidebar.h"
+#include "game.h"
 
 #include <QWidget>
 #include <QStackedWidget>
@@ -29,6 +31,7 @@ private:
     History *history;
     DictionaryEditor *dictEditor;
     SingleWordView *wordViewer;
+    Game *game;
     QStackedWidget *container;
 };
 

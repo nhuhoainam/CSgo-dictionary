@@ -14,6 +14,7 @@ public:
   QSize minimumSizeHint() const;
 
 signals:
+  void actionSelected(int i);
 
 public slots:
 
@@ -24,6 +25,7 @@ protected:
   void leaveEvent(QEvent *event);
 
   QAction *actionAt(const QPoint &at);
+  int indexAt(const QPoint &at);
 
 private:
   QList<QAction *> mActions;

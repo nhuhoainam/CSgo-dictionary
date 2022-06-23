@@ -1,5 +1,6 @@
 #include "widget.h"
 #include "sidebar.h"
+#include "mainwindow.h"
 
 #include <QApplication>
 #include <QLocale>
@@ -24,11 +25,7 @@ void setupSidebar(Widget &w, Sidebar *&sidebar) {
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    Widget w;
-    w.setWindowTitle("CSgo Dictionary");
-
-    Sidebar *sidebar = new Sidebar();
-    setupSidebar(w, sidebar);
+    MainWindow w;
     w.show();
     return a.exec();
 }

@@ -93,6 +93,7 @@ void Sidebar::mousePressEvent(QMouseEvent *event)
         mOverAction = NULL;
     mCheckedAction = tempAction;
     tempAction->setChecked(true);
+    emit actionSelected(indexAt(event->pos()));
     update();
     QWidget::mousePressEvent(event);
 }
@@ -133,6 +134,20 @@ QAction* Sidebar::actionAt(const QPoint &at)
     return NULL;
 }
 
+int Sidebar::indexAt(const QPoint &at)
+{
+    int action_y = 100;
+    int i = 0;
+    for(auto action: mActions)
+    {
+        QRect actionRect(0, action_y, rect().width(), action_height);
+        if(actionRect.contains(at))
+            return i;
+        action_y += actionRect.height();
+        i++;
+    }
+    return -1;
+}
 void Sidebar::setSidebarIcon(QIcon &icon) {
     mSidebarIcon = &icon;
 }
