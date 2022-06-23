@@ -3,6 +3,7 @@
 #include <vector>
 #include <string>
 #include <cassert>
+#include <fstream>
 
 using namespace std;
 
@@ -42,6 +43,45 @@ struct Word {
             std::cout << "Definitions in part of speech " << i << ":\n";
             for(const string& s : part_of_speech[i])
                 std::cout << s << std::endl;
+        }
+    }
+
+    // get fist definition of that word
+    string getFirstDef() {
+        for (int i = 0; i < 10; i++) {
+            if (part_of_speech[i].size()) {
+                return part_of_speech[i][0];
+            }
+        }
+    }
+
+    // File structure:
+    // word
+    // size of part_of_speech[0] part_of_speech[1] ... part_of_speech[9]
+    // part_of_speech[i][0]
+    // part_of_speech[i][1]
+    // ...
+    void saveToFile(fstream &fout) {
+        fout << word << "\n";
+        for (int i = 0; i < 10; i++)
+            fout << part_of_speech[i].size() << " ";
+        fout << "\n";
+        for (int i = 0; i < 10; i++) {
+            for (int j = 0; j < part_of_speech[i].size(); j++)
+                cout << part_of_speech[i][j] << "\n";
+        }
+    }
+
+    void loadFromFile(fstream &fin) {
+        getline(fin, word);
+        int sizeOfSpeech[10];
+        for (int i = 0; i < 10; i++)
+            fin >> sizeOfSpeech[i];
+        fin.get();
+
+        for (int i = 0; i < 10; i++) {
+            for (int j = 0; j < sizeOfSpeech[i]; j++)
+                getline(fin, part_of_speech[i][j]);
         }
     }
 };
@@ -98,6 +138,8 @@ public:
         pRoot = new TrieNode<MAX_SIZE, getid>();
     }
     ~dictionary() {
+        saveToFile();
+
         if (pRoot == nullptr) return;
         queue<TrieNode<MAX_SIZE, getid>*> nodes;
         nodes.push(pRoot);
@@ -115,6 +157,15 @@ public:
             cur = nullptr;
         }
     }
+
+    // file structure:
+    // 
+    void saveToFile(string path) {
+        fstream fout(path);
+
+        fin.close();
+    }
+    void loadFromFile(string path);
 
     // main functions of dictionary
     TrieNode<MAX_SIZE, getid>* insert(const string& word, const PoS& pos, const string& def) {
@@ -184,7 +235,7 @@ public:
     // this feature requires that when a word is removed from the Trie, all the nodes above the removed nodes that lead nowhere
     // should be deleted.
     const Word* random_word() const {
-        const TrieNode<MAX_SIZE, getid>* cur {this};
+        const TrieNode<MAX_SIZE, getid>* cur {pRoot};
         while (true) {
             if (cur->data) return cur->data;
             vector<TrieNode<MAX_SIZE, getid>*> opts; opts.reserve(MAX_SIZE);
@@ -220,6 +271,97 @@ public:
         return false;
     }
     // to view the favorite list, the UI can operate on the vector favoriteList
+
+    void getPrefixMatch(TrieNode<MAX_SIZE, getid>* cur, vector<string>& ans, const int& maxNumOfEntries) {
+        if (ans.size() == maxNumOfEntries) return;
+        if (cur == nullptr) return;
+
+        if (cur->data != nullptr) {
+            ans.push_back(cur->data->word);
+        }
+
+        // for each of next able characters
+        for (int i = 0; i < MAX_SIZE; i++) {
+            getPrefixMatch(cur, ans, maxNumOfEntries);
+        }
+    }
+    vector<string> prefixMatch(const string& word, const int& maxNumOfEntries) {
+        vector<string> ans;
+        if (word.empty()) return {};
+        TrieNode<MAX_SIZE, getid>* cur {pRoot};
+
+        // traverse cur to end of word
+        for (const char c : word) {
+            int id {getid(c)};
+            if (id == -1) return {};
+            else {
+                if (cur->nxt[id] == nullptr)
+                    return {};
+                cur = cur->nxt[id];
+            }
+        }
+
+        getPrefixMatch(cur, ans, maxNumOfEntries);
+        return ans;
+    }
+
+    vector<pair<string, string>> randomQuiz() {
+        vector<pair<string, string>> ans;
+        for (int i = 0; i < 4; i++) {
+            Word* randWord = random_word();
+            string def = randWord->getFirstDef();
+
+            ans.push_back({randWord->word, def});
+        }
+
+        return ans;
+    }
+
+    // save and load data structures are not done yet!!!
+    void saveDataStructures(string path) {
+        ofstream fout(path);
+        TrieNode<MAX_SIZE, getid>* cur {pRoot};
+        queue<TrieNode<MAX_SIZE, getid>*> nodeQueue;
+        nodeQueue.push(cur);
+
+
+        //BFS
+        while (nodeQueue.size() != 0) {
+            cur = nodeQueue.top();
+            nodeQueue.pop();
+            if (cur == nullptr) continue;
+            for (int i = 0; i < MAX_SIZE; i++) {
+                nodeQueue.push(cur[i]);
+            }
+        }
+        
+        fout.close();
+    }
+
+    void loadDataStructures(string path) {
+        ifstream fin(path);
+        TrieNode<MAX_SIZE, getid>* cur {pRoot};
+        queue<TrieNode<MAX_SIZE, getid>*> nodeQueue;
+        nodeQueue.push(cur);
+        
+        //BFS
+        while (nodeQueue.size() != 0) {
+            cur = nodeQueue.top();
+            nodeQueue.pop();
+            int numOfChild;
+            fin >> numOfChild;
+            for (int i = 0; i < numOfChild; i++) {
+                // input a child character
+                int child; cin >> child;
+                // create child node and append that node to queue
+                cur->nxt[child] = new TrieNode<MAX_SIZE, getid>();
+                TrieNode<MAX_SIZE, getid> nChild = cur->nxt[child];
+                nodeQueue.push(nChild);
+            }
+        }
+
+        fin.close();
+    }
 };
 
 int getid(char c)
@@ -228,6 +370,29 @@ int getid(char c)
     else if ('A' <= c && c <= 'Z') return c - 'A';
     else if (c == '-') return 26;
     else return -1;
+}
+
+int getidEmotion(char c)
+{
+    if (c < 0 || c >= 256) return -1;
+    return c;
+}
+
+void readFromFileSlang(string path, vector <string> &slang, vector <string> &meaning)
+{
+    ifstream fin(path);
+    string a, b, input;
+
+    while(getline(fin, input))
+    {
+        a = input.substr(0, input.find("`"));
+        b = input.substr(input.find("`") + 1, input.size()-1);
+
+        slang.push_back(a);
+        meaning.push_back(b);
+    }
+
+    fin.close();
 }
 
 int main()
@@ -330,4 +495,4 @@ int main()
     }
 
     return 0;
-}
+}  
