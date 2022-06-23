@@ -17,6 +17,9 @@ public:
 
 private:
     Ui::DictionaryEditor *ui;
+signals:
+    void addNewWord(const QString&, const QString&);
+    void resetDictionary();
 };
 
 #endif // DICTIONARYEDITOR_H

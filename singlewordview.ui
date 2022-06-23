@@ -1,37 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>FavoriteList</class>
- <widget class="QWidget" name="FavoriteList">
+ <class>SingleWordView</class>
+ <widget class="QWidget" name="SingleWordView">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>699</width>
-    <height>515</height>
+    <width>400</width>
+    <height>300</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout" stretch="1,1,10,1">
+  <layout class="QVBoxLayout" name="verticalLayout" stretch="1,5,3">
+   <property name="spacing">
+    <number>20</number>
+   </property>
    <item>
-    <widget class="SearchBox" name="searchBox"/>
+    <widget class="SearchBox" name="lineEdit"/>
    </item>
    <item>
-    <widget class="QLabel" name="label">
-     <property name="font">
-      <font>
-       <pointsize>12</pointsize>
-       <bold>true</bold>
-      </font>
-     </property>
-     <property name="text">
-      <string>Favorite List</string>
-     </property>
-    </widget>
-   </item>
-   <item>
-    <widget class="WordCardGroup" name="wordGroup" native="true"/>
+    <widget class="WordViewer" name="widget" native="true"/>
    </item>
    <item>
     <spacer name="verticalSpacer">
@@ -41,7 +31,7 @@
      <property name="sizeHint" stdset="0">
       <size>
        <width>20</width>
-       <height>40</height>
+       <height>79</height>
       </size>
      </property>
     </spacer>
@@ -55,9 +45,9 @@
    <header>searchbox.h</header>
   </customwidget>
   <customwidget>
-   <class>WordCardGroup</class>
+   <class>WordViewer</class>
    <extends>QWidget</extends>
-   <header>wordcardgroup.h</header>
+   <header>wordviewer.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

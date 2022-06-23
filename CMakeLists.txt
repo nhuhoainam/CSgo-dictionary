@@ -43,6 +43,19 @@ set(PROJECT_SOURCES
         dictionaryeditor.cpp
         dictionaryeditor.h
         dictionaryeditor.ui
+        mainwindow.h
+        mainwindow.ui
+        mainwindow.cpp
+        wordcardlayout.h
+        wordcardlayout.cpp
+        wordcardgroup.cpp
+        wordcardgroup.h
+        wordviewer.cpp
+        wordviewer.h
+        wordviewer.ui
+        singlewordview.cpp
+        singlewordview.h
+        singlewordview.ui
         ${TS_FILES}
 )
 

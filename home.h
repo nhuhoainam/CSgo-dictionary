@@ -1,6 +1,8 @@
 #ifndef HOME_H
 #define HOME_H
 
+#include "searchbox.h"
+
 #include <QWidget>
 
 namespace Ui {
@@ -17,6 +19,11 @@ public:
 
 private:
     Ui::Home *ui;
+    SearchBox *searchBox;
+signals:
+    void searchRequest(const QString&);
+    void wordSelected(const QString&);
+    void wordToggleFavorite(const QString&, bool);
 };
 
 #endif // HOME_H

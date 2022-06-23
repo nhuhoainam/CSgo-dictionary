@@ -3,6 +3,7 @@
 
 #include <QWidget>
 
+class SearchBox;
 namespace Ui {
 class History;
 }
@@ -17,6 +18,10 @@ public:
 
 private:
     Ui::History *ui;
+signals:
+    void searchRequest(const QString&);
+    void wordSelected(const QString&);
+    void wordToggleFavorite(const QString&, bool);
 };
 
 #endif // HISTORY_H
