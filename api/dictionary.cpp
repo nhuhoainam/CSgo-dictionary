@@ -280,9 +280,10 @@ public:
             ans.push_back(cur->data->word);
         }
 
-        // for each of next able characters
+        // for each of next exist characters
         for (int i = 0; i < MAX_SIZE; i++) {
-            getPrefixMatch(cur, ans, maxNumOfEntries);
+            if (cur->nxt[i] != nullptr)
+                getPrefixMatch(cur->nxt[i], ans, maxNumOfEntries);
         }
     }
     vector<string> prefixMatch(const string& word, const int& maxNumOfEntries) {
