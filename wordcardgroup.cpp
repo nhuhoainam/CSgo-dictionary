@@ -12,7 +12,11 @@ WordCardGroup::WordCardGroup(QWidget *parent)
 void WordCardGroup::addCard(const QString &keyword,
                             const QString &meaning,
                             bool favorite) {
-    auto *w = new WordCard(keyword, meaning, favorite);
+    auto *w = new WordCard;
+    w->setKeyword("Hello");
+    w->addDefinition("sljkgsakgj;aswdhg");
+    w->addDefinition("sljkgsakgj;aswdhg");
+    w->addDefinition("sljkgsakgj;aswdhg");
     connect(w, &WordCard::wordSelected, this, &WordCardGroup::wordSelected);
     connect(w, &WordCard::favoriteStateChanged, this, &WordCardGroup::wordToggleFavorite);
     wordList.push_back(w);
