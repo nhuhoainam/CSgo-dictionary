@@ -22,9 +22,6 @@ public:
     void setDefinitions(std::vector<const QString &> defs);
     void setFavoriteState(bool);
 
-    QSize minimumSizeHint() const override;
-    QSize sizeHint() const override;
-
     bool event(QEvent*) override;
     void mousePressEvent(QMouseEvent*) override;
     void mouseReleaseEvent(QMouseEvent*) override;

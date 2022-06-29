@@ -46,15 +46,6 @@ WordCard::~WordCard()
     delete ui;
 }
 
-QSize WordCard::minimumSizeHint() const {
-    return QSize(300, 100);
-}
-
-QSize WordCard::sizeHint() const {
-    return QSize(400, 200);
-}
-
-
 bool WordCard::event(QEvent* event) {
     if (event->type() == QEvent::HoverEnter) {
         hovered = true;
