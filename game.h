@@ -16,7 +16,6 @@ const QString STYLE =
         "	border-width: 2px;"
         "	border-radius: 10px;"
         "	border-color: #FFDEBA;"
-        "	font: bold 14px;"
         "	padding: 6px;"
         "}"
         "*[ansState=\"true\"] {"
@@ -27,6 +26,7 @@ const QString STYLE =
         "}"
         "QPushButton:hover {"
         "	background-color: orange;"
+        "	color: white;"
         "}"
 ;
 
@@ -39,21 +39,32 @@ class Game : public QWidget
     Q_OBJECT
 
 public:
+    enum Type {
+        GuessMeaning,
+        GuessKeyword,
+    };
     explicit Game(QWidget *parent = nullptr);
     ~Game();
-    void addQuestionSets(std::vector<std::array<QString, 6>> questions);
+    void addMeaningQSet(std::vector<std::array<QString, 6>> questions);
+    void addKeywordQSet(std::vector<std::array<QString, 6>> questions);
+    void start();
 
 private slots:
     void checkAnswer(int i);
     void nextQuestion();
     void prevQuestion();
+    void setMeaningGame();
+    void setKeywordGame();
 
 public slots:
 
 signals:
-    void requestNewQuestionSets(int n=1);
+    void requestMeaningQSet(int n=1);
+    void requestKeywordQSet(int n=1);
 
 private:
+    Type type;
+    void connectSignalAndSlot();
     void mousePressEvent(QMouseEvent *event) override;
     void keyPressEvent(QKeyEvent *event) override;
     void resizeEvent(QResizeEvent *event) override;
@@ -61,7 +72,6 @@ private:
     QString m_answer;
     QButtonGroup *m_optionButtons;
 
-    QLabel *startScreen;
     QWidget *emptyScreen;
     QWidget *blocker;
     std::vector<std::array<QString, 6>> m_polledQuestionSets;

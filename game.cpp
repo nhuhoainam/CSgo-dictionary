@@ -13,19 +13,13 @@ Game::Game(QWidget *parent) :
     m_optionButtons->addButton(ui->ans2, 2);
     m_optionButtons->addButton(ui->ans3, 3);
     m_optionButtons->addButton(ui->ans4, 4);
+    ui->ans1->setText("HELLO");
 
     // To block input when an answer is chosen
     blocker = new QWidget(this);
     blocker->setStyleSheet("background-color: rgba(61,61, 61, 0);");
     blocker->resize( width(), height());
     blocker->hide();
-
-    startScreen = new QLabel("Press any key to start...", this);
-    startScreen->setStyleSheet("background-color: rgba(61,61, 61, 100); color: white");
-    startScreen->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
-    startScreen->setFont(QFont("Sans serif", 42, 100));
-    startScreen->resize(width(), height());
-    startScreen->show();
 
     emptyScreen = new QWidget(this);
     emptyScreen->setStyleSheet("background-color: rgba(61,61, 61, 100);");
@@ -36,6 +30,8 @@ Game::Game(QWidget *parent) :
         checkAnswer(id);
         blocker->show();
     });
+    connect(ui->guessKeywordBtn, &QPushButton::clicked, this, &Game::setKeywordGame);
+    connect(ui->guiessMeaningBtn, &QPushButton::clicked, this, &Game::setMeaningGame);
 }
 
 void Game::checkAnswer(int i) {
@@ -72,31 +68,36 @@ void Game::nextQuestion() {
         m_optionButtons->button(i)->setText(currentSet[i+1]);
         m_optionButtons->button(i)->setProperty("ansState", "");
     }
-    ui->word->setText(currentSet[0]);
+    ui->questionLabel->setText(currentSet[0]);
     m_answer = currentSet[1];
 
     m_questionSets.pop();
 
-    startScreen->hide();
     blocker->hide();
     setStyleSheet(STYLE);
 }
 
-void Game::addQuestionSets(std::vector<std::array<QString, 6>> questions) {
+void Game::addMeaningQSet(std::vector<std::array<QString, 6>> questions) {
+    for (const auto &a : questions) {
+        m_questionSets.push(a);
+    }
+}
+
+void Game::addKeywordQSet(std::vector<std::array<QString, 6>> questions) {
     for (const auto &a : questions) {
         m_questionSets.push(a);
     }
 }
 
 void Game::mousePressEvent(QMouseEvent *event) {
-    if (!blocker->isHidden() || !startScreen->isHidden())
+    if (!blocker->isHidden())
         nextQuestion();
 
     QWidget::mousePressEvent(event);
 }
 
 void Game::keyPressEvent(QKeyEvent *event) {
-    if (!blocker->isHidden()|| !startScreen->isHidden())
+    if (!blocker->isHidden())
         nextQuestion();
     switch (event->key()) {
     case Qt::Key_1:
@@ -117,11 +118,35 @@ void Game::keyPressEvent(QKeyEvent *event) {
 void Game::resizeEvent(QResizeEvent *event) {
     auto size = event->size();
     blocker->resize(event->size());
-    startScreen->resize(event->size());
     emptyScreen->resize(width(), height());
     QWidget::resizeEvent(event);
 }
 
 void Game::prevQuestion() {
+}
 
+void Game::setMeaningGame() {
+    ui->stackedWidget->setCurrentIndex(1);
+    ui->questionLabel->setFont(QFont("Sans", 24, QFont::Bold));
+    for (auto btn : m_optionButtons->buttons()) {
+        btn->setFont(QFont("Sans", 16));
+    }
+
+}
+void Game::setKeywordGame() {
+    type = Type::GuessKeyword;
+    ui->stackedWidget->setCurrentIndex(1);
+    ui->questionLabel->setFont(QFont("Sans", 24));
+    for (auto btn : m_optionButtons->buttons()) {
+        btn->setFont(QFont("Sans", 24, QFont::Bold));
+    }
+}
+
+void Game::start() {
+    type = Type::GuessMeaning;
+    ui->stackedWidget->setCurrentIndex(0);
+    blocker->hide();
+    while (!m_questionSets.empty())
+        m_questionSets.pop();
+    nextQuestion();
 }
