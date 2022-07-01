@@ -17,6 +17,7 @@ signals:
   void actionSelected(int i);
 
 public slots:
+  void setSelected(int i, bool selected);
 
 protected:
   void paintEvent(QPaintEvent *event);

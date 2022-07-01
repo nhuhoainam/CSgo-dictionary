@@ -86,7 +86,6 @@ void Sidebar::mousePressEvent(QMouseEvent *event)
     QAction* tempAction = actionAt(event->pos());
     if(tempAction == NULL || tempAction->isChecked())
         return;
-    qDebug()<<"clicked";
     if(mCheckedAction)
         mCheckedAction->setChecked(false);
     if(mOverAction == tempAction)
@@ -150,6 +149,11 @@ int Sidebar::indexAt(const QPoint &at)
 }
 void Sidebar::setSidebarIcon(QIcon &icon) {
     mSidebarIcon = &icon;
+}
+
+void Sidebar::setSelected(int i, bool selected) {
+    mActions[i]->setChecked(selected);
+    update();
 }
 
 #undef action_height
