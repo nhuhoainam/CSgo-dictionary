@@ -70,8 +70,8 @@ QPushButton {
         <string/>
        </property>
        <property name="icon">
-        <iconset>
-         <normaloff>:/resources/img/bookmark_hollow.svg</normaloff>:/resources/img/bookmark_hollow.svg</iconset>
+        <iconset resource="resources.qrc">
+         <normaloff>:/images/img/delete.svg</normaloff>:/images/img/delete.svg</iconset>
        </property>
        <property name="iconSize">
         <size>
@@ -93,8 +93,8 @@ QPushButton {
         <string/>
        </property>
        <property name="icon">
-        <iconset>
-         <normaloff>:/resources/img/bookmark_hollow.svg</normaloff>:/resources/img/bookmark_hollow.svg</iconset>
+        <iconset resource="resources.qrc">
+         <normaloff>:/images/img/word-edit.svg</normaloff>:/images/img/word-edit.svg</iconset>
        </property>
        <property name="iconSize">
         <size>
@@ -116,8 +116,8 @@ QPushButton {
         <string/>
        </property>
        <property name="icon">
-        <iconset>
-         <normaloff>:/resources/img/bookmark_hollow.svg</normaloff>:/resources/img/bookmark_hollow.svg</iconset>
+        <iconset resource="resources.qrc">
+         <normaloff>:/images/img/bookmark_hollow.svg</normaloff>:/images/img/bookmark_hollow.svg</iconset>
        </property>
        <property name="iconSize">
         <size>
@@ -155,6 +155,8 @@ QPushButton {
    </item>
   </layout>
  </widget>
- <resources/>
+ <resources>
+  <include location="resources.qrc"/>
+ </resources>
  <connections/>
 </ui>
