@@ -199,7 +199,7 @@ QPushButton::hover {
            <string/>
           </property>
           <property name="pixmap">
-           <pixmap>:/resources/img/reset.svg</pixmap>
+           <pixmap resource="resources.qrc">:/images/img/reset.svg</pixmap>
           </property>
          </widget>
         </item>
@@ -311,6 +311,8 @@ QPushButton::hover {
    </item>
   </layout>
  </widget>
- <resources/>
+ <resources>
+  <include location="resources.qrc"/>
+ </resources>
  <connections/>
 </ui>
