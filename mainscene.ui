@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>Home</class>
- <widget class="QWidget" name="Home">
+ <class>MainScene</class>
+ <widget class="QWidget" name="MainScene">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -17,7 +17,7 @@
    <bool>false</bool>
   </property>
   <property name="styleSheet">
-   <string notr="true">#Home {
+   <string notr="true">#MainScene {
 	background-color: #FFF8EF;
 }
 
@@ -52,12 +52,12 @@ QScrollBar::sub-line:vertical {
     <widget class="SearchBox" name="searchBox"/>
    </item>
    <item>
-    <layout class="QHBoxLayout" name="horizontalLayout">
+    <layout class="QHBoxLayout" name="titleLayout">
      <property name="spacing">
       <number>20</number>
      </property>
      <item>
-      <widget class="QLabel" name="label">
+      <widget class="QLabel" name="title">
        <property name="font">
         <font>
          <pointsize>14</pointsize>
@@ -66,39 +66,6 @@ QScrollBar::sub-line:vertical {
        </property>
        <property name="text">
         <string>Random new words</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="resetBtn">
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">QPushButton {
-	border: none;
-}
-
-QPushButton::hover {
-	border-radius: 5px;
-	background-color: rgb(241, 228, 218);
-}</string>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-       <property name="icon">
-        <iconset resource="resources.qrc">
-         <normaloff>:/images/img/reset.svg</normaloff>:/images/img/reset.svg</iconset>
-       </property>
-       <property name="iconSize">
-        <size>
-         <width>24</width>
-         <height>24</height>
-        </size>
        </property>
       </widget>
      </item>
@@ -163,8 +130,6 @@ QPushButton::hover {
    <container>1</container>
   </customwidget>
  </customwidgets>
- <resources>
-  <include location="resources.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>
