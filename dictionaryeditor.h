@@ -2,6 +2,7 @@
 #define DICTIONARYEDITOR_H
 
 #include <QWidget>
+#include <QLineEdit>
 
 namespace Ui {
 class DictionaryEditor;
@@ -17,8 +18,11 @@ public:
 
 private:
     Ui::DictionaryEditor *ui;
+    std::vector<QLineEdit *> defEditGroup;
+
+    void addNewDefEdit();
 signals:
-    void addNewWord(const QString&, const QString&);
+    void addNewWord(const QString&, std::vector<QString>);
     void resetDictionary();
 };
 
