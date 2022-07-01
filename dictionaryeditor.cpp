@@ -19,7 +19,8 @@ DictionaryEditor::DictionaryEditor(QWidget *parent) :
         for (auto edit : defEditGroup) {
             edit->setText("");
         }
-        emit addNewWord(key, defs);
+        if (defs.size() > 0 && !key.isEmpty())
+            emit addNewWord(key, defs);
     });
     connect(ui->resetBtn,
             &QPushButton::clicked,
@@ -39,4 +40,15 @@ void DictionaryEditor::addNewDefEdit() {
     QLineEdit *newEdit = new QLineEdit;
     defEditGroup.push_back(newEdit);
     ui->defLayout->addWidget(newEdit);
+}
+
+void DictionaryEditor::resetDefEdit() {
+    ui->keywordEdit->clear();
+    QLayoutItem *child;
+    while ((child = ui->defLayout->takeAt(0)) != nullptr) {
+        delete child->widget();
+        delete child;
+    }
+    defEditGroup.clear();
+    addNewDefEdit();
 }

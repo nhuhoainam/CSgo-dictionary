@@ -15,6 +15,7 @@ class DictionaryEditor : public QWidget
 public:
     explicit DictionaryEditor(QWidget *parent = nullptr);
     ~DictionaryEditor();
+    void resetDefEdit();
 
 private:
     Ui::DictionaryEditor *ui;
