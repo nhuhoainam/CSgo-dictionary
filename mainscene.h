@@ -33,12 +33,12 @@ protected:
     Ui::MainScene *ui;
 
 private:
-    SearchBox *searchBox;
     QListWidget *completePopup;
 
     void adjustPopup();
     void setupUi();
     void connectSignalAndSlot();
+    void handleSearch(const QString &text);
 signals:
     void searchRequest(const QString&);
     void completionRequest(const QString&);

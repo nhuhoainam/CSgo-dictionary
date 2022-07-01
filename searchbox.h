@@ -21,9 +21,14 @@ private:
     void adjustCompleter();
 public:
     explicit SearchBox(QWidget *parent = nullptr);
+
+    void setText(const QString &);
+    QString text() const;
+
     void moveEvent(QMoveEvent *event);
     void resizeEvent(QResizeEvent *event);
     void keyPressEvent(QKeyEvent *event);
+
     void handleCompleterShown();
     void handleCompleterHidden();
 
@@ -33,6 +38,8 @@ public slots:
 signals:
     void searchEdit(const QString &str);
     void searchFinished(const QString &str);
+    void requestNextCompletion();
+    void requestPrevCompletion();
     void requestCompletion(const QString &str);
 };
 

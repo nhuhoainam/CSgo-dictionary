@@ -71,7 +71,7 @@ void MainScene::setupUi() {
 
 void MainScene::connectSignalAndSlot() {
     connect(ui->searchBox, &SearchBox::searchFinished,
-            this, &MainScene::searchRequest);
+            this, &MainScene::handleSearch);
     connect(ui->searchBox, &SearchBox::searchEdit,
             this, &MainScene::completionRequest);
     connect(ui->wordGroup, &WordCardGroup::wordSelected,
@@ -82,11 +82,25 @@ void MainScene::connectSignalAndSlot() {
         completePopup->show();
         ui->searchBox->handleCompleterShown();
     });
-    connect(completePopup, &QListWidget::itemPressed, this, [=](QListWidgetItem *item) {
-        ui->searchBox->handleCompletion(item->text());
-        emit searchRequest(item->text());
-        completePopup->setCurrentRow(-1);
-        completePopup->hide();
+    connect(completePopup, &QListWidget::itemPressed,
+            this, [=](QListWidgetItem *item) {
+        handleSearch(item->text());
+    });
+    connect(ui->searchBox, &SearchBox::requestNextCompletion, this, [=]() {
+        int cur = completePopup->currentRow();
+        cur += 1;
+        completePopup->setCurrentRow(cur);
+        auto curItem = completePopup->item(cur);
+        if (curItem)
+            ui->searchBox->setText(curItem->text());
+    });
+    connect(ui->searchBox, &SearchBox::requestPrevCompletion, this, [=]() {
+        int cur = completePopup->currentRow();
+        cur -= 1;
+        completePopup->setCurrentRow(cur);
+        auto curItem = completePopup->item(cur);
+        if (curItem)
+            ui->searchBox->setText(curItem->text());
     });
 }
 
@@ -127,17 +141,11 @@ void MainScene::moveEvent(QMoveEvent *event) {
 }
 
 void MainScene::keyPressEvent(QKeyEvent *event) {
-    if (event->key() == Qt::Key_Up) {
-        if (completePopup->isVisible()) {
-            int cur = completePopup->currentRow();
-            qDebug() << cur;
-            if (cur < completePopup->count())
-                completePopup->setCurrentRow(cur+1, QItemSelectionModel::Current);
-        }
-    } else if (event->key() == Qt::Key_Down) {
-        qDebug() << "HERE";
-        int cur = completePopup->currentRow();
-        if (cur >= 0)
-            completePopup->setCurrentRow(cur-1);
-    }
+}
+
+void MainScene::handleSearch(const QString &text) {
+    ui->searchBox->handleCompletion(text);
+    emit searchRequest(text);
+    completePopup->setCurrentRow(-1);
+    completePopup->hide();
 }

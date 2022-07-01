@@ -2,11 +2,12 @@
 
 #include <QHBoxLayout>
 #include <QListWidget>
+#include <QKeyEvent>
 
 SearchBox::SearchBox(QWidget *parent)
     : QWidget{parent}
 {
-    setFixedWidth(400);
+    setMaximumWidth(400);
     auto sizePolicy = QSizePolicy(QSizePolicy::Maximum, QSizePolicy::Fixed);
     setSizePolicy(sizePolicy);
     textInp = new QLineEdit(this);
@@ -93,7 +94,12 @@ void SearchBox::setWithCompleterStyle() {
 }
 
 void SearchBox::keyPressEvent(QKeyEvent *event) {
-
+    QWidget::keyPressEvent(event);
+    if (event->key() == Qt::Key_Up) {
+        emit requestPrevCompletion();
+    } else if (event->key() == Qt::Key_Down) {
+        emit requestNextCompletion();
+    }
 }
 
 void SearchBox::handleCompleterShown() {
@@ -107,4 +113,12 @@ void SearchBox::handleCompleterHidden() {
 void SearchBox::handleCompletion(const QString &str) {
     textInp->setText("");
     setStyle();
+}
+
+void SearchBox::setText(const QString &str) {
+    textInp->setText(str);
+}
+
+QString SearchBox::text() const {
+    return textInp->text();
 }
