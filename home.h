@@ -40,6 +40,7 @@ private:
 signals:
     void refreshRequest();
     void searchRequest(const QString&);
+    void completionRequest(const QString&);
     void wordSelected(const QString&);
     void wordToggleFavorite(const QString&, bool);
 };

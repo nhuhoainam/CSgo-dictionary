@@ -53,6 +53,9 @@ void Home::setupUi() {
     for (int i = 0; i < 4; i++) {
         ui->wordGroup->addCard("heightist", "Someone who believes that people are superior to or inferior to others on account of their respective heights, or that people of differing heights have different moral qualities and intellectual capabilities.", true);
     }
+    for (int i = 0; i < 4; i++) {
+        ui->wordGroup->addCard("heightist", "Someone who believes that people are superior to or inferior to others on account of their respective heights, or that people of differing heights have different moral qualities and intellectual capabilities.", true);
+    }
     completePopup = new QListWidget(this);
     completePopup->addItem("Hello");
     completePopup->addItem("Helo");
@@ -66,6 +69,8 @@ void Home::setupUi() {
 void Home::connectSignalAndSlot() {
     connect(ui->searchBox, &SearchBox::searchFinished,
             this, &Home::searchRequest);
+    connect(ui->searchBox, &SearchBox::searchEdit,
+            this, &Home::completionRequest);
     connect(ui->wordGroup, &WordCardGroup::wordSelected,
             this, &Home::wordSelected);
     connect(ui->wordGroup, &WordCardGroup::wordToggleFavorite,
@@ -79,6 +84,7 @@ void Home::connectSignalAndSlot() {
     connect(completePopup, &QListWidget::itemPressed, this, [=](QListWidgetItem *item) {
         ui->searchBox->handleCompletion(item->text());
         emit searchRequest(item->text());
+        completePopup->setCurrentRow(-1);
         completePopup->hide();
     });
 }

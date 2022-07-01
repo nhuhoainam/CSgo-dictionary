@@ -19,9 +19,35 @@
   <property name="styleSheet">
    <string notr="true">#Home {
 	background-color: #FFF8EF;
+}
+
+#scrollArea {
+	border: none;
+}
+
+QScrollBar:vertical {
+	border-radius: 2px;
+	width: 12px;
+}
+
+QScrollBar::handle:vertical {
+	background: orange;
+	border-radius: 4px;
+	height: 12px;
+}
+
+QScrollBar::add-line:vertical {
+    border: 2px solid grey;
+	background: grey;
+}
+
+QScrollBar::sub-line:vertical {
+    border: 2px solid grey;
+	background: grey;
+	height: 12px;
 }</string>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout">
+  <layout class="QVBoxLayout" name="verticalLayout" stretch="1,1,8">
    <item>
     <widget class="SearchBox" name="searchBox"/>
    </item>
@@ -92,20 +118,35 @@ QPushButton::hover {
     </layout>
    </item>
    <item>
-    <widget class="WordCardGroup" name="wordGroup" native="true"/>
-   </item>
-   <item>
-    <spacer name="verticalSpacer">
-     <property name="orientation">
-      <enum>Qt::Vertical</enum>
+    <widget class="QScrollArea" name="scrollArea">
+     <property name="styleSheet">
+      <string notr="true"/>
      </property>
-     <property name="sizeHint" stdset="0">
-      <size>
-       <width>20</width>
-       <height>40</height>
-      </size>
+     <property name="widgetResizable">
+      <bool>true</bool>
      </property>
-    </spacer>
+     <widget class="QWidget" name="scrollContent">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>622</width>
+        <height>390</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">#scrollContent {
+	border: none;
+	background-color: #FFF8EF;
+}</string>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout_2">
+       <item>
+        <widget class="WordCardGroup" name="wordGroup" native="true"/>
+       </item>
+      </layout>
+     </widget>
+    </widget>
    </item>
   </layout>
  </widget>
