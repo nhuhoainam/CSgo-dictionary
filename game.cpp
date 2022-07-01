@@ -13,7 +13,8 @@ Game::Game(QWidget *parent) :
     m_optionButtons->addButton(ui->ans2, 2);
     m_optionButtons->addButton(ui->ans3, 3);
     m_optionButtons->addButton(ui->ans4, 4);
-    ui->ans1->setText("HELLO");
+    ui->ans1->setText("asdlgkna  sldgks  sldsdgkl slgkd sklg slkdgans;g sgls slkgn lssl lsgln lsgknsl sdgjknbsl k skfdgja;s sjkgd sdjg"
+                      "ASJKLGFBNASKG;sdljkg dsg");
 
     // To block input when an answer is chosen
     blocker = new QWidget(this);
