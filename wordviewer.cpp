@@ -53,3 +53,14 @@ void WordViewer::paintEvent(QPaintEvent* event) {
     painter.drawRoundedRect(boundaryRect, 10.0, 10.0);
     QWidget::paintEvent(event);
 }
+
+void WordViewer::setWord(const QString &key, std::vector<QString> defs, bool favState) {
+    ui->keyword->setText(key);
+    QLayoutItem *item;
+    while (!(item = ui->defLayout->takeAt(0))) {
+        delete item->widget();
+        delete item;
+    }
+    // TODO
+    // Add definitions
+}
