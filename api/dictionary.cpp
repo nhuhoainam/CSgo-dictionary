@@ -7,53 +7,40 @@
 
 using namespace std;
 
-// 9 parts of speech in English
-enum PoS {
-    NONE, // for emojis and slangs
-    NOUN,
-    ADJECTIVE,
-    ADVERB,
-    VERB,
-    CONJUNCTION,
-    PRONOUN,
-    PREPOSITION,
-    DETERMINER,
-    MODAL_VERB
-};
-PoS pos_val[10] {NONE, NOUN, ADJECTIVE, ADVERB, VERB, CONJUNCTION, PRONOUN, PREPOSITION, DETERMINER, MODAL_VERB};
-
 struct Word {
-    // 9 potential parts of speech of a word, each one may contain several definitions
     string word;
-    vector<string> part_of_speech[10]; // the order is as in the enum PoS
+    vector<pair<string, string>> data; // including definitions + their corresponding examples
 
     Word(const string& w) {
         word = w;
     }
-    bool contain(const PoS& pos, const string& def) const {
-        for (const string& s : part_of_speech[pos]) {
-            if (s == def)
+    Word(const Word& other) {
+        *this = other;
+    }
+    bool contain(const string& def) const {
+        for (auto& p : data) {
+            if (def == p.first)
                 return true;
         }
         return false;
     }
     void show() const {
         std::cout << "The word is: " << word << std::endl;
-        for (int i = 0; i < 10; ++i) {
-            std::cout << "Definitions in part of speech " << i << ":\n";
-            for(const string& s : part_of_speech[i])
-                std::cout << s << std::endl;
+        for (auto& p : data) {
+            std::cout << "-Definition\n=Example+Explanation\n";
+            std::cout << '-' << p.first << "\n=" << p.second << '\n';
         }
     }
 
     // get fist definition of that word
-    string getFirstDef() {
-        for (int i = 0; i < 10; i++) {
-            if (part_of_speech[i].size()) {
-                return part_of_speech[i][0];
-            }
-        }
-    }
+    // from Minh: Duy sửa lại cái hàm này theo cấu trúc struct mới update nha Duy (chú ý cái return vì bên dưới có trg hợp ko return)
+    // string getFirstDef() {
+    //     for (int i = 0; i < 10; i++) {
+    //         if (part_of_speech[i].size()) {
+    //             return part_of_speech[i][0];
+    //         }
+    //     }
+    // }
 
     // File structure:
     // word
@@ -110,7 +97,7 @@ public:
         return data;
     }
     // there might be overloads of set() depending on the demands of UI team, this one is just one of them
-    TrieNode<MAX_SIZE, getid>* set(const PoS& pos, int idx, const string& new_def) {
+    TrieNode<MAX_SIZE, getid>* set(const string& def, const string& new_def) {
         assert(idx < int(data->part_of_speech[pos].size()));
         data->part_of_speech[pos][idx] = new_def;
         return this;
@@ -129,9 +116,49 @@ private:
             if (p == node) return;
         searchHistory.push_back(node);
     }
+    bool internal_erase(const string& w, TrieNode<MAX_SIZE, getid>*& cur, int cur_idx) {
+        if (cur_idx == int(w.size())) {
+            if (cur->data == nullptr) return false;
+            delete cur->data;
+            cur->data = nullptr;
+            if (cur->isLeaf()) {
+                delete cur;
+                cur = nullptr;
+            }
+            return true;
+        }
+
+        int id {getid(w[cur_idx])};
+        if (id == -1 || cur->nxt[id] == nullptr) return false;
+        bool res {internal_erase(w, cur->nxt[id], cur_idx+1)};
+        if (cur->data == nullptr && cur->isLeaf()) {
+            delete cur;
+            cur = nullptr;
+        }
+        return res;
+    }
+    bool internal_erase(const Word& w, TrieNode<MAX_SIZE, getid>*& cur, int cur_idx) {
+        if (cur_idx == int(w.word.size())) {
+            if (cur->data == nullptr) return false;
+            delete cur->data;
+            cur->data = nullptr;
+            if (cur->isLeaf()) {
+                delete cur;
+                cur = nullptr;
+            }
+            return true;
+        }
+
+        int id {getid(w.word[cur_idx])};
+        if (id == -1 || cur->nxt[id] == nullptr) return false;
+        bool res {internal_erase(w, cur->nxt[id], cur_idx+1)};
+        if (cur->data == nullptr && cur->isLeaf()) {
+            delete cur;
+            cur = nullptr;
+        }
+        return res;
+    }
 public:
-    // a pointer pointing to const to avoid changing the data, a const pointer to avoid pointing the pointer of the array
-    // to somewhere else
     vector<Word*> searchHistory;
     vector<Word*> favoriteList;
     dictionary() {
@@ -167,11 +194,11 @@ public:
     }
     void loadFromFile(string path);
 
-    // main functions of dictionary
-    TrieNode<MAX_SIZE, getid>* insert(const string& word, const PoS& pos, const string& def) {
-        if (word.empty()) return nullptr; // for the erase feature's sake, inserting an empty word is not allowed
+    // insert a new word (word + definitions + corresponding examples) to the dictionary
+    TrieNode<MAX_SIZE, getid>* insert(const Word& w) {
+        if (w.word.empty()) return nullptr; // for the erasion's sake, inserting an empty word is not allowed!
         TrieNode<MAX_SIZE, getid>* cur {pRoot};
-        for (const char c : word) {
+        for (const char c : w.word) {
             int id {getid(c)};
             if (id == -1) return nullptr;
             else {
@@ -180,18 +207,58 @@ public:
                 cur = cur->nxt[id];
             }
         }
-        if (cur->data == nullptr)
-            cur->data = new Word(word);
-        // check whether this definition has already existed
-        if (cur->data->contain(pos, def)) return nullptr;
-        // this definition does not exist, so insert it!
-        cur->data->part_of_speech[pos].push_back(def);
+        if (cur->data == nullptr) {
+            cur->data = new Word(w);
+            return cur;
+        }
+        else return nullptr; // the word already exists
+    }
+    // insert a new word (only the word) to the dictionary
+    TrieNode<MAX_SIZE, getid>* insert(const string& w) {
+        if (w.empty()) return nullptr; // for the erasion's sake, inserting an empty word is not allowed!
+        TrieNode<MAX_SIZE, getid>* cur {pRoot};
+        for (const char c : w) {
+            int id {getid(c)};
+            if (id == -1) return nullptr;
+            else {
+                if (cur->nxt[id] == nullptr)
+                    cur->nxt[id] = new TrieNode<MAX_SIZE, getid>();
+                cur = cur->nxt[id];
+            }
+        }
+        if (cur->data == nullptr) {
+            cur->data = new Word(w);
+            return cur;
+        }
+        else return nullptr; // the word already exists
+    }
+    // insert a new word (word + def) to the dictionary
+    TrieNode<MAX_SIZE, getid>* insert(const string& w, const string& def) {
+        if (w.empty()) return nullptr; // for the erasion's sake, inserting an empty word is not allowed!
+        TrieNode<MAX_SIZE, getid>* cur {pRoot};
+        for (const char c : w) {
+            int id {getid(c)};
+            if (id == -1) return nullptr;
+            else {
+                if (cur->nxt[id] == nullptr)
+                    cur->nxt[id] = new TrieNode<MAX_SIZE, getid>();
+                cur = cur->nxt[id];
+            }
+        }
+        if (cur->data == nullptr) {
+            cur->data = new Word;
+            cur->data->word = w;
+        }
+        if (cur->data->contain(def))
+            return nullptr; // this definition already exists in the node of word
+        cur->data->data.push_back(make_pair(def, "")); // definition without examples
         return cur;
     }
-    TrieNode<MAX_SIZE, getid>* find(const string& word) {
-        if (word.empty()) return nullptr;
+    // find a node in the dictionary containing the word w
+    TrieNode<MAX_SIZE, getid>* find(const Word& w) {
+        if (w.word.empty()) return nullptr;
         TrieNode<MAX_SIZE, getid>* cur {pRoot};
-        for (const char c : word) {
+        for (const char c : w.word) {
             int id {getid(c)};
             if (id == -1) return nullptr;
             else {
@@ -206,47 +273,58 @@ public:
             return cur;
         }
     }
-    bool erase(const string& word) {
-        if (word.empty()) return true;
+    // find a node in the dictionary containing the string word
+    TrieNode<MAX_SIZE, getid>* find(const string& w) {
+        if (w.empty()) return nullptr;
         TrieNode<MAX_SIZE, getid>* cur {pRoot};
-        for (int i = 0; i < int(word.size()); ++i) {
-            int id {getid(word[i])};
-            if (id == -1) return false;
+        for (const char c : w) {
+            int id {getid(c)};
+            if (id == -1) return nullptr;
             else {
                 if (cur->nxt[id] == nullptr)
-                    return false;
-                if (i == int(word.size()) - 1) {
-                    if (cur->nxt[id]->data == nullptr) return false;
-                    delete cur->nxt[id]->data;
-                    cur->nxt[id]->data = nullptr;
-                    if (cur->nxt[id]->isLeaf()) {
-                        delete cur->nxt[id];
-                        cur->nxt[id] = nullptr;
-                    }
-                    return true;
-                }
-                else cur = cur->nxt[id];
+                    return nullptr;
+                cur = cur->nxt[id];
             }
         }
-        // this case shouldn't be reached
-        assert(false);
-        return false;
+        if (cur->data == nullptr) return nullptr;
+        else {
+            add_to_searchHistory(cur->data);
+            return cur;
+        }
     }
-    // this feature requires that when a word is removed from the Trie, all the nodes above the removed nodes that lead nowhere
-    // should be deleted.
+    // this erasing feature requires that when a word is removed from the Trie, all the nodes above the removed nodes that 
+    // lead nowhere should be deleted.
+    // erase the node in the dictionary containing the struct w
+    bool erase(const Word& w) {
+        if (w.word.empty()) return true;
+        return internal_erase(w, pRoot, 0);
+    }
+    // erase the node in the dictionary containing the string w
+    bool erase(const string& w) {
+        if (w.empty()) return true;
+        return internal_erase(w, pRoot, 0);
+    }
+    
+    // If there is a series of words which have at least 1 prefix in common, this algorithm chooses the longest one
     const Word* random_word() const {
         const TrieNode<MAX_SIZE, getid>* cur {pRoot};
-        while (true) {
+        while (cur) {
             if (cur->data) return cur->data;
             vector<TrieNode<MAX_SIZE, getid>*> opts; opts.reserve(MAX_SIZE);
             // we have to ensure that the random child we branch into must lead to an existing word.
-            // This is why the delete operation should be carried out with care!
+            // This is why the delete operation above should be carried out with care!
             for (int i = 0; i < MAX_SIZE; ++i) {
                 if (cur->nxt[i])
                     opts.push_back(cur->nxt[i]);
             }
-            int id {rand() % int(opts.size())};
-            cur = opts[id];
+            if (opts.empty()) {
+                assert(cur->data); // a leaf node has to contain a word
+                return cur->data;
+            }
+            else {
+                int id {rand() % int(opts.size())};
+                cur = opts[id];
+            }
         }
         // this case shouldn't be reached
         assert(false);
