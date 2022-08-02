@@ -151,6 +151,7 @@ void MainWindow::connectSignalAndSlot() {
 void MainWindow::handleHomeSearchRequest(const QString &keyword) {
     qDebug() << "Search " << keyword << " in home";
     container->setCurrentIndex(6);
+    sidebar->setSelected(0, false);
 }
 
 void MainWindow::handleFavoriteListSearchRequest(const QString &keyword) {
@@ -202,6 +203,7 @@ void MainWindow::handleHistoryFocus() {
 }
 
 void MainWindow::handleEditorFocus() {
+    dictEditor->resetDefEdit();
     qDebug() << "Editor focus";
 }
 
@@ -210,12 +212,20 @@ void MainWindow::handleEditorReset() {
 }
 
 void MainWindow::handleEditorAdd(const QString &keyword,
-                                 const QString &meaning) {
-    qDebug() << "Add new word: " << keyword << " | " << meaning;
+                                 std::vector<QString> defs) {
+    qDebug() << "Add new word: " << keyword << " | ";
+    for (auto def : defs) {
+        qDebug() << def;
+    }
 }
 
 void MainWindow::handleGameFocus() {
     qDebug() << "Game focus";
+    game->start();
+    game->addKeywordQSet({
+                              { "Question", "1", "1", "2", "3", "4" },
+                              { "Question2", "1", "1", "2", "3", "4" },
+                          });
 }
 
 void MainWindow::handleWordViewerEdit(const QString &keyword) {

@@ -57,7 +57,7 @@ private slots:
 
     void handleEditorFocus();
     void handleEditorReset();
-    void handleEditorAdd(const QString&, const QString&);
+    void handleEditorAdd(const QString&, std::vector<QString>);
     void handleGameFocus();
 
     void handleWordViewerEdit(const QString&);
