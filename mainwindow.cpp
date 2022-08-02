@@ -41,7 +41,7 @@ void MainWindow::setupUI() {
     ui->horizontalLayout->addWidget(sidebar);
     QIcon *dictIcon = new QIcon(":/images/img/CSgo.png");
     sidebar->setSidebarIcon(*dictIcon);
-    sidebar->addAction(QString("Home"), QIcon(":/images/img/home.svg"));
+    sidebar->addDefaultAction(QString("Home"), QIcon(":/images/img/home.svg"));
     sidebar->addAction(QString("Favorite list"), QIcon(":/images/img/bookmarks.svg"));
     sidebar->addAction(QString("History"), QIcon(":/images/img/history.svg"));
     sidebar->addAction(QString("Edit dictionary"), QIcon(":/images/img/edit.svg"));
