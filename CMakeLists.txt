@@ -17,6 +17,11 @@ find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets LinguistTools)
 set(TS_FILES CSgo-dictionary_en_US.ts)
 
 set(PROJECT_SOURCES
+        mainscene.cpp
+        mainscene.ui
+        mainscene.h
+        textwrapbutton.cpp
+        textwrapbutton.h
         main.cpp
         sidebar.cpp
         sidebar.h
@@ -29,17 +34,15 @@ set(PROJECT_SOURCES
         game.ui
         wordcard.cpp
         wordcard.h
+        wordcard.ui
         home.h
         home.cpp
-        home.ui
         favoritelist.cpp
         favoritelist.h
-        favoritelist.ui
         searchbox.cpp
         searchbox.h
         history.cpp
         history.h
-        history.ui
         dictionaryeditor.cpp
         dictionaryeditor.h
         dictionaryeditor.ui

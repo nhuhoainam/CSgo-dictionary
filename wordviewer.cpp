@@ -8,6 +8,28 @@ WordViewer::WordViewer(QWidget *parent) :
     ui(new Ui::WordViewer)
 {
     ui->setupUi(this);
+
+    connect(ui->deleteBtn,
+            &QPushButton::clicked,
+            this,
+            [=]() {
+        auto keyword = ui->keyword->text();
+        emit deleteRequest(keyword);
+    });
+    connect(ui->editBtn,
+            &QPushButton::clicked,
+            this,
+            [=]() {
+        auto keyword = ui->keyword->text();
+        emit editRequest(keyword);
+    });
+    connect(ui->favBtn,
+            &QPushButton::clicked,
+            this,
+            [=](bool state) {
+        auto keyword = ui->keyword->text();
+        emit favoriteToggle(keyword, state);
+    });
 }
 
 WordViewer::~WordViewer()
@@ -30,4 +52,15 @@ void WordViewer::paintEvent(QPaintEvent* event) {
     painter.setRenderHint(QPainter::Antialiasing);
     painter.drawRoundedRect(boundaryRect, 10.0, 10.0);
     QWidget::paintEvent(event);
+}
+
+void WordViewer::setWord(const QString &key, std::vector<QString> defs, bool favState) {
+    ui->keyword->setText(key);
+    QLayoutItem *item;
+    while (!(item = ui->defLayout->takeAt(0))) {
+        delete item->widget();
+        delete item;
+    }
+    // TODO
+    // Add definitions
 }

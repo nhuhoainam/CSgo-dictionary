@@ -1,29 +1,20 @@
 #ifndef HOME_H
 #define HOME_H
 
-#include "searchbox.h"
+#include "mainscene.h"
 
-#include <QWidget>
-
-namespace Ui {
-class Home;
-}
-
-class Home : public QWidget
+class Home : public MainScene
 {
     Q_OBJECT
 
 public:
     explicit Home(QWidget *parent = nullptr);
-    ~Home();
-
 private:
-    Ui::Home *ui;
-    SearchBox *searchBox;
+    QPushButton *refreshBtn;
+    void setupRefreshBtn();
 signals:
-    void searchRequest(const QString&);
-    void wordSelected(const QString&);
-    void wordToggleFavorite(const QString&, bool);
+    void refreshRequest();
 };
+
 
 #endif // HOME_H

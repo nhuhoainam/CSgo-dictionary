@@ -1,29 +1,26 @@
 #include "home.h"
-#include "ui_home.h"
-#include "wordcard.h"
-#include "searchbox.h"
-#include "wordcardlayout.h"
+#include "ui_mainscene.h"
 
-#include <iostream>
+#include <QPushButton>
 
-Home::Home(QWidget *parent) :
-    QWidget(parent),
-    ui(new Ui::Home)
+Home::Home(QWidget *parent)
+    : MainScene("Random new word", parent)
 {
-    ui->setupUi(this);
-
-    for (int i = 0; i < 4; i++) {
-        ui->wordGroup->addCard("heightist", "Someone who believes that people are superior to or inferior to others on account of their respective heights, or that people of differing heights have different moral qualities and intellectual capabilities.", true);
-    }
-    connect(ui->searchBox, &SearchBox::searchFinished,
-            this, &Home::searchRequest);
-    connect(ui->wordGroup, &WordCardGroup::wordSelected,
-            this, &Home::wordSelected);
-    connect(ui->wordGroup, &WordCardGroup::wordToggleFavorite,
-            this, &Home::wordToggleFavorite);
+    setupRefreshBtn();
 }
 
-Home::~Home()
-{
-    delete ui;
+void Home::setupRefreshBtn() {
+    refreshBtn = new QPushButton;
+    ui->titleLayout->insertWidget(1, refreshBtn);
+    connect(refreshBtn, &QPushButton::clicked,
+            this, &Home::refreshRequest);
+    refreshBtn->setStyleSheet("QPushButton {"
+                              "border-radius: 6px;"
+                              "border: none;"
+                              "}"
+                              "QPushButton:hover {"
+                              "background-color: lightgrey;"
+                              "}");
+    refreshBtn->setIcon(QIcon(":/images/img/reset.svg"));
+    refreshBtn->setIconSize(QSize(24, 24));
 }

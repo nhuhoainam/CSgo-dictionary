@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>Home</class>
- <widget class="QWidget" name="Home">
+ <class>MainScene</class>
+ <widget class="QWidget" name="MainScene">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -17,21 +17,47 @@
    <bool>false</bool>
   </property>
   <property name="styleSheet">
-   <string notr="true">#Home {
+   <string notr="true">#MainScene {
 	background-color: #FFF8EF;
+}
+
+#scrollArea {
+	border: none;
+}
+
+QScrollBar:vertical {
+	border-radius: 1px;
+	width: 6px;
+}
+
+QScrollBar::handle:vertical {
+	background: orange;
+	border-radius: 4px;
+	height: 12px;
+}
+
+QScrollBar::add-line:vertical {
+    border: 2px solid grey;
+	background: grey;
+}
+
+QScrollBar::sub-line:vertical {
+    border: 2px solid grey;
+	background: grey;
+	height: 12px;
 }</string>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout" stretch="1,10,1,0">
+  <layout class="QVBoxLayout" name="verticalLayout" stretch="1,1,8">
    <item>
     <widget class="SearchBox" name="searchBox"/>
    </item>
    <item>
-    <layout class="QHBoxLayout" name="horizontalLayout">
+    <layout class="QHBoxLayout" name="titleLayout">
      <property name="spacing">
       <number>20</number>
      </property>
      <item>
-      <widget class="QLabel" name="label">
+      <widget class="QLabel" name="title">
        <property name="font">
         <font>
          <pointsize>14</pointsize>
@@ -40,39 +66,6 @@
        </property>
        <property name="text">
         <string>Random new words</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="resetBtn">
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">QPushButton {
-	border: none;
-}
-
-QPushButton::hover {
-	border-radius: 5px;
-	background-color: rgb(241, 228, 218);
-}</string>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-       <property name="icon">
-        <iconset resource="resources.qrc">
-         <normaloff>:/resources/img/reset.svg</normaloff>:/resources/img/reset.svg</iconset>
-       </property>
-       <property name="iconSize">
-        <size>
-         <width>24</width>
-         <height>24</height>
-        </size>
        </property>
       </widget>
      </item>
@@ -92,20 +85,35 @@ QPushButton::hover {
     </layout>
    </item>
    <item>
-    <widget class="WordCardGroup" name="wordGroup" native="true"/>
-   </item>
-   <item>
-    <spacer name="verticalSpacer">
-     <property name="orientation">
-      <enum>Qt::Vertical</enum>
+    <widget class="QScrollArea" name="scrollArea">
+     <property name="styleSheet">
+      <string notr="true"/>
      </property>
-     <property name="sizeHint" stdset="0">
-      <size>
-       <width>20</width>
-       <height>40</height>
-      </size>
+     <property name="widgetResizable">
+      <bool>true</bool>
      </property>
-    </spacer>
+     <widget class="QWidget" name="scrollContent">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>622</width>
+        <height>390</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">#scrollContent {
+	border: none;
+	background-color: #FFF8EF;
+}</string>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout_2">
+       <item>
+        <widget class="WordCardGroup" name="wordGroup" native="true"/>
+       </item>
+      </layout>
+     </widget>
+    </widget>
    </item>
   </layout>
  </widget>
@@ -122,8 +130,6 @@ QPushButton::hover {
    <container>1</container>
   </customwidget>
  </customwidgets>
- <resources>
-  <include location="resources.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>

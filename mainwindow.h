@@ -33,6 +33,36 @@ private:
     SingleWordView *wordViewer;
     Game *game;
     QStackedWidget *container;
+    Sidebar *sidebar;
+
+    void setupUI();
+    void connectSignalAndSlot();
+
+private slots:
+    void handleHomeFocus();
+    void handleHomeRefresh();
+    void handleHomeSearchRequest(const QString&);
+    void handleHomeWordSelected(const QString&);
+    void handleHomeWordFavorite(const QString&, bool);
+
+    void handleFavoriteListFocus();
+    void handleFavoriteListSearchRequest(const QString&);
+    void handleFavoriteListWordSelected(const QString&);
+    void handleFavoriteListWordFavorite(const QString&, bool);
+
+    void handleHistoryFocus();
+    void handleHistorySearchRequest(const QString&);
+    void handleHistoryWordSelected(const QString&);
+    void handleHistoryWordFavorite(const QString&, bool);
+
+    void handleEditorFocus();
+    void handleEditorReset();
+    void handleEditorAdd(const QString&, const QString&);
+    void handleGameFocus();
+
+    void handleWordViewerEdit(const QString&);
+    void handleWordViewerDelete(const QString&);
+    void handleWordViewerFavorite(const QString&, bool on);
 };
 
 #endif // MAINWINDOW_H
