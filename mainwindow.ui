@@ -1,18 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>Widget</class>
- <widget class="QWidget" name="Widget">
+ <class>MainWindow</class>
+ <widget class="QWidget" name="MainWindow">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1440</width>
-    <height>1024</height>
+    <width>1025</width>
+    <height>677</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Widget</string>
+   <string>Form</string>
   </property>
+  <layout class="QHBoxLayout" name="horizontalLayout"/>
  </widget>
  <resources/>
  <connections/>

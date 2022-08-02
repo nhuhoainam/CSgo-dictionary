@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainScene</class>
+ <widget class="QWidget" name="MainScene">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>640</width>
+    <height>491</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <property name="autoFillBackground">
+   <bool>false</bool>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">#MainScene {
+	background-color: #FFF8EF;
+}
+
+#scrollArea {
+	border: none;
+}
+
+QScrollBar:vertical {
+	border-radius: 1px;
+	width: 6px;
+}
+
+QScrollBar::handle:vertical {
+	background: orange;
+	border-radius: 4px;
+	height: 12px;
+}
+
+QScrollBar::add-line:vertical {
+    border: 2px solid grey;
+	background: grey;
+}
+
+QScrollBar::sub-line:vertical {
+    border: 2px solid grey;
+	background: grey;
+	height: 12px;
+}</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout" stretch="1,1,8">
+   <item>
+    <widget class="SearchBox" name="searchBox"/>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="titleLayout">
+     <property name="spacing">
+      <number>20</number>
+     </property>
+     <item>
+      <widget class="QLabel" name="title">
+       <property name="font">
+        <font>
+         <pointsize>14</pointsize>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="text">
+        <string>Random new words</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <widget class="QScrollArea" name="scrollArea">
+     <property name="styleSheet">
+      <string notr="true"/>
+     </property>
+     <property name="widgetResizable">
+      <bool>true</bool>
+     </property>
+     <widget class="QWidget" name="scrollContent">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>622</width>
+        <height>390</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">#scrollContent {
+	border: none;
+	background-color: #FFF8EF;
+}</string>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout_2">
+       <item>
+        <widget class="WordCardGroup" name="wordGroup" native="true"/>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>SearchBox</class>
+   <extends>QLineEdit</extends>
+   <header>searchbox.h</header>
+  </customwidget>
+  <customwidget>
+   <class>WordCardGroup</class>
+   <extends>QWidget</extends>
+   <header>wordcardgroup.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections/>
+</ui>

@@ -17,11 +17,48 @@ find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets LinguistTools)
 set(TS_FILES CSgo-dictionary_en_US.ts)
 
 set(PROJECT_SOURCES
+        mainscene.cpp
+        mainscene.ui
+        mainscene.h
+        textwrapbutton.cpp
+        textwrapbutton.h
         main.cpp
+        sidebar.cpp
+        sidebar.h
         widget.cpp
         widget.h
         widget.ui
         resources.qrc
+        game.h
+        game.cpp
+        game.ui
+        wordcard.cpp
+        wordcard.h
+        wordcard.ui
+        home.h
+        home.cpp
+        favoritelist.cpp
+        favoritelist.h
+        searchbox.cpp
+        searchbox.h
+        history.cpp
+        history.h
+        dictionaryeditor.cpp
+        dictionaryeditor.h
+        dictionaryeditor.ui
+        mainwindow.h
+        mainwindow.ui
+        mainwindow.cpp
+        wordcardlayout.h
+        wordcardlayout.cpp
+        wordcardgroup.cpp
+        wordcardgroup.h
+        wordviewer.cpp
+        wordviewer.h
+        wordviewer.ui
+        singlewordview.cpp
+        singlewordview.h
+        singlewordview.ui
         ${TS_FILES}
 )
 

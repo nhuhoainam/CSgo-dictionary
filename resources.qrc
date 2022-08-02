@@ -1,7 +1,24 @@
 <RCC>
-    <qresource prefix="/resources">
+    <qresource prefix="/images">
         <file>img/CSgo.png</file>
         <file>img/icon.png</file>
         <file>img/icon2.png</file>
+        <file>img/bookmarks.svg</file>
+        <file>img/edit.svg</file>
+        <file>img/game.svg</file>
+        <file>img/history.svg</file>
+        <file>img/home.svg</file>
+        <file>img/people-outline.svg</file>
+        <file>img/CSgo1.svg</file>
+        <file>img/bookmark_hollow.svg</file>
+        <file>img/bookmark_solid.svg</file>
+        <file>img/reset.svg</file>
+        <file>img/search.svg</file>
+        <file>img/delete.svg</file>
+        <file>img/word-edit.svg</file>
+    </qresource>
+    <qresource prefix="/fonts">
+        <file>fonts/PlayfairDisplay-Italic-VariableFont_wght.ttf</file>
+        <file>fonts/PlayfairDisplay-VariableFont_wght.ttf</file>
     </qresource>
 </RCC>
