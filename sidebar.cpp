@@ -35,19 +35,20 @@ void Sidebar::paintEvent(QPaintEvent *event)
 
         QRect actionRect(0, action_y, event->rect().width(), action_height);
 
+        p.setPen(QColor(168, 176, 185));
         if(action->isChecked())
         {
             p.fillRect(actionRect, QColor(255, 248, 239));
+            p.setPen(QColor(248, 161, 69));
         }
 
         if(action == mOverAction){
             p.fillRect(actionRect, QColor(255, 248, 239));
         }
 
-        p.setPen(QColor(168, 176, 185));
         QRect iconRect(24, action_y + action_height/2 - 12, mIconSize.width(), mIconSize.height());
         QIcon actionIcon = action->icon();
-        actionIcon.paint(&p, iconRect);
+        actionIcon.paint(&p, iconRect, Qt::AlignCenter, action->isChecked() ? QIcon::Normal : QIcon::Disabled);
         QSize size = p.fontMetrics().size(Qt::TextSingleLine, action->text());
         QRect textRect(
                     24 + mIconSize.width() + 20,
@@ -77,6 +78,18 @@ QAction *Sidebar::addAction(const QString &text, const QIcon &icon)
     QAction *action = new QAction(icon, text, this);
     action->setCheckable(true);
     mActions.push_back(action);
+    update();
+    return action;
+}
+
+QAction *Sidebar::addDefaultAction(const QString &text, const QIcon &icon)
+{
+    QAction *action = new QAction(icon, text, this);
+    action->setCheckable(true);
+    mCheckedAction = action;
+    action->setChecked(true);
+    mActions.push_back(action);
+    qDebug() << (action->isChecked() ? "YES" : "NO") << '\n';
     update();
     return action;
 }
