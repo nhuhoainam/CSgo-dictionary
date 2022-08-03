@@ -31,8 +31,10 @@ Game::Game(QWidget *parent) :
         checkAnswer(id);
         blocker->show();
     });
+    ui->guessKeywordBtn->setStyleSheet("QPushButton{ border-image: url(:/images/img/keyword_art.png) 0 0 0 0 stretch stretch }");
+    ui->guessMeaningBtn->setStyleSheet("QPushButton{ border-image: url(:/images/img/meaning_art.png) 0 0 0 0 stretch stretch }");
     connect(ui->guessKeywordBtn, &QPushButton::clicked, this, &Game::setKeywordGame);
-    connect(ui->guiessMeaningBtn, &QPushButton::clicked, this, &Game::setMeaningGame);
+    connect(ui->guessMeaningBtn, &QPushButton::clicked, this, &Game::setMeaningGame);
 }
 
 void Game::checkAnswer(int i) {
@@ -127,7 +129,7 @@ void Game::prevQuestion() {
 }
 
 void Game::setMeaningGame() {
-    ui->stackedWidget->setCurrentIndex(1);
+    ui->stackedWidget->setCurrentIndex(0);
     ui->questionLabel->setFont(QFont("Sans", 24, QFont::Bold));
     for (auto btn : m_optionButtons->buttons()) {
         btn->setFont(QFont("Sans", 16));
@@ -136,7 +138,7 @@ void Game::setMeaningGame() {
 }
 void Game::setKeywordGame() {
     type = Type::GuessKeyword;
-    ui->stackedWidget->setCurrentIndex(1);
+    ui->stackedWidget->setCurrentIndex(0);
     ui->questionLabel->setFont(QFont("Sans", 24));
     for (auto btn : m_optionButtons->buttons()) {
         btn->setFont(QFont("Sans", 24, QFont::Bold));
@@ -145,7 +147,7 @@ void Game::setKeywordGame() {
 
 void Game::start() {
     type = Type::GuessMeaning;
-    ui->stackedWidget->setCurrentIndex(0);
+    ui->stackedWidget->setCurrentIndex(1);
     blocker->hide();
     while (!m_questionSets.empty())
         m_questionSets.pop();
