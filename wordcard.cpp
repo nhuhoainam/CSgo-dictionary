@@ -6,8 +6,8 @@ WordCard::WordCard(QWidget *parent) :
     ui(new Ui::WordCard)
 {
     effect = new QGraphicsDropShadowEffect(this);
-    on_icon = QIcon("bookmark_solid.svg");
-    off_icon = QIcon("bookmark_hollow.svg");
+    on_icon = QIcon(":/images/img/bookmark_solid.svg");
+    off_icon = QIcon(":/images/img/bookmark_hollow.svg");
     setupUi();
     connectSignalAndSlot();
 }

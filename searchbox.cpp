@@ -17,7 +17,7 @@ SearchBox::SearchBox(QWidget *parent)
 
     searchBtn = new QPushButton(this);
     searchBtn->setObjectName("SearchButton");
-    searchBtn->setIcon(QIcon("search.svg"));
+    searchBtn->setIcon(QIcon(":/images/img/search.svg"));
     searchBtn->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Maximum);
 
     frame = new QFrame(this);
