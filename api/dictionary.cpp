@@ -72,14 +72,14 @@ struct Word {
     // }
 };
 
-template <int MAX_SIZE, int (*getid)(char)> class dictionary;
+template <int MAX_SIZE, int (*getid)(char)> class Dictionary;
 
 template <int MAX_SIZE, int (*getid)(char)>
 class TrieNode {
 private:
     Word* data;
     TrieNode* nxt[MAX_SIZE];
-    friend class dictionary<MAX_SIZE, getid>;
+    friend class Dictionary<MAX_SIZE, getid>;
 public:
     TrieNode() {
         data = nullptr;
