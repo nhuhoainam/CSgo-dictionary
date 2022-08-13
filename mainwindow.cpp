@@ -93,6 +93,10 @@ void MainWindow::connectSignalAndSlot() {
             &FavoriteList::wordToggleFavorite,
             this,
             &MainWindow::handleFavoriteListWordFavorite);
+    connect(favoriteList,
+            &FavoriteList::completionRequest,
+            this,
+            &MainWindow::handleFavoriteListCompletionRequest);
 
     connect(history,
             &History::searchRequest,
@@ -106,6 +110,10 @@ void MainWindow::connectSignalAndSlot() {
             &History::wordToggleFavorite,
             this,
             &MainWindow::handleHistoryWordFavorite);
+    connect(history,
+            &History::completionRequest,
+            this,
+            &MainWindow::handleHistoryCompletionRequest);
 
     connect(home,
             &Home::wordSelected,
@@ -123,6 +131,10 @@ void MainWindow::connectSignalAndSlot() {
             &Home::refreshRequest,
             this,
             &MainWindow::handleHomeRefresh);
+    connect(home,
+            &Home::completionRequest,
+            this,
+            &MainWindow::handleHomeCompletionRequest);
 
     connect(dictEditor,
             &DictionaryEditor::addNewWord,
@@ -147,31 +159,39 @@ void MainWindow::connectSignalAndSlot() {
             &MainWindow::handleWordViewerFavorite);
 }
 
+void MainWindow::handleSearchRequest(const QString& keyword) {
+    // search word in dictionary
+    // then set the word in singlewordview
+    container->setCurrentIndex(6);
+
+    // Deselect the sidebar to avoid confusion
+    sidebar->setSelected(0, false);
+    sidebar->setSelected(1, false);
+    sidebar->setSelected(2, false);
+}
 
 void MainWindow::handleHomeSearchRequest(const QString &keyword) {
-    qDebug() << "Search " << keyword << " in home";
-    container->setCurrentIndex(6);
-    sidebar->setSelected(0, false);
+    handleSearchRequest(keyword);
 }
 
 void MainWindow::handleFavoriteListSearchRequest(const QString &keyword) {
-    qDebug() << "Search " << keyword << " in favorite list";
+    handleSearchRequest(keyword);
 }
 
 void MainWindow::handleHistorySearchRequest(const QString &keyword) {
-    qDebug() << "Search " << keyword << " in history";
+    handleSearchRequest(keyword);
 }
 
 void MainWindow::handleHomeWordSelected(const QString&keyword) {
-    qDebug() << "Select " << keyword << " in home";
+    handleSearchRequest(keyword);
 }
 
 void MainWindow::handleFavoriteListWordSelected(const QString&keyword) {
-    qDebug() << "Select " << keyword << " in favorite list";
+    handleSearchRequest(keyword);
 }
 
 void MainWindow::handleHistoryWordSelected(const QString&keyword) {
-    qDebug() << "Select " << keyword << " in history";
+    handleSearchRequest(keyword);
 }
 
 void MainWindow::handleHomeWordFavorite(const QString &keyword, bool on) {
@@ -245,7 +265,8 @@ vector<QString> MainWindow::getCompletionChoices(const QString &word) {
 }
 
 void MainWindow::handleHomeCompletionRequest(const QString& word) {
-    auto choices = getCompletionChoices(word);
+    // auto choices = getCompletionChoices(word);
+    auto choices = {QString("Hello")};
     home->setCompletionChoices(choices);
 }
 void MainWindow::handleHistoryCompletionRequest(const QString& word) {

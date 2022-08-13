@@ -67,6 +67,8 @@ private slots:
     void handleWordViewerEdit(const QString&);
     void handleWordViewerDelete(const QString&);
     void handleWordViewerFavorite(const QString&, bool on);
+
+    void handleSearchRequest(const QString&);
 };
 
 #endif // MAINWINDOW_H

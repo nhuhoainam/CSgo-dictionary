@@ -12,8 +12,9 @@ WordCardGroup::WordCardGroup(QWidget *parent)
 void WordCardGroup::addCard(Word word, bool favorite) {
     auto *w = new WordCard;
     w->setKeyword(QString::fromStdString(word.word));
-    for (auto p : word.data) {
+    for (const auto &p : word.data) {
         w->addDefinition(QString::fromStdString(p.first));
+        w->setFavoriteState(favorite);
     }
     connect(w, &WordCard::wordSelected, this, &WordCardGroup::wordSelected);
     connect(w, &WordCard::favoriteStateChanged, this, &WordCardGroup::wordToggleFavorite);

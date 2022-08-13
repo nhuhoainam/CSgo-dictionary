@@ -63,9 +63,11 @@ void MainScene::setupUi() {
     completePopup->hide();
     completePopup->setStyleSheet(listViewStyle);
 }
+
 void MainScene::setCompletionChoices(vector<QString> choices) {
     completePopup->clear();
-    for (auto item : choices) {
+    for (const auto &item : choices) {
+        qDebug() << item;
         completePopup->addItem(item);
     }
 }
