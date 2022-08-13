@@ -238,3 +238,21 @@ void MainWindow::handleWordViewerFavorite(const QString &keyword, bool on) {
     QString state = on ? "on" : "off";
     qDebug() << "Set favorite to " << state << " " << keyword;
 }
+
+vector<QString> MainWindow::getCompletionChoices(const QString &word) {
+    // search dictionary for similar word
+    return {};
+}
+
+void MainWindow::handleHomeCompletionRequest(const QString& word) {
+    auto choices = getCompletionChoices(word);
+    home->setCompletionChoices(choices);
+}
+void MainWindow::handleHistoryCompletionRequest(const QString& word) {
+    auto choices = getCompletionChoices(word);
+    favoriteList->setCompletionChoices(choices);
+}
+void MainWindow::handleFavoriteListCompletionRequest(const QString& word) {
+    auto choices = getCompletionChoices(word);
+    history->setCompletionChoices(choices);
+}

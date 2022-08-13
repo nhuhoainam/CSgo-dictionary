@@ -55,16 +55,19 @@ void MainScene::setupUi() {
     ui->setupUi(this);
 
     for (int i = 0; i < 4; i++) {
-        ui->wordGroup->addCard(Word("heightist"), false);
+        Word w("heightist");
+        w.data.push_back({"Hello", "It's me"});
+        ui->wordGroup->addCard(w, true);
     }
     completePopup = new QListWidget(this);
-    completePopup->addItem("Hello");
-    completePopup->addItem("Helo");
-    completePopup->addItem("Hllo");
-    completePopup->addItem("Helo");
-    completePopup->addItem("ello");
     completePopup->hide();
     completePopup->setStyleSheet(listViewStyle);
+}
+void MainScene::setCompletionChoices(vector<QString> choices) {
+    completePopup->clear();
+    for (auto item : choices) {
+        completePopup->addItem(item);
+    }
 }
 
 void MainScene::setWordList(vector<pair<Word, bool>> words) {
