@@ -33,14 +33,11 @@ struct Word {
     }
 
     // get fist definition of that word
-    // from Minh: Duy sửa lại cái hàm này theo cấu trúc struct mới update nha Duy (chú ý cái return vì bên dưới có trg hợp ko return)
-    // string getFirstDef() {
-    //     for (int i = 0; i < 10; i++) {
-    //         if (part_of_speech[i].size()) {
-    //             return part_of_speech[i][0];
-    //         }
-    //     }
-    // }
+    string getFirstDef() {
+        if (data.empty() || data[0].first.empty())
+            return NULL;
+        return data[0].first;
+    }
 
     // File structure:
     // word
@@ -48,29 +45,29 @@ struct Word {
     // part_of_speech[i][0]
     // part_of_speech[i][1]
     // ...
-    void saveToFile(fstream &fout) {
-        fout << word << "\n";
-        for (int i = 0; i < 10; i++)
-            fout << part_of_speech[i].size() << " ";
-        fout << "\n";
-        for (int i = 0; i < 10; i++) {
-            for (int j = 0; j < part_of_speech[i].size(); j++)
-                cout << part_of_speech[i][j] << "\n";
-        }
-    }
+    // void saveToFile(fstream &fout) {
+    //     fout << word << "\n";
+    //     for (int i = 0; i < 10; i++)
+    //         fout << part_of_speech[i].size() << " ";
+    //     fout << "\n";
+    //     for (int i = 0; i < 10; i++) {
+    //         for (int j = 0; j < part_of_speech[i].size(); j++)
+    //             cout << part_of_speech[i][j] << "\n";
+    //     }
+    // }
 
-    void loadFromFile(fstream &fin) {
-        getline(fin, word);
-        int sizeOfSpeech[10];
-        for (int i = 0; i < 10; i++)
-            fin >> sizeOfSpeech[i];
-        fin.get();
+    // void loadFromFile(fstream &fin) {
+    //     getline(fin, word);
+    //     int sizeOfSpeech[10];
+    //     for (int i = 0; i < 10; i++)
+    //         fin >> sizeOfSpeech[i];
+    //     fin.get();
 
-        for (int i = 0; i < 10; i++) {
-            for (int j = 0; j < sizeOfSpeech[i]; j++)
-                getline(fin, part_of_speech[i][j]);
-        }
-    }
+    //     for (int i = 0; i < 10; i++) {
+    //         for (int j = 0; j < sizeOfSpeech[i]; j++)
+    //             getline(fin, part_of_speech[i][j]);
+    //     }
+    // }
 };
 
 template <int MAX_SIZE, int (*getid)(char)> class dictionary;
@@ -165,7 +162,7 @@ public:
         pRoot = new TrieNode<MAX_SIZE, getid>();
     }
     ~dictionary() {
-        saveToFile();
+        // saveToFile();
 
         if (pRoot == nullptr) return;
         queue<TrieNode<MAX_SIZE, getid>*> nodes;
@@ -187,12 +184,12 @@ public:
 
     // file structure:
     // 
-    void saveToFile(string path) {
-        fstream fout(path);
+    // void saveToFile(string path) {
+    //     fstream fout(path);
 
-        fin.close();
-    }
-    void loadFromFile(string path);
+    //     fin.close();
+    // }
+    // void loadFromFile(string path);
 
     // insert a new word (word + definitions + corresponding examples) to the dictionary
     TrieNode<MAX_SIZE, getid>* insert(const Word& w) {
@@ -397,68 +394,65 @@ public:
     }
 
     // save and load data structures are not done yet!!!
-    void saveDataStructures(string path) {
-        ofstream fout(path);
-        TrieNode<MAX_SIZE, getid>* cur {pRoot};
-        queue<TrieNode<MAX_SIZE, getid>*> nodeQueue;
-        nodeQueue.push(cur);
+    // void saveDataStructures(string path) {
+    //     ofstream fout(path);
+    //     TrieNode<MAX_SIZE, getid>* cur {pRoot};
+    //     queue<TrieNode<MAX_SIZE, getid>*> nodeQueue;
+    //     nodeQueue.push(cur);
 
 
-        //BFS
-        while (nodeQueue.size() != 0) {
-            cur = nodeQueue.top();
-            nodeQueue.pop();
-            if (cur == nullptr) continue;
-            for (int i = 0; i < MAX_SIZE; i++) {
-                nodeQueue.push(cur[i]);
-            }
-        }
+    //     //BFS
+    //     while (nodeQueue.size() != 0) {
+    //         cur = nodeQueue.top();
+    //         nodeQueue.pop();
+    //         if (cur == nullptr) continue;
+    //         for (int i = 0; i < MAX_SIZE; i++) {
+    //             nodeQueue.push(cur[i]);
+    //         }
+    //     }
         
-        fout.close();
-    }
+    //     fout.close();
+    // }
 
-    void loadDataStructures(string path) {
-        ifstream fin(path);
-        TrieNode<MAX_SIZE, getid>* cur {pRoot};
-        queue<TrieNode<MAX_SIZE, getid>*> nodeQueue;
-        nodeQueue.push(cur);
+    // void loadDataStructures(string path) {
+    //     ifstream fin(path);
+    //     TrieNode<MAX_SIZE, getid>* cur {pRoot};
+    //     queue<TrieNode<MAX_SIZE, getid>*> nodeQueue;
+    //     nodeQueue.push(cur);
         
-        //BFS
-        while (nodeQueue.size() != 0) {
-            cur = nodeQueue.top();
-            nodeQueue.pop();
-            int numOfChild;
-            fin >> numOfChild;
-            for (int i = 0; i < numOfChild; i++) {
-                // input a child character
-                int child; cin >> child;
-                // create child node and append that node to queue
-                cur->nxt[child] = new TrieNode<MAX_SIZE, getid>();
-                TrieNode<MAX_SIZE, getid> nChild = cur->nxt[child];
-                nodeQueue.push(nChild);
-            }
-        }
+    //     //BFS
+    //     while (nodeQueue.size() != 0) {
+    //         cur = nodeQueue.top();
+    //         nodeQueue.pop();
+    //         int numOfChild;
+    //         fin >> numOfChild;
+    //         for (int i = 0; i < numOfChild; i++) {
+    //             // input a child character
+    //             int child; cin >> child;
+    //             // create child node and append that node to queue
+    //             cur->nxt[child] = new TrieNode<MAX_SIZE, getid>();
+    //             TrieNode<MAX_SIZE, getid> nChild = cur->nxt[child];
+    //             nodeQueue.push(nChild);
+    //         }
+    //     }
 
-        fin.close();
-    }
+    //     fin.close();
+    // }
 };
 
-int getid(char c)
-{
+int getid(char c) {
     if ('a' <= c && c <= 'z') return c - 'a';
     else if ('A' <= c && c <= 'Z') return c - 'A';
     else if (c == '-') return 26;
     else return -1;
 }
 
-int getidEmotion(char c)
-{
+int getidEmotion(char c) {
     if (c < 0 || c >= 256) return -1;
     return c;
 }
 
-void readFromFileSlang(string path, vector <string> &slang, vector <string> &meaning)
-{
+void readFromFileSlang(string path, vector <string> &slang, vector <string> &meaning) {
     ifstream fin(path);
     string a, b, input;
 
@@ -469,6 +463,33 @@ void readFromFileSlang(string path, vector <string> &slang, vector <string> &mea
 
         slang.push_back(a);
         meaning.push_back(b);
+    }
+
+    fin.close();
+}
+
+void readFromFile(string path, vector<pair<string, string>> &data) {
+    vector<pair<string, string>> data;
+    ifstream fin(path);
+
+    int numWords;
+    fin >> numWords;
+    for (int i = 0; i < numWords; i++) {
+        int numDefs;
+        fin >> numDefs;
+        for (int j = 0; j < numDefs; j++) {
+            string def;
+            fin >> def;
+            int numExamples;
+            fin >> numExamples;
+            string examples;
+            for (int k = 0; k < numExamples; k++) {
+                string example;
+                fin >> example;
+                examples += example + " ";
+            }
+            data.push_back({def, examples});
+        }
     }
 
     fin.close();
