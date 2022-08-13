@@ -9,14 +9,12 @@ WordCardGroup::WordCardGroup(QWidget *parent)
     setLayout(layout);
 }
 
-void WordCardGroup::addCard(const QString &keyword,
-                            const QString &meaning,
-                            bool favorite) {
+void WordCardGroup::addCard(Word word, bool favorite) {
     auto *w = new WordCard;
-    w->setKeyword("Hello");
-    w->addDefinition("sljkgsakgj;aswdhg");
-    w->addDefinition("sljkgsakgj;aswdhg");
-    w->addDefinition("sljkgsakgj;aswdhg");
+    w->setKeyword(QString::fromStdString(word.word));
+    for (auto p : word.data) {
+        w->addDefinition(QString::fromStdString(p.first));
+    }
     connect(w, &WordCard::wordSelected, this, &WordCardGroup::wordSelected);
     connect(w, &WordCard::favoriteStateChanged, this, &WordCardGroup::wordToggleFavorite);
     wordList.push_back(w);
