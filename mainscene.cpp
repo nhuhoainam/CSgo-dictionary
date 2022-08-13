@@ -77,23 +77,39 @@ void MainScene::setWordList(vector<pair<Word, bool>> words) {
 }
 
 void MainScene::connectSignalAndSlot() {
-    connect(ui->searchBox, &SearchBox::searchFinished,
-            this, &MainScene::handleSearch);
-    connect(ui->searchBox, &SearchBox::searchEdit,
-            this, &MainScene::completionRequest);
-    connect(ui->wordGroup, &WordCardGroup::wordSelected,
-            this, &MainScene::wordSelected);
-    connect(ui->wordGroup, &WordCardGroup::wordToggleFavorite,
-            this, &MainScene::wordToggleFavorite);
-    connect(ui->searchBox, &SearchBox::requestCompletion, this, [=](const QString &str) {
+    connect(ui->searchBox,
+            &SearchBox::searchFinished,
+            this,
+            &MainScene::handleSearch);
+    connect(ui->searchBox,
+            &SearchBox::searchEdit,
+            this,
+            &MainScene::completionRequest);
+    connect(ui->wordGroup,
+            &WordCardGroup::wordSelected,
+            this,
+            &MainScene::wordSelected);
+    connect(ui->wordGroup,
+            &WordCardGroup::wordToggleFavorite,
+            this,
+            &MainScene::wordToggleFavorite);
+    connect(ui->searchBox,
+            &SearchBox::requestCompletion,
+            this,
+            [=](const QString &str) {
         completePopup->show();
         ui->searchBox->handleCompleterShown();
     });
-    connect(completePopup, &QListWidget::itemPressed,
-            this, [=](QListWidgetItem *item) {
+    connect(completePopup,
+            &QListWidget::itemPressed,
+            this,
+            [=](QListWidgetItem *item) {
         handleSearch(item->text());
     });
-    connect(ui->searchBox, &SearchBox::requestNextCompletion, this, [=]() {
+    connect(ui->searchBox,
+            &SearchBox::requestNextCompletion,
+            this,
+            [=]() {
         int cur = completePopup->currentRow();
         cur += 1;
         completePopup->setCurrentRow(cur);
@@ -101,7 +117,10 @@ void MainScene::connectSignalAndSlot() {
         if (curItem)
             ui->searchBox->setText(curItem->text());
     });
-    connect(ui->searchBox, &SearchBox::requestPrevCompletion, this, [=]() {
+    connect(ui->searchBox,
+            &SearchBox::requestPrevCompletion,
+            this,
+            [=]() {
         int cur = completePopup->currentRow();
         cur -= 1;
         completePopup->setCurrentRow(cur);
