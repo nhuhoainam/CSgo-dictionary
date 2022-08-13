@@ -72,14 +72,14 @@ struct Word {
     // }
 };
 
-template <int MAX_SIZE, int (*getid)(char)> class dictionary;
+template <int MAX_SIZE, int (*getid)(char)> class Dictionary;
 
 template <int MAX_SIZE, int (*getid)(char)>
 class TrieNode {
 private:
     Word* data;
     TrieNode* nxt[MAX_SIZE];
-    friend class dictionary<MAX_SIZE, getid>;
+    friend class Dictionary<MAX_SIZE, getid>;
 public:
     TrieNode() {
         data = nullptr;
@@ -473,6 +473,10 @@ void readFromFileSlang(string path, vector <string> &slang, vector <string> &mea
 
 void readFromFile(string path, vector<pair<string, vector<pair<string, string>>>>& fileData) {
     ifstream fin(path);
+    if (!fin.is_open()) {
+        cerr << "Cannot read file." << endl;
+        return;
+    }
 
     int numWords;
     fin >> numWords;
@@ -501,12 +505,14 @@ void readFromFile(string path, vector<pair<string, vector<pair<string, string>>>
 }
 
 //inserts data to dictionary
-void insertData(Dictionary<27, getid>* &dictionary, vector<pair<string, vector<pair<string, string>>>>& fileData) {
+void insertData(Dictionary<27, getid> &dictionary, vector<pair<string, vector<pair<string, string>>>>& fileData) {
     for (auto wordData : fileData) {
+        cerr << wordData.first << endl;
         Word word;
         word.word = wordData.first;
         word.data = wordData.second;
-        dictionary->insert(word);
+        word.show();
+        dictionary.insert(word);
     }
 }
 
@@ -614,7 +620,18 @@ int main()
     // testing the data structure
     Dictionary<27, getid> myDict;
     vector<pair<string, vector<pair<string, string>>>> fileData;
-    readFromFile("../../data/dictionary-data/VieEng-no-accent", fileData);
+    readFromFile("..\\dictionary-data\\EngEng.txt", fileData);
+    insertData(myDict, fileData);
+    string w;
+    while (getline(cin, w)) {
+        auto node {myDict.find(w)};
+        if (node == nullptr) {
+            cerr << "Word does not exist." << endl;
+        }
+        else {
+            node->get_data()->show();
+        }
+    }
 
     return 0;
 }
