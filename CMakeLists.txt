@@ -53,12 +53,18 @@ set(PROJECT_SOURCES
         wordcardlayout.cpp
         wordcardgroup.cpp
         wordcardgroup.h
-        wordviewer.cpp
-        wordviewer.h
-        wordviewer.ui
-        singlewordview.cpp
-        singlewordview.h
-        singlewordview.ui
+        WordViewer/wordviewer.cpp
+        WordViewer/wordviewer.h
+        WordViewer/wordviewer.ui
+        WordViewer/wordviewerentry.cpp
+        WordViewer/wordviewerentry.h
+        WordViewer/wordviewerentry.ui
+        WordViewer/singlewordview.cpp
+        WordViewer/singlewordview.h
+        WordViewer/singlewordview.ui
+        WordViewer/wordedit.cpp
+        WordViewer/wordedit.h
+        WordViewer/wordedit.ui
         ${TS_FILES}
 )
 
