@@ -480,24 +480,33 @@ void readFromFile(string path, vector<pair<string, vector<pair<string, string>>>
 
     int numWords;
     fin >> numWords;
+    fin.ignore();
     for (int i = 0; i < numWords; i++) {
         string word;
+        getline(fin, word);
+        word.erase(word.begin());
         vector<pair<string, string>> wordData;
         int numDefs;
         fin >> numDefs;
+        fin.ignore();
         for (int j = 0; j < numDefs; j++) {
             string def;
-            fin >> def;
+            getline(fin, def);
+            def.erase(def.begin());
             int numExamples;
             fin >> numExamples;
-            string examples;
+            fin.ignore();
+            string examples = "";
             for (int k = 0; k < numExamples; k++) {
                 string example;
-                fin >> example;
+                getline(fin, example);
+                example.erase(example.begin());
                 examples += example + " ";
             }
             wordData.push_back({def, examples});
         }
+        cerr << word << endl;
+        cerr << wordData.size() << endl;
         fileData.push_back({word, wordData});
     }
 
@@ -506,6 +515,7 @@ void readFromFile(string path, vector<pair<string, vector<pair<string, string>>>
 
 //inserts data to dictionary
 void insertData(Dictionary<27, getid> &dictionary, vector<pair<string, vector<pair<string, string>>>>& fileData) {
+    cout << "Inserting data to dictionary..." << endl;
     for (auto wordData : fileData) {
         cerr << wordData.first << endl;
         Word word;
@@ -620,18 +630,18 @@ int main()
     // testing the data structure
     Dictionary<27, getid> myDict;
     vector<pair<string, vector<pair<string, string>>>> fileData;
-    readFromFile("..\\dictionary-data\\EngEng.txt", fileData);
+    readFromFile("VieEng-no-accent-test.txt", fileData);
     insertData(myDict, fileData);
-    string w;
-    while (getline(cin, w)) {
-        auto node {myDict.find(w)};
-        if (node == nullptr) {
-            cerr << "Word does not exist." << endl;
-        }
-        else {
-            node->get_data()->show();
-        }
-    }
+    // string w;
+    // while (getline(cin, w)) {
+    //     auto node {myDict.find(w)};
+    //     if (node == nullptr) {
+    //         cerr << "Word does not exist." << endl;
+    //     }
+    //     else {
+    //         node->get_data()->show();
+    //     }
+    // }
 
     return 0;
 }
