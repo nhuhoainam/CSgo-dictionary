@@ -404,12 +404,10 @@ public:
                 w->loadFromFile(fin);
                 pRoot->data = w;
             }
-            else {
-                // if c is a valid character, we create a new node and branch to it
-                if (pRoot->nxt[c] == nullptr)
-                    pRoot->nxt[c] = new TrieNode<MAX_SIZE, getid>();
-                loadSerialTrie(pRoot->nxt[c], fin);
-            }
+            // if c is a valid character, we create a new node and branch to it
+            if (pRoot->nxt[c] == nullptr)
+                pRoot->nxt[c] = new TrieNode<MAX_SIZE, getid>();
+            loadSerialTrie(pRoot->nxt[c], fin);
         }
     }
 
