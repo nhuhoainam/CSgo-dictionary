@@ -472,7 +472,6 @@ void readFromFileSlang(string path, vector <string> &slang, vector <string> &mea
 }
 
 void readFromFile(string path, vector<pair<string, vector<pair<string, string>>>>& fileData) {
-    vector<pair<string, vector<pair<string, string>>>> fileData;
     ifstream fin(path);
 
     int numWords;
