@@ -40,36 +40,14 @@ struct Word {
             return NULL;
         return data[0].first;
     }
-
+    //not done yet
     // File structure:
-    // word
-    // size of part_of_speech[0] part_of_speech[1] ... part_of_speech[9]
-    // part_of_speech[i][0]
-    // part_of_speech[i][1]
-    // ...
-    // void saveToFile(fstream &fout) {
-    //     fout << word << "\n";
-    //     for (int i = 0; i < 10; i++)
-    //         fout << part_of_speech[i].size() << " ";
-    //     fout << "\n";
-    //     for (int i = 0; i < 10; i++) {
-    //         for (int j = 0; j < part_of_speech[i].size(); j++)
-    //             cout << part_of_speech[i][j] << "\n";
-    //     }
-    // }
 
-    // void loadFromFile(fstream &fin) {
-    //     getline(fin, word);
-    //     int sizeOfSpeech[10];
-    //     for (int i = 0; i < 10; i++)
-    //         fin >> sizeOfSpeech[i];
-    //     fin.get();
+    void saveToFile(fstream &fout) {
+    }
 
-    //     for (int i = 0; i < 10; i++) {
-    //         for (int j = 0; j < sizeOfSpeech[i]; j++)
-    //             getline(fin, part_of_speech[i][j]);
-    //     }
-    // }
+    void loadFromFile(fstream &fin) {
+    }
 };
 
 template <int MAX_SIZE, int (*getid)(char)> class Dictionary;
@@ -396,51 +374,61 @@ public:
         return ans;
     }
 
-    // save and load data structures are not done yet!!!
-    // void saveDataStructures(string path) {
-    //     ofstream fout(path);
-    //     TrieNode<MAX_SIZE, getid>* cur {pRoot};
-    //     queue<TrieNode<MAX_SIZE, getid>*> nodeQueue;
-    //     nodeQueue.push(cur);
+    void saveSerialTrie(TrieNode<MAX_SIZE, getid>* pRoot, fstream& fout) {
+        // end of a word
+        if (pRoot->data != nullptr) {
+            fout << "]";
+            pRoot->data->saveToFile(fout);
+        }
+        // for each of next exist characters
+        for (int i = 0; i < MAX_SIZE; i++) {
+            if (pRoot->nxt[i] != nullptr) {
+                // write the character
+                fout << (char)i;
+                saveSerialTrie(pRoot->nxt[i], fout);
+            }
+        }
+        // end of a character
+        fout << ">";
+    }
 
+    void loadSerialTrie(TrieNode<MAX_SIZE, getid>* pRoot, fstream& fin) {
+        char c;
+        while (fin >> c) {
+            // if c is '>', we have reached the end of the serialized Trie
+            // so we backtrack to the parent node
+            if (c == '>') break;
+            // if c is ']', we have reached the end of a word
+            if (c == ']') {
+                Word* w = new Word();
+                w->loadFromFile(fin);
+                pRoot->data = w;
+            }
+            else {
+                // if c is a valid character, we create a new node and branch to it
+                if (pRoot->nxt[c] == nullptr)
+                    pRoot->nxt[c] = new TrieNode<MAX_SIZE, getid>();
+                loadSerialTrie(pRoot->nxt[c], fin);
+            }
+        }
+    }
 
-    //     //BFS
-    //     while (nodeQueue.size() != 0) {
-    //         cur = nodeQueue.top();
-    //         nodeQueue.pop();
-    //         if (cur == nullptr) continue;
-    //         for (int i = 0; i < MAX_SIZE; i++) {
-    //             nodeQueue.push(cur[i]);
-    //         }
-    //     }
+    //save and load data by serialization
+    void saveDataStructures(string path) {
+        ofstream fout(path);
+        TrieNode<MAX_SIZE, getid>* cur {pRoot};
+        saveSerialTrie(cur, fout);
         
-    //     fout.close();
-    // }
+        fout.close();
+    }
 
-    // void loadDataStructures(string path) {
-    //     ifstream fin(path);
-    //     TrieNode<MAX_SIZE, getid>* cur {pRoot};
-    //     queue<TrieNode<MAX_SIZE, getid>*> nodeQueue;
-    //     nodeQueue.push(cur);
-        
-    //     //BFS
-    //     while (nodeQueue.size() != 0) {
-    //         cur = nodeQueue.top();
-    //         nodeQueue.pop();
-    //         int numOfChild;
-    //         fin >> numOfChild;
-    //         for (int i = 0; i < numOfChild; i++) {
-    //             // input a child character
-    //             int child; cin >> child;
-    //             // create child node and append that node to queue
-    //             cur->nxt[child] = new TrieNode<MAX_SIZE, getid>();
-    //             TrieNode<MAX_SIZE, getid> nChild = cur->nxt[child];
-    //             nodeQueue.push(nChild);
-    //         }
-    //     }
+    void loadDataStructures(string path) {
+        ifstream fin(path);
+        TrieNode<MAX_SIZE, getid>* cur {pRoot};
+        loadSerialTrie(cur, fin);
 
-    //     fin.close();
-    // }
+        fin.close();
+    }
 };
 
 int getid(char c) {
