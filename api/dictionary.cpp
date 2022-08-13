@@ -17,6 +17,8 @@ struct Word {
     Word(const Word& other) {
         *this = other;
     }
+
+    Word() {}
     bool contain(const string& def) const {
         for (auto& p : data) {
             if (def == p.first)
@@ -94,16 +96,17 @@ public:
         return data;
     }
     // there might be overloads of set() depending on the demands of UI team, this one is just one of them
-    TrieNode<MAX_SIZE, getid>* set(const string& def, const string& new_def) {
-        assert(idx < int(data->part_of_speech[pos].size()));
-        data->part_of_speech[pos][idx] = new_def;
-        return this;
-    }
+    // TrieNode<MAX_SIZE, getid>* set(const string& def, const string& new_def) {
+    //     assert(idx < int(data->part_of_speech[pos].size()));
+    //     data->part_of_speech[pos][idx] = new_def;
+    //     return this;
+    // }
+    // fix this later
 };
 
 // this version of Trie contains characters on it edges
 template <int MAX_SIZE, int (*getid)(char)>
-class dictionary {
+class Dictionary {
     static_assert(MAX_SIZE > 0, "Size of the trie must be positive.");
 private:
     TrieNode<MAX_SIZE, getid>* pRoot;
@@ -158,10 +161,10 @@ private:
 public:
     vector<Word*> searchHistory;
     vector<Word*> favoriteList;
-    dictionary() {
+    Dictionary() {
         pRoot = new TrieNode<MAX_SIZE, getid>();
     }
-    ~dictionary() {
+    ~Dictionary() {
         // saveToFile();
 
         if (pRoot == nullptr) return;
@@ -468,13 +471,15 @@ void readFromFileSlang(string path, vector <string> &slang, vector <string> &mea
     fin.close();
 }
 
-void readFromFile(string path, vector<pair<string, string>> &data) {
-    vector<pair<string, string>> data;
+void readFromFile(string path, vector<pair<string, vector<pair<string, string>>>>& fileData) {
+    vector<pair<string, vector<pair<string, string>>>> fileData;
     ifstream fin(path);
 
     int numWords;
     fin >> numWords;
     for (int i = 0; i < numWords; i++) {
+        string word;
+        vector<pair<string, string>> wordData;
         int numDefs;
         fin >> numDefs;
         for (int j = 0; j < numDefs; j++) {
@@ -488,17 +493,29 @@ void readFromFile(string path, vector<pair<string, string>> &data) {
                 fin >> example;
                 examples += example + " ";
             }
-            data.push_back({def, examples});
+            wordData.push_back({def, examples});
         }
+        fileData.push_back({word, wordData});
     }
 
     fin.close();
 }
 
+//inserts data to dictionary
+void insertData(Dictionary<27, getid>* &dictionary, vector<pair<string, vector<pair<string, string>>>>& fileData) {
+    for (auto wordData : fileData) {
+        Word word;
+        word.word = wordData.first;
+        word.data = wordData.second;
+        dictionary->insert(word);
+    }
+}
+
 int main()
 {
+    /*
     // testing the data structure
-    dictionary<27, getid> myDict;
+    Dictionary<27, getid> myDict;
     cout << "0. Insert a new definition.\n"
             "1. Edit an existing definition.\n"
             "2. Remove a word.\n"
@@ -593,6 +610,12 @@ int main()
         }
         else break;
     }
+    */
+
+    // testing the data structure
+    Dictionary<27, getid> myDict;
+    vector<pair<string, vector<pair<string, string>>>> fileData;
+    readFromFile("../../data/dictionary-data/VieEng-no-accent", fileData);
 
     return 0;
-}  
+}
