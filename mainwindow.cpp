@@ -273,6 +273,9 @@ void MainWindow::handleFavoriteListWordFavorite(const QString &keyword, bool on)
     QString state = on ? "on" : "off";
     qDebug() << "Toggle favorite " << keyword << state << " in favorite list";
     handleWordFavoriteToggle(keyword, on);
+
+    // Reset
+    handleFavoriteListFocus();
 }
 
 void MainWindow::handleHistoryWordFavorite(const QString &keyword, bool on) {
@@ -292,6 +295,7 @@ void MainWindow::handleHomeRefresh() {
 void MainWindow::handleFavoriteListFocus() {
     vector<pair<Word, bool>> ls;
     for (Word *w : engEngDict->favoriteList) {
+        qDebug() << "_______";
         if (!w)
             return;
         ls.push_back({*w, true});
