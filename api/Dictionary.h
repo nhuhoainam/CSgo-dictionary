@@ -10,13 +10,13 @@
 
 using namespace std;
 
-template <int MAX_SIZE, int (*getid)(char)> class Dictionary;
-template <int MAX_SIZE, int (*getid)(char)>
+template <int MAX_SIZE, int (*getid)(char), char (*getchar)(int)> class Dictionary;
+template <int MAX_SIZE, int (*getid)(char), char (*getchar)(int)>
 class TrieNode {
 private:
     Word* data;
     TrieNode* nxt[MAX_SIZE];
-    friend class Dictionary<MAX_SIZE, getid>;
+    friend class Dictionary<MAX_SIZE, getid, getchar>;
 public:
     TrieNode();
     bool isLeaf() const;
@@ -24,7 +24,7 @@ public:
 };
 
 // this version of Trie contains characters on it edges
-template <int MAX_SIZE, int (*getid)(char)>
+template <int MAX_SIZE, int (*getid)(char), char (*getchar)(int)>
 class Dictionary {
     static_assert(MAX_SIZE > 0, "Size of the trie must be positive.");
 public:
@@ -37,13 +37,13 @@ public:
     bool remove_from_favoriteList(Word*);
     
 private:
-    TrieNode<MAX_SIZE, getid>* pRoot;
+    TrieNode<MAX_SIZE, getid, getchar>* pRoot;
 
     void remove_from_searchHistory(Word*);
     // the erasion of a node should set its pointer to nullptr for the sake of searchHistory and favoriteList
-    bool internal_erase(const string&, TrieNode<MAX_SIZE, getid>*&, int);
+    bool internal_erase(const string&, TrieNode<MAX_SIZE, getid, getchar>*&, int);
     // the erasion of a node should set its pointer to nullptr for the sake of searchHistory and favoriteList
-    bool internal_erase(const Word&, TrieNode<MAX_SIZE, getid>*&, int);
+    bool internal_erase(const Word&, TrieNode<MAX_SIZE, getid, getchar>*&, int);
 public:
     Dictionary();
     ~Dictionary();
@@ -58,15 +58,15 @@ public:
     // void loadFromFile(string path);
 
     // insert a new word (word + definitions + corresponding examples) to the dictionary
-    TrieNode<MAX_SIZE, getid>* insert(const Word&);
+    TrieNode<MAX_SIZE, getid, getchar>* insert(const Word&);
     // insert a new word (only the word) to the dictionary
-    TrieNode<MAX_SIZE, getid>* insert(const string&);
+    TrieNode<MAX_SIZE, getid, getchar>* insert(const string&);
     // insert a new word (word + def) to the dictionary
-    TrieNode<MAX_SIZE, getid>* insert(const string&, const string&);
+    TrieNode<MAX_SIZE, getid, getchar>* insert(const string&, const string&);
     // find a node in the dictionary containing the word w
-    TrieNode<MAX_SIZE, getid>* find(const Word&);
+    TrieNode<MAX_SIZE, getid, getchar>* find(const Word&);
     // find a node in the dictionary containing the string word
-    TrieNode<MAX_SIZE, getid>* find(const string&);
+    TrieNode<MAX_SIZE, getid, getchar>* find(const string&);
     // this erasing feature requires that when a word is removed from the Trie, all the nodes above the removed nodes that 
     // lead nowhere should be deleted.
     // erase the node in the dictionary containing the struct w
@@ -77,14 +77,14 @@ public:
     // If there is a series of words which have at least 1 prefix in common, this algorithm chooses the longest one
     const Word* random_word() const;
 
-    void getPrefixMatch(TrieNode<MAX_SIZE, getid>*, vector<string>&, const int&);
+    void getPrefixMatch(TrieNode<MAX_SIZE, getid, getchar>*, vector<string>&, const int&);
     vector<string> prefixMatch(const string&, const int&);
 
     vector<pair<string, string>> randomQuiz();
 
-    void saveSerialTrie(TrieNode<MAX_SIZE, getid>*, fstream&);
+    void saveSerialTrie(TrieNode<MAX_SIZE, getid, getchar>*, fstream&);
 
-    void loadSerialTrie(TrieNode<MAX_SIZE, getid>*, fstream&);
+    void loadSerialTrie(TrieNode<MAX_SIZE, getid, getchar>*, fstream&);
 
     //save and load data by serialization
     void saveDataStructures(string);

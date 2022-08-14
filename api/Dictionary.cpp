@@ -1,27 +1,27 @@
 #include "Dictionary.h"
 
-template <int MAX_SIZE, int (*getid)(char)>
-TrieNode<MAX_SIZE, getid>::TrieNode() {
+template <int MAX_SIZE, int (*getid)(char), char (*getchar)(int)>
+TrieNode<MAX_SIZE, getid, getchar>::TrieNode() {
     data = nullptr;
     for (int i = 0; i < MAX_SIZE; ++i)
         nxt[i] = nullptr;
 }
 
-template <int MAX_SIZE, int (*getid)(char)>
-bool TrieNode<MAX_SIZE, getid>::isLeaf() const {
+template <int MAX_SIZE, int (*getid)(char), char (*getchar)(int)>
+bool TrieNode<MAX_SIZE, getid, getchar>::isLeaf() const {
     for (int i = 0; i < MAX_SIZE; ++i)
         if (nxt[i])
             return false;
     return true;
 }
 
-template <int MAX_SIZE, int (*getid)(char)>
-Word* TrieNode<MAX_SIZE, getid>::get_data() const {
+template <int MAX_SIZE, int (*getid)(char), char (*getchar)(int)>
+Word* TrieNode<MAX_SIZE, getid, getchar>::get_data() const {
     return data;
 }
 
-template <int MAX_SIZE, int (*getid)(char)>
-bool Dictionary<MAX_SIZE, getid>::add_to_favoriteList(Word* wrd) {
+template <int MAX_SIZE, int (*getid)(char), char (*getchar)(int)>
+bool Dictionary<MAX_SIZE, getid, getchar>::add_to_favoriteList(Word* wrd) {
     for (Word* p : favoriteList) {
         if (p == wrd) return false;
     }
@@ -29,8 +29,8 @@ bool Dictionary<MAX_SIZE, getid>::add_to_favoriteList(Word* wrd) {
     return true;
 }
 
-template <int MAX_SIZE, int (*getid)(char)>
-bool Dictionary<MAX_SIZE, getid>::remove_from_favoriteList(Word* wrd) {
+template <int MAX_SIZE, int (*getid)(char), char (*getchar)(int)>
+bool Dictionary<MAX_SIZE, getid, getchar>::remove_from_favoriteList(Word* wrd) {
     for (int i = 0; i < int(favoriteList.size()); ++i) {
         if (favoriteList[i] == wrd) {
             favoriteList.erase(favoriteList.begin() + i);
@@ -40,8 +40,8 @@ bool Dictionary<MAX_SIZE, getid>::remove_from_favoriteList(Word* wrd) {
     return false;
 }
 
-template <int MAX_SIZE, int (*getid)(char)>
-void Dictionary<MAX_SIZE, getid>::remove_from_searchHistory(Word* wrd) {
+template <int MAX_SIZE, int (*getid)(char), char (*getchar)(int)>
+void Dictionary<MAX_SIZE, getid, getchar>::remove_from_searchHistory(Word* wrd) {
     for (int i = 0; i < int(searchHistory.size()); ++i) {
         if (searchHistory[i] == wrd) {
             searchHistory.erase(searchHistory.begin() + i);
@@ -50,8 +50,8 @@ void Dictionary<MAX_SIZE, getid>::remove_from_searchHistory(Word* wrd) {
     }
 }
 
-template <int MAX_SIZE, int (*getid)(char)>
-bool Dictionary<MAX_SIZE, getid>::internal_erase(const string& w, TrieNode<MAX_SIZE, getid>*& cur, int cur_idx) {
+template <int MAX_SIZE, int (*getid)(char), char (*getchar)(int)>
+bool Dictionary<MAX_SIZE, getid, getchar>::internal_erase(const string& w, TrieNode<MAX_SIZE, getid, getchar>*& cur, int cur_idx) {
     assert(cur);
     if (cur_idx == int(w.size())) {
         if (cur->data == nullptr) return false;
@@ -76,8 +76,8 @@ bool Dictionary<MAX_SIZE, getid>::internal_erase(const string& w, TrieNode<MAX_S
     return res;
 }
 
-template <int MAX_SIZE, int (*getid)(char)>
-bool Dictionary<MAX_SIZE, getid>::internal_erase(const Word& w, TrieNode<MAX_SIZE, getid>*& cur, int cur_idx) {
+template <int MAX_SIZE, int (*getid)(char), char (*getchar)(int)>
+bool Dictionary<MAX_SIZE, getid, getchar>::internal_erase(const Word& w, TrieNode<MAX_SIZE, getid, getchar>*& cur, int cur_idx) {
     assert(cur);
     if (cur_idx == int(w.word.size())) {
         if (cur->data == nullptr) return false;
@@ -102,18 +102,18 @@ bool Dictionary<MAX_SIZE, getid>::internal_erase(const Word& w, TrieNode<MAX_SIZ
     return res;
 }
 
-template <int MAX_SIZE, int (*getid)(char)>
-Dictionary<MAX_SIZE, getid>::Dictionary() {
-    pRoot = new TrieNode<MAX_SIZE, getid>();
+template <int MAX_SIZE, int (*getid)(char), char (*getchar)(int)>
+Dictionary<MAX_SIZE, getid, getchar>::Dictionary() {
+    pRoot = new TrieNode<MAX_SIZE, getid, getchar>();
 }
 
-template <int MAX_SIZE, int (*getid)(char)>
-Dictionary<MAX_SIZE, getid>::~Dictionary() {
+template <int MAX_SIZE, int (*getid)(char), char (*getchar)(int)>
+Dictionary<MAX_SIZE, getid, getchar>::~Dictionary() {
     if (pRoot == nullptr) return;
-    queue<TrieNode<MAX_SIZE, getid>*> nodes;
+    queue<TrieNode<MAX_SIZE, getid, getchar>*> nodes;
     nodes.push(pRoot);
     while (nodes.size()) {
-        TrieNode<MAX_SIZE, getid>*& cur {nodes.front()};
+        TrieNode<MAX_SIZE, getid, getchar>*& cur {nodes.front()};
         nodes.pop();
         if (cur->data) {
             delete cur->data;
@@ -127,17 +127,17 @@ Dictionary<MAX_SIZE, getid>::~Dictionary() {
     }
 }
 
-template <int MAX_SIZE, int (*getid)(char)>
-TrieNode<MAX_SIZE, getid>* Dictionary<MAX_SIZE, getid>::insert(const Word& w) {
+template <int MAX_SIZE, int (*getid)(char), char (*getchar)(int)>
+TrieNode<MAX_SIZE, getid, getchar>* Dictionary<MAX_SIZE, getid, getchar>::insert(const Word& w) {
     if (w.word.empty()) return nullptr; // for the erasion's sake, inserting an empty word is not allowed!
-    TrieNode<MAX_SIZE, getid>* cur {pRoot};
+    TrieNode<MAX_SIZE, getid, getchar>* cur {pRoot};
     assert(cur);
     for (const char c : w.word) {
         int id {getid(c)};
         if (id == -1) return nullptr;
         else {
             if (cur->nxt[id] == nullptr)
-                cur->nxt[id] = new TrieNode<MAX_SIZE, getid>();
+                cur->nxt[id] = new TrieNode<MAX_SIZE, getid, getchar>();
             cur = cur->nxt[id];
         }
     }
@@ -148,17 +148,17 @@ TrieNode<MAX_SIZE, getid>* Dictionary<MAX_SIZE, getid>::insert(const Word& w) {
     else return nullptr; // the word already exists
 }
 
-template <int MAX_SIZE, int (*getid)(char)>
-TrieNode<MAX_SIZE, getid>* Dictionary<MAX_SIZE, getid>::insert(const string& w) {
+template <int MAX_SIZE, int (*getid)(char), char (*getchar)(int)>
+TrieNode<MAX_SIZE, getid, getchar>* Dictionary<MAX_SIZE, getid, getchar>::insert(const string& w) {
     if (w.empty()) return nullptr; // for the erasion's sake, inserting an empty word is not allowed!
-    TrieNode<MAX_SIZE, getid>* cur {pRoot};
+    TrieNode<MAX_SIZE, getid, getchar>* cur {pRoot};
     assert(cur);
     for (const char c : w) {
         int id {getid(c)};
         if (id == -1) return nullptr;
         else {
             if (cur->nxt[id] == nullptr)
-                cur->nxt[id] = new TrieNode<MAX_SIZE, getid>();
+                cur->nxt[id] = new TrieNode<MAX_SIZE, getid, getchar>();
             cur = cur->nxt[id];
         }
     }
@@ -169,17 +169,17 @@ TrieNode<MAX_SIZE, getid>* Dictionary<MAX_SIZE, getid>::insert(const string& w) 
     else return nullptr; // the word already exists
 }
 
-template <int MAX_SIZE, int (*getid)(char)>
-TrieNode<MAX_SIZE, getid>* Dictionary<MAX_SIZE, getid>::insert(const string& w, const string& def) {
+template <int MAX_SIZE, int (*getid)(char), char (*getchar)(int)>
+TrieNode<MAX_SIZE, getid, getchar>* Dictionary<MAX_SIZE, getid, getchar>::insert(const string& w, const string& def) {
     if (w.empty()) return nullptr; // for the erasion's sake, inserting an empty word is not allowed!
-    TrieNode<MAX_SIZE, getid>* cur {pRoot};
+    TrieNode<MAX_SIZE, getid, getchar>* cur {pRoot};
     assert(cur);
     for (const char c : w) {
         int id {getid(c)};
         if (id == -1) return nullptr;
         else {
             if (cur->nxt[id] == nullptr)
-                cur->nxt[id] = new TrieNode<MAX_SIZE, getid>();
+                cur->nxt[id] = new TrieNode<MAX_SIZE, getid, getchar>();
             cur = cur->nxt[id];
         }
     }
@@ -193,10 +193,10 @@ TrieNode<MAX_SIZE, getid>* Dictionary<MAX_SIZE, getid>::insert(const string& w, 
     return cur;
 }
 
-template <int MAX_SIZE, int (*getid)(char)>
-TrieNode<MAX_SIZE, getid>* Dictionary<MAX_SIZE, getid>::find(const Word& w) {
+template <int MAX_SIZE, int (*getid)(char), char (*getchar)(int)>
+TrieNode<MAX_SIZE, getid, getchar>* Dictionary<MAX_SIZE, getid, getchar>::find(const Word& w) {
     if (w.word.empty()) return nullptr;
-    TrieNode<MAX_SIZE, getid>* cur {pRoot};
+    TrieNode<MAX_SIZE, getid, getchar>* cur {pRoot};
     assert(cur);
     for (const char c : w.word) {
         int id {getid(c)};
@@ -214,10 +214,10 @@ TrieNode<MAX_SIZE, getid>* Dictionary<MAX_SIZE, getid>::find(const Word& w) {
     }
 }
 
-template <int MAX_SIZE, int (*getid)(char)>
-TrieNode<MAX_SIZE, getid>* Dictionary<MAX_SIZE, getid>::find(const string& w) {
+template <int MAX_SIZE, int (*getid)(char), char (*getchar)(int)>
+TrieNode<MAX_SIZE, getid, getchar>* Dictionary<MAX_SIZE, getid, getchar>::find(const string& w) {
     if (w.empty()) return nullptr;
-    TrieNode<MAX_SIZE, getid>* cur {pRoot};
+    TrieNode<MAX_SIZE, getid, getchar>* cur {pRoot};
     assert(cur);
     for (const char c : w) {
         int id {getid(c)};
@@ -235,25 +235,25 @@ TrieNode<MAX_SIZE, getid>* Dictionary<MAX_SIZE, getid>::find(const string& w) {
     }
 }
 
-template <int MAX_SIZE, int (*getid)(char)>
-bool Dictionary<MAX_SIZE, getid>::erase(const Word& w) {
+template <int MAX_SIZE, int (*getid)(char), char (*getchar)(int)>
+bool Dictionary<MAX_SIZE, getid, getchar>::erase(const Word& w) {
     if (w.word.empty()) return true;
     return internal_erase(w, pRoot, 0);
 }
 
-template <int MAX_SIZE, int (*getid)(char)>
-bool Dictionary<MAX_SIZE, getid>::erase(const string& w) {
+template <int MAX_SIZE, int (*getid)(char), char (*getchar)(int)>
+bool Dictionary<MAX_SIZE, getid, getchar>::erase(const string& w) {
     if (w.empty()) return true;
     return internal_erase(w, pRoot, 0);
 }
 
-template <int MAX_SIZE, int (*getid)(char)>
-const Word* Dictionary<MAX_SIZE, getid>::random_word() const {
-    const TrieNode<MAX_SIZE, getid>* cur {pRoot};
+template <int MAX_SIZE, int (*getid)(char), char (*getchar)(int)>
+const Word* Dictionary<MAX_SIZE, getid, getchar>::random_word() const {
+    const TrieNode<MAX_SIZE, getid, getchar>* cur {pRoot};
     assert(cur);
     while (cur) {
         if (cur->data) return cur->data;
-        vector<TrieNode<MAX_SIZE, getid>*> opts; opts.reserve(MAX_SIZE);
+        vector<TrieNode<MAX_SIZE, getid, getchar>*> opts; opts.reserve(MAX_SIZE);
         // we have to ensure that the random child we branch into must lead to an existing word.
         // This is why the delete operation above should be carried out with care!
         for (int i = 0; i < MAX_SIZE; ++i) {
@@ -274,8 +274,8 @@ const Word* Dictionary<MAX_SIZE, getid>::random_word() const {
     return nullptr;
 }
 
-template <int MAX_SIZE, int (*getid)(char)>
-void Dictionary<MAX_SIZE, getid>::getPrefixMatch(TrieNode<MAX_SIZE, getid>* cur, vector<string>& ans, const int& maxNumOfEntries) {
+template <int MAX_SIZE, int (*getid)(char), char (*getchar)(int)>
+void Dictionary<MAX_SIZE, getid, getchar>::getPrefixMatch(TrieNode<MAX_SIZE, getid, getchar>* cur, vector<string>& ans, const int& maxNumOfEntries) {
     if (ans.size() == maxNumOfEntries) return;
     if (cur == nullptr) return;
 
@@ -290,11 +290,11 @@ void Dictionary<MAX_SIZE, getid>::getPrefixMatch(TrieNode<MAX_SIZE, getid>* cur,
     }
 }
 
-template <int MAX_SIZE, int (*getid)(char)>
-vector<string> Dictionary<MAX_SIZE, getid>::prefixMatch(const string& word, const int& maxNumOfEntries) {
+template <int MAX_SIZE, int (*getid)(char), char (*getchar)(int)>
+vector<string> Dictionary<MAX_SIZE, getid, getchar>::prefixMatch(const string& word, const int& maxNumOfEntries) {
     vector<string> ans;
     if (word.empty()) return {};
-    TrieNode<MAX_SIZE, getid>* cur {pRoot};
+    TrieNode<MAX_SIZE, getid, getchar>* cur {pRoot};
     assert(cur);
 
     // traverse cur to end of word
@@ -312,8 +312,8 @@ vector<string> Dictionary<MAX_SIZE, getid>::prefixMatch(const string& word, cons
     return ans;
 }
 
-template <int MAX_SIZE, int (*getid)(char)>
-vector<pair<string, string>> Dictionary<MAX_SIZE, getid>::randomQuiz() {
+template <int MAX_SIZE, int (*getid)(char), char (*getchar)(int)>
+vector<pair<string, string>> Dictionary<MAX_SIZE, getid, getchar>::randomQuiz() {
     vector<pair<string, string>> ans;
     for (int i = 0; i < 4; i++) {
         Word* randWord = random_word();
@@ -325,58 +325,111 @@ vector<pair<string, string>> Dictionary<MAX_SIZE, getid>::randomQuiz() {
     return ans;
 }
 
-template <int MAX_SIZE, int (*getid)(char)>
-void Dictionary<MAX_SIZE, getid>::saveSerialTrie(TrieNode<MAX_SIZE, getid>* pRoot, fstream& fout) {
+template <int MAX_SIZE, int (*getid)(char), char (*getchar)(int)>
+void Dictionary<MAX_SIZE, getid, getchar>::saveSerialTrie(TrieNode<MAX_SIZE, getid, getchar>* root, fstream& fout) {
+    // // end of a word
+    // if (root->data != nullptr) {
+    //     fout << "]";
+    //     root->data->saveToFile(fout);
+    // }
+    // // for each of next exist characters
+    // for (int i = 0; i < MAX_SIZE; i++) {
+    //     if (root->nxt[i] != nullptr) {
+    //         // write the character
+    //         fout << getchar(i);
+    //         saveSerialTrie(root->nxt[i], fout);
+    //     }
+    // }
+    // // end of a character
+    // fout << ">";
+    
     // end of a word
-    if (pRoot->data != nullptr) {
-        fout << "]";
-        pRoot->data->saveToFile(fout);
-    }
-    // for each of next exist characters
-    for (int i = 0; i < MAX_SIZE; i++) {
-        if (pRoot->nxt[i] != nullptr) {
-            // write the character
-            fout << (char)i;
-            saveSerialTrie(pRoot->nxt[i], fout);
+        if (root->data != nullptr) {
+            fout << "]";
+            cerr << "]";
+            root->data->saveToFile(fout);
         }
-    }
-    // end of a character
-    fout << ">";
+        // for each of next exist characters
+        for (int i = 0; i < MAX_SIZE; i++) {
+            if (root->nxt[i] != nullptr) {
+                // write the character
+                fout << getchar(i);
+                cerr << getchar(i);
+                saveSerialTrie(root->nxt[i], fout);
+            }
+        }
+        // end of a character
+        fout << ">";
+        cerr << ">";
 }
 
-template <int MAX_SIZE, int (*getid)(char)>
-void Dictionary<MAX_SIZE, getid>::loadSerialTrie(TrieNode<MAX_SIZE, getid>* pRoot, fstream& fin) {
+template <int MAX_SIZE, int (*getid)(char), char (*getchar)(int)>
+void Dictionary<MAX_SIZE, getid, getchar>::loadSerialTrie(TrieNode<MAX_SIZE, getid, getchar>* root, fstream& fin) {
+    // char c;
+    // while (fin >> c) {
+    //     // if c is '>', we have reached the end of the serialized Trie
+    //     // so we backtrack to the parent node
+    //     if (c == '>') break;
+    //     // if c is ']', we have reached the end of a word
+    //     if (c == ']') {
+    //         Word* w = new Word();
+    //         w->loadFromFile(fin);
+    //         root->data = w;
+    //         continue;
+    //     }
+    //     int id{getid(c)};
+    //     // if c is a valid character, we create a new node and branch to it
+    //     if (root->nxt[id] == nullptr)
+    //         root->nxt[id] = new TrieNode<MAX_SIZE, getid, getchar>();
+    //     loadSerialTrie(root->nxt[id], fin);
+    // }
     char c;
-    while (fin >> c) {
-        // if c is '>', we have reached the end of the serialized Trie
-        // so we backtrack to the parent node
-        if (c == '>') break;
-        // if c is ']', we have reached the end of a word
-        if (c == ']') {
-            Word* w = new Word();
-            w->loadFromFile(fin);
-            pRoot->data = w;
+        while (fin.get(c)) {
+            cerr << c;
+            // if c is '>', we have reached the end of the serialized Trie
+            // so we backtrack to the parent node
+            if (c == '>') {
+                cerr << "\nbacktrack to parent node" << endl;
+                break;
+            }
+            // if c is ']', we have reached the end of a word
+            if (c == ']') {
+                Word* w = new Word();
+                w->loadFromFile(fin);
+                root->data = w;
+                continue;
+            }
+            // if c is a valid character, we create a new node and branch to it
+            if (root->nxt[getid(c)] == nullptr)
+                root->nxt[getid(c)] = new TrieNode<MAX_SIZE, getid, getchar>();
+            cerr << "\nbranch to " << c << ":" << getid(c) << "\n";
+            loadSerialTrie(root->nxt[getid(c)], fin);
         }
-        // if c is a valid character, we create a new node and branch to it
-        if (pRoot->nxt[c] == nullptr)
-            pRoot->nxt[c] = new TrieNode<MAX_SIZE, getid>();
-        loadSerialTrie(pRoot->nxt[c], fin);
-    }
 }
 
-template <int MAX_SIZE, int (*getid)(char)>
-void Dictionary<MAX_SIZE, getid>::saveDataStructures(string path) {
-    ofstream fout(path);
-    TrieNode<MAX_SIZE, getid>* cur {pRoot};
+template <int MAX_SIZE, int (*getid)(char), char (*getchar)(int)>
+void Dictionary<MAX_SIZE, getid, getchar>::saveDataStructures(string path) {
+    fstream fout(path, ios::out);
+    if (!fout.is_open()) {
+        cerr << "Error: cannot open file " << path << endl;
+        return;
+    }
+    cerr << "\nSaving file\n";
+    TrieNode<MAX_SIZE, getid, getchar>* cur {pRoot};
     saveSerialTrie(cur, fout);
+    cerr << "\nDONE!\n";
     
     fout.close();
 }
 
-template <int MAX_SIZE, int (*getid)(char)>
-void Dictionary<MAX_SIZE, getid>::loadDataStructures(string path) {
-    ifstream fin(path);
-    TrieNode<MAX_SIZE, getid>* cur {pRoot};
+template <int MAX_SIZE, int (*getid)(char), char (*getchar)(int)>
+void Dictionary<MAX_SIZE, getid, getchar>::loadDataStructures(string path) {
+    fstream fin(path, ios::in);
+    if (!fin.is_open()) {
+        cerr << "Error: cannot open file " << path << endl;
+        return;
+    }
+    TrieNode<MAX_SIZE, getid, getchar>* cur {pRoot};
     loadSerialTrie(cur, fin);
 
     fin.close();

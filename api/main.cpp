@@ -85,8 +85,8 @@ void readFromFile(string path, vector<pair<string, vector<pair<string, string>>>
 }
 
 //inserts data to dictionary
-template <int MAX_SIZE, int (*getid)(char)>
-void insertData(Dictionary<MAX_SIZE, getid> &dictionary, vector<pair<string, vector<pair<string, string>>>>& fileData) {
+template <int MAX_SIZE, int (*getid)(char), char (*getchar)(int)>
+void insertData(Dictionary<MAX_SIZE, getid, getchar> &dictionary, vector<pair<string, vector<pair<string, string>>>>& fileData) {
     // cout << "Inserting data to dictionary..." << endl;
     for (auto wordData : fileData) {
         Word word;
@@ -103,8 +103,10 @@ int main()
 
     vector<pair<string, vector<pair<string, string>>>> fileData;
     readFromFile("..\\dictionary-data\\EngEng.txt", fileData);
-    Dictionary<41, getid_EngEng> myDict;
-    insertData(myDict, fileData);
+    Dictionary<41, getid_EngEng, getchar_EngEng> myDict;
+    // insertData(myDict, fileData);
+    myDict.loadDataStructures("..\\dictionary-data\\data.txt");
+    myDict.saveDataStructures("..\\dictionary-data\\data-after.txt");
     // cout << "0. Insert a new definition.\n"
     //         "1. Edit an existing definition.\n"
     //         "2. Remove a word.\n"

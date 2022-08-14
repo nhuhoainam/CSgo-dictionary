@@ -38,9 +38,29 @@ string Word::getFirstDef() {
 }
 
 void Word::saveToFile(fstream &fout) {
-
+    fout << "\n";
+    fout << word << "\n";
+    fout << data.size() << "\n";
+    for (auto& p : data) {
+        fout << p.first << "\n";
+        fout << p.second << "\n";
+    }
 }
 
 void Word::loadFromFile(fstream &fin) {
-
+    fin.ignore();
+    if (fin.eof()){
+        cerr << "Error: file is empty" << endl;
+        return;
+    }
+    getline(fin, word);
+    int size;
+    fin >> size;
+    fin.ignore();
+    for (int i = 0; i < size; i++) {
+        string def, ex;
+        getline(fin, def);
+        getline(fin, ex);
+        data.push_back(make_pair(def, ex));
+    }
 }

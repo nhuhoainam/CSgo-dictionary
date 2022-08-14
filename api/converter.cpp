@@ -17,7 +17,25 @@ int getid_EngEng(char c) {
     else return -1;
 }
 
-int getidEmotion(char c) {
+int getid_Emotion(char c) {
     if (c < 0 || c >= 256) return -1;
     return c;
+}
+
+// reverse of getid_EngEng
+char getchar_EngEng(int id) {
+    if (id >= 0 && id <= 25) return 'a' + id;
+    else if (id >= 26 && id <= 35) return '0' + id - 26;
+    else if (id == 36) return ' ';
+    else if (id == 37) return '-';
+    else if (id == 38) return '.';
+    else if (id == 39) return '/';
+    else if (id == 40) return '\'';
+    else return '\0';
+}
+
+// reverse of getidEmotion
+char getchar_Emotion(int id) {
+    if (id < 0 || id >= 256) return '\0';
+    return id;
 }
