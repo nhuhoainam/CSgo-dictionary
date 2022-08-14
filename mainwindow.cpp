@@ -1,6 +1,16 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
+#include "home.h"
+#include "favoritelist.h"
+#include "history.h"
+#include "dictionaryeditor.h"
+#include "WordViewer/singlewordview.h"
+#include "sidebar.h"
+#include "game.h"
+
+#include <QStackedWidget>
+
 MainWindow::MainWindow(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::MainWindow)
@@ -166,7 +176,21 @@ void MainWindow::connectSignalAndSlot() {
             &MainWindow::handleDictionaryChanged);
 }
 
+void MainWindow::setupScene() {
+    // TODO
+    // set up Home, FavoriteList and History using current dictionary
+    // get data from curDict and use setWordLists for setup
+}
+
+void MainWindow::handleDictionaryChanged(const QString &keyword) {
+    // TODO
+    // change curDict using keyword
+    // then init the scene
+    setupScene();
+}
+
 void MainWindow::handleSearchRequest(const QString& keyword) {
+    // TODO
     // search word in dictionary
     // then set the word in singlewordview
     container->setCurrentIndex(6);
