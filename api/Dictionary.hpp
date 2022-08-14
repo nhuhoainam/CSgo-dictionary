@@ -66,9 +66,9 @@ public:
     // insert a new word (word + def) to the dictionary
     TrieNode<MAX_SIZE, getid, getchar>* insert(const string&, const string&);
     // find a node in the dictionary containing the word w
-    TrieNode<MAX_SIZE, getid, getchar>* find(const Word&);
+    Word* find(const Word&);
     // find a node in the dictionary containing the string word
-    TrieNode<MAX_SIZE, getid, getchar>* find(const string&);
+    Word* find(const string&);
     // this erasing feature requires that when a word is removed from the Trie, all the nodes above the removed nodes that 
     // lead nowhere should be deleted.
     // erase the node in the dictionary containing the struct w

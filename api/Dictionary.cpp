@@ -1,4 +1,4 @@
-#include "Dictionary.h"
+#include "Dictionary.hpp"
 
 
 template <int MAX_SIZE, int (*getid)(char), char (*getchar)(int)>
@@ -26,6 +26,7 @@ bool Dictionary<MAX_SIZE, getid, getchar>::add_to_favoriteList(Word* wrd) {
     for (Word* p : favoriteList) {
         if (p == wrd) return false;
     }
+    wrd->isFavorite = true;
     favoriteList.push_back(wrd);
     return true;
 }
@@ -34,6 +35,7 @@ template <int MAX_SIZE, int (*getid)(char), char (*getchar)(int)>
 bool Dictionary<MAX_SIZE, getid, getchar>::remove_from_favoriteList(Word* wrd) {
     for (int i = 0; i < int(favoriteList.size()); ++i) {
         if (favoriteList[i] == wrd) {
+            wrd->isFavorite = false;
             favoriteList.erase(favoriteList.begin() + i);
             return true;
         }
@@ -195,7 +197,7 @@ TrieNode<MAX_SIZE, getid, getchar>* Dictionary<MAX_SIZE, getid, getchar>::insert
 }
 
 template <int MAX_SIZE, int (*getid)(char), char (*getchar)(int)>
-TrieNode<MAX_SIZE, getid, getchar>* Dictionary<MAX_SIZE, getid, getchar>::find(const Word& w) {
+Word* Dictionary<MAX_SIZE, getid, getchar>::find(const Word& w) {
     if (w.word.empty()) return nullptr;
     TrieNode<MAX_SIZE, getid, getchar>* cur {pRoot};
     assert(cur);
@@ -211,12 +213,12 @@ TrieNode<MAX_SIZE, getid, getchar>* Dictionary<MAX_SIZE, getid, getchar>::find(c
     if (cur->data == nullptr) return nullptr;
     else {
         searchHistory.push_back(cur->data);
-        return cur;
+        return cur->data;
     }
 }
 
 template <int MAX_SIZE, int (*getid)(char), char (*getchar)(int)>
-TrieNode<MAX_SIZE, getid, getchar>* Dictionary<MAX_SIZE, getid, getchar>::find(const string& w) {
+Word* Dictionary<MAX_SIZE, getid, getchar>::find(const string& w) {
     if (w.empty()) return nullptr;
     TrieNode<MAX_SIZE, getid, getchar>* cur {pRoot};
     assert(cur);
@@ -232,7 +234,7 @@ TrieNode<MAX_SIZE, getid, getchar>* Dictionary<MAX_SIZE, getid, getchar>::find(c
     if (cur->data == nullptr) return nullptr;
     else {
         searchHistory.push_back(cur->data);
-        return cur;
+        return cur->data;
     }
 }
 

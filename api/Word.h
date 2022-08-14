@@ -9,6 +9,7 @@ using namespace std;
 struct Word {
     string word;
     vector<pair<string, string>> data; // including definitions + their corresponding examples
+    bool isFavorite = false;
 
     Word() {}
     Word(const string&);

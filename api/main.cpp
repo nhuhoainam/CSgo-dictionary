@@ -15,7 +15,7 @@ TESTED FEATURES:
 
 */
 
-#include "Dictionary.h"
+#include "Dictionary.hpp"
 #include "converter.h"
 
 using namespace std;
