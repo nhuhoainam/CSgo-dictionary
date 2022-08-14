@@ -215,7 +215,7 @@ QComboBox QAbstractItemView {
   <customwidget>
    <class>WordCardGroup</class>
    <extends>QWidget</extends>
-   <header>wordcardgroup.h</header>
+   <header>WordCard/wordcardgroup.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

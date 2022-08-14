@@ -33,9 +33,6 @@ set(PROJECT_SOURCES
         game.h
         game.cpp
         game.ui
-        wordcard.cpp
-        wordcard.h
-        wordcard.ui
         home.h
         home.cpp
         favoritelist.cpp
@@ -50,10 +47,15 @@ set(PROJECT_SOURCES
         mainwindow.h
         mainwindow.ui
         mainwindow.cpp
-        wordcardlayout.h
-        wordcardlayout.cpp
-        wordcardgroup.cpp
-        wordcardgroup.h
+
+        WordCard/wordcard.cpp
+        WordCard/wordcard.h
+        WordCard/wordcard.ui
+        WordCard/wordcardlayout.h
+        WordCard/wordcardlayout.cpp
+        WordCard/wordcardgroup.cpp
+        WordCard/wordcardgroup.h
+
         WordViewer/wordviewer.cpp
         WordViewer/wordviewer.h
         WordViewer/wordviewer.ui

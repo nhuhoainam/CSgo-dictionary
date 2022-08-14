@@ -1,6 +1,6 @@
 #include "favoritelist.h"
 
-#include "wordcard.h"
+#include "WordCard/wordcard.h"
 
 FavoriteList::FavoriteList(QWidget *parent) :
     MainScene(QString("Favorite List"), parent)
