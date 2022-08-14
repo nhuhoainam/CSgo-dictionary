@@ -1,9 +1,9 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
-#include "home.h"
-#include "favoritelist.h"
-#include "history.h"
+#include "Scene/home.h"
+#include "Scene/favoritelist.h"
+#include "Scene/history.h"
 #include "dictionaryeditor.h"
 #include "WordViewer/singlewordview.h"
 #include "sidebar.h"

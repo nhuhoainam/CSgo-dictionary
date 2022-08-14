@@ -18,29 +18,28 @@ set(TS_FILES CSgo-dictionary_en_US.ts)
 
 set(PROJECT_SOURCES
         api/dictionary_UI_testing.hpp
-        mainscene.cpp
-        mainscene.ui
-        mainscene.h
+        resources.qrc
+        Scene/mainscene.cpp
+        Scene/mainscene.ui
+        Scene/mainscene.h
         textwrapbutton.cpp
         textwrapbutton.h
         main.cpp
         sidebar.cpp
         sidebar.h
-        widget.cpp
-        widget.h
-        widget.ui
-        resources.qrc
+
         game.h
         game.cpp
         game.ui
-        home.h
-        home.cpp
-        favoritelist.cpp
-        favoritelist.h
+        Scene/home.h
+        Scene/home.cpp
+        Scene/favoritelist.cpp
+        Scene/favoritelist.h
+        Scene/history.cpp
+        Scene/history.h
+
         searchbox.cpp
         searchbox.h
-        history.cpp
-        history.h
         dictionaryeditor.cpp
         dictionaryeditor.h
         dictionaryeditor.ui
