@@ -327,84 +327,43 @@ vector<pair<string, string>> Dictionary<MAX_SIZE, getid, getchar>::randomQuiz() 
 
 template <int MAX_SIZE, int (*getid)(char), char (*getchar)(int)>
 void Dictionary<MAX_SIZE, getid, getchar>::saveSerialTrie(TrieNode<MAX_SIZE, getid, getchar>* root, fstream& fout) {
-    // // end of a word
-    // if (root->data != nullptr) {
-    //     fout << "]";
-    //     root->data->saveToFile(fout);
-    // }
-    // // for each of next exist characters
-    // for (int i = 0; i < MAX_SIZE; i++) {
-    //     if (root->nxt[i] != nullptr) {
-    //         // write the character
-    //         fout << getchar(i);
-    //         saveSerialTrie(root->nxt[i], fout);
-    //     }
-    // }
-    // // end of a character
-    // fout << ">";
-    
     // end of a word
-        if (root->data != nullptr) {
-            fout << "]";
-            cerr << "]";
-            root->data->saveToFile(fout);
+    if (root->data != nullptr) {
+        fout << "]";
+        root->data->saveToFile(fout);
+    }
+    // for each of next exist characters
+    for (int i = 0; i < MAX_SIZE; i++) {
+        if (root->nxt[i] != nullptr) {
+            // write the character
+            fout << getchar(i);
+            saveSerialTrie(root->nxt[i], fout);
         }
-        // for each of next exist characters
-        for (int i = 0; i < MAX_SIZE; i++) {
-            if (root->nxt[i] != nullptr) {
-                // write the character
-                fout << getchar(i);
-                cerr << getchar(i);
-                saveSerialTrie(root->nxt[i], fout);
-            }
-        }
-        // end of a character
-        fout << ">";
-        cerr << ">";
+    }
+    // end of a character
+    fout << ">";
 }
 
 template <int MAX_SIZE, int (*getid)(char), char (*getchar)(int)>
 void Dictionary<MAX_SIZE, getid, getchar>::loadSerialTrie(TrieNode<MAX_SIZE, getid, getchar>* root, fstream& fin) {
-    // char c;
-    // while (fin >> c) {
-    //     // if c is '>', we have reached the end of the serialized Trie
-    //     // so we backtrack to the parent node
-    //     if (c == '>') break;
-    //     // if c is ']', we have reached the end of a word
-    //     if (c == ']') {
-    //         Word* w = new Word();
-    //         w->loadFromFile(fin);
-    //         root->data = w;
-    //         continue;
-    //     }
-    //     int id{getid(c)};
-    //     // if c is a valid character, we create a new node and branch to it
-    //     if (root->nxt[id] == nullptr)
-    //         root->nxt[id] = new TrieNode<MAX_SIZE, getid, getchar>();
-    //     loadSerialTrie(root->nxt[id], fin);
-    // }
     char c;
-        while (fin.get(c)) {
-            cerr << c;
-            // if c is '>', we have reached the end of the serialized Trie
-            // so we backtrack to the parent node
-            if (c == '>') {
-                cerr << "\nbacktrack to parent node" << endl;
-                break;
-            }
-            // if c is ']', we have reached the end of a word
-            if (c == ']') {
-                Word* w = new Word();
-                w->loadFromFile(fin);
-                root->data = w;
-                continue;
-            }
-            // if c is a valid character, we create a new node and branch to it
-            if (root->nxt[getid(c)] == nullptr)
-                root->nxt[getid(c)] = new TrieNode<MAX_SIZE, getid, getchar>();
-            cerr << "\nbranch to " << c << ":" << getid(c) << "\n";
-            loadSerialTrie(root->nxt[getid(c)], fin);
+    while (fin >> c) {
+        // if c is '>', we have reached the end of the serialized Trie
+        // so we backtrack to the parent node
+        if (c == '>') break;
+        // if c is ']', we have reached the end of a word
+        if (c == ']') {
+            Word* w = new Word();
+            w->loadFromFile(fin);
+            root->data = w;
+            continue;
         }
+        int id{getid(c)};
+        // if c is a valid character, we create a new node and branch to it
+        if (root->nxt[id] == nullptr)
+            root->nxt[id] = new TrieNode<MAX_SIZE, getid, getchar>();
+        loadSerialTrie(root->nxt[id], fin);
+    }
 }
 
 template <int MAX_SIZE, int (*getid)(char), char (*getchar)(int)>
