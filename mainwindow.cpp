@@ -263,11 +263,15 @@ void MainWindow::handleEditorReset() {
 }
 
 void MainWindow::handleEditorAdd(const QString &keyword,
-                                 std::vector<QString> defs) {
+                                 std::vector<std::pair<QString, QString> > defs) {
     qDebug() << "Add new word: " << keyword << " | ";
-    for (auto def : defs) {
-        qDebug() << def;
+    Word newWord(keyword.toStdString());
+    std::vector<std::pair<std::string, std::string> > newDefs;
+    for (auto &def : defs) {
+        newDefs.push_back(std::pair(def.first.toStdString(), def.second.toStdString()));
+        qDebug() << def.first << " + " << def.second;
     }
+    newWord.data = newDefs;
 }
 
 void MainWindow::handleGameFocus() {

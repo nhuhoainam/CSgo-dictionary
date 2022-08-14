@@ -22,12 +22,14 @@ public:
 private:
     Ui::DictionaryEditor *ui;
     std::vector<std::pair<QLineEdit*, QPushButton*>> defEditGroup;
+    std::vector<std::pair<QLineEdit*, QPushButton*>> exampleEditGroup;
     QButtonGroup *rmEditBtnGroup;
 
     void addNewDefEdit();
+    void addNewExEdit();
     void removeEdit(int i);
   signals:
-    void addNewWord(const QString&, std::vector<QString>);
+    void addNewWord(const QString&, std::vector<std::pair<QString, QString> >);
     void resetDictionary();
 };
 

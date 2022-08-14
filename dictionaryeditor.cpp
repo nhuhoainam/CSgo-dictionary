@@ -11,14 +11,21 @@ DictionaryEditor::DictionaryEditor(QWidget *parent) :
     connect(ui->addBtn, &QPushButton::clicked, [=]() {
         auto key = ui->keywordEdit->text();
         ui->keywordEdit->setText("");
-        std::vector<QString> defs;
-        for (auto edit : defEditGroup) {
-            if (edit.first->text().length() > 0) {
-                defs.push_back(edit.first->text());
+        std::vector<std::pair<QString, QString> > defs;
+        for (auto def = defEditGroup.begin(), example = exampleEditGroup.begin();
+             def != defEditGroup.end() && example != exampleEditGroup.end();
+             def++, example++)
+        {
+            if (def->first->text().length() > 0) {
+                defs.push_back(std::pair(def->first->text(), example->first->text()));
             }
         }
-        for (auto edit : defEditGroup) {
-            edit.first->setText("");
+        for (auto edit = defEditGroup.begin(), example = exampleEditGroup.begin();
+             edit != defEditGroup.end() && example != exampleEditGroup.end();
+             edit++, example++)
+        {
+            edit->first->setText("");
+            example->first->setText("");
         }
         if (defs.size() > 0 && !key.isEmpty())
             emit addNewWord(key, defs);
@@ -29,6 +36,8 @@ DictionaryEditor::DictionaryEditor(QWidget *parent) :
             &DictionaryEditor::resetDictionary);
     connect(ui->addDefBtn, &QPushButton::clicked,
             this, &DictionaryEditor::addNewDefEdit);
+    connect(ui->addDefBtn, &QPushButton::clicked,
+            this, &DictionaryEditor::addNewExEdit);
     addNewDefEdit();
 }
 
@@ -64,20 +73,57 @@ void DictionaryEditor::addNewDefEdit() {
     });
 }
 
+void DictionaryEditor::addNewExEdit() {
+    QLineEdit *newEdit = new QLineEdit;
+    QPushButton *newRemoveBtn = new QPushButton("-");
+    newRemoveBtn->setFont(QFont("Sans", 16));
+    newRemoveBtn->setMaximumWidth(48);
+
+    QHBoxLayout *layout = new QHBoxLayout;
+    layout->addWidget(newEdit);
+    layout->addWidget(newRemoveBtn);
+    layout->setContentsMargins(0,0,0,0);
+
+    QWidget *container = new QWidget;
+    container->setLayout(layout);
+    exampleEditGroup.push_back(std::make_pair(newEdit, newRemoveBtn));
+    ui->exampleLayout->addWidget(container);
+    connect(newRemoveBtn, &QPushButton::clicked,
+            this,
+            [=]() {
+        for (int i = 0; i < exampleEditGroup.size(); i++) {
+            auto item = exampleEditGroup[i];
+            if (item.second == newRemoveBtn) {
+                removeEdit(i);
+            }
+        }
+    });
+}
+
 void DictionaryEditor::resetDefEdit() {
     ui->keywordEdit->clear();
-    QLayoutItem *child;
-    while ((child = ui->defLayout->takeAt(0)) != nullptr) {
-        delete child->widget();
-        delete child;
+    QLayoutItem *def, *ex;
+    while ((def = ui->defLayout->takeAt(0)) != nullptr
+           && (ex = ui->defLayout->takeAt(0)) != nullptr)
+    {
+        delete def->widget();
+        delete def;
+        delete ex->widget();
+        delete ex;
     }
     defEditGroup.clear();
+    exampleEditGroup.clear();
     addNewDefEdit();
+    addNewExEdit();
 }
 
 void DictionaryEditor::removeEdit(int i) {
-    QLayoutItem *item = ui->defLayout->takeAt(i);
-    delete item->widget();
-    delete item;
+    QLayoutItem *def = ui->defLayout->takeAt(i);
+    QLayoutItem *ex = ui->exampleLayout->takeAt(i);
+    delete def->widget();
+    delete def;
+    delete ex->widget();
+    delete ex;
     defEditGroup.erase(defEditGroup.begin()+i);
+    exampleEditGroup.erase(exampleEditGroup.begin()+i);
 }
