@@ -12,16 +12,20 @@ SingleWordView::SingleWordView(QWidget *parent) :
             this,
             &SingleWordView::deleteRequest);
     connect(ui->widget,
-            &WordViewer::editRequest,
-            this,
-            &SingleWordView::editRequest);
-    connect(ui->widget,
             &WordViewer::favoriteToggle,
             this,
             &SingleWordView::favoriteToggle);
+    connect(ui->widget,
+            &WordViewer::wordEdited,
+            this,
+            &SingleWordView::wordEdited);
 }
 
 SingleWordView::~SingleWordView()
 {
     delete ui;
+}
+
+void SingleWordView::setWord(Word w) {
+    ui->widget->setWord(w);
 }

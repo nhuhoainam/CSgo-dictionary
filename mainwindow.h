@@ -5,7 +5,7 @@
 #include "favoritelist.h"
 #include "history.h"
 #include "dictionaryeditor.h"
-#include "singlewordview.h"
+#include "WordViewer/singlewordview.h"
 #include "sidebar.h"
 #include "game.h"
 
@@ -64,7 +64,7 @@ private slots:
     void handleEditorAdd(const QString&, std::vector<QString>);
     void handleGameFocus();
 
-    void handleWordViewerEdit(const QString&);
+    void handleWordViewerEdit(Word);
     void handleWordViewerDelete(const QString&);
     void handleWordViewerFavorite(const QString&, bool on);
 

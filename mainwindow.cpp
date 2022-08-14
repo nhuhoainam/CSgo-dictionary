@@ -150,7 +150,7 @@ void MainWindow::connectSignalAndSlot() {
             this,
             &MainWindow::handleWordViewerDelete);
     connect(wordViewer,
-            &SingleWordView::editRequest,
+            &SingleWordView::wordEdited,
             this,
             &MainWindow::handleWordViewerEdit);
     connect(wordViewer,
@@ -248,8 +248,9 @@ void MainWindow::handleGameFocus() {
                           });
 }
 
-void MainWindow::handleWordViewerEdit(const QString &keyword) {
-    qDebug() << "Edit " << keyword;
+void MainWindow::handleWordViewerEdit(Word w) {
+    qDebug() << "Edit " << QString::fromStdString(w.word);
+    wordViewer->setWord(w);
 }
 void MainWindow::handleWordViewerDelete(const QString &keyword) {
     qDebug() << "Delete " << keyword;

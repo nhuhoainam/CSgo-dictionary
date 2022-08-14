@@ -17,6 +17,8 @@ struct Word {
     Word(const Word& other) {
         *this = other;
     }
+
+    Word() {}
     bool contain(const string& def) const {
         for (auto& p : data) {
             if (def == p.first)
@@ -33,54 +35,29 @@ struct Word {
     }
 
     // get fist definition of that word
-    // from Minh: Duy sửa lại cái hàm này theo cấu trúc struct mới update nha Duy (chú ý cái return vì bên dưới có trg hợp ko return)
-    // string getFirstDef() {
-    //     for (int i = 0; i < 10; i++) {
-    //         if (part_of_speech[i].size()) {
-    //             return part_of_speech[i][0];
-    //         }
-    //     }
-    // }
-
+    string getFirstDef() {
+        if (data.empty() || data[0].first.empty())
+            return NULL;
+        return data[0].first;
+    }
+    //not done yet
     // File structure:
-    // word
-    // size of part_of_speech[0] part_of_speech[1] ... part_of_speech[9]
-    // part_of_speech[i][0]
-    // part_of_speech[i][1]
-    // ...
+
     void saveToFile(fstream &fout) {
-        fout << word << "\n";
-        for (int i = 0; i < 10; i++)
-            fout << part_of_speech[i].size() << " ";
-        fout << "\n";
-        for (int i = 0; i < 10; i++) {
-            for (int j = 0; j < part_of_speech[i].size(); j++)
-                cout << part_of_speech[i][j] << "\n";
-        }
     }
 
     void loadFromFile(fstream &fin) {
-        getline(fin, word);
-        int sizeOfSpeech[10];
-        for (int i = 0; i < 10; i++)
-            fin >> sizeOfSpeech[i];
-        fin.get();
-
-        for (int i = 0; i < 10; i++) {
-            for (int j = 0; j < sizeOfSpeech[i]; j++)
-                getline(fin, part_of_speech[i][j]);
-        }
     }
 };
 
-template <int MAX_SIZE, int (*getid)(char)> class dictionary;
+template <int MAX_SIZE, int (*getid)(char)> class Dictionary;
 
 template <int MAX_SIZE, int (*getid)(char)>
 class TrieNode {
 private:
     Word* data;
     TrieNode* nxt[MAX_SIZE];
-    friend class dictionary<MAX_SIZE, getid>;
+    friend class Dictionary<MAX_SIZE, getid>;
 public:
     TrieNode() {
         data = nullptr;
@@ -97,16 +74,17 @@ public:
         return data;
     }
     // there might be overloads of set() depending on the demands of UI team, this one is just one of them
-    TrieNode<MAX_SIZE, getid>* set(const string& def, const string& new_def) {
-        assert(idx < int(data->part_of_speech[pos].size()));
-        data->part_of_speech[pos][idx] = new_def;
-        return this;
-    }
+    // TrieNode<MAX_SIZE, getid>* set(const string& def, const string& new_def) {
+    //     assert(idx < int(data->part_of_speech[pos].size()));
+    //     data->part_of_speech[pos][idx] = new_def;
+    //     return this;
+    // }
+    // fix this later
 };
 
 // this version of Trie contains characters on it edges
 template <int MAX_SIZE, int (*getid)(char)>
-class dictionary {
+class Dictionary {
     static_assert(MAX_SIZE > 0, "Size of the trie must be positive.");
 private:
     TrieNode<MAX_SIZE, getid>* pRoot;
@@ -161,11 +139,11 @@ private:
 public:
     vector<Word*> searchHistory;
     vector<Word*> favoriteList;
-    dictionary() {
+    Dictionary() {
         pRoot = new TrieNode<MAX_SIZE, getid>();
     }
-    ~dictionary() {
-        saveToFile();
+    ~Dictionary() {
+        // saveToFile();
 
         if (pRoot == nullptr) return;
         queue<TrieNode<MAX_SIZE, getid>*> nodes;
@@ -187,12 +165,12 @@ public:
 
     // file structure:
     // 
-    void saveToFile(string path) {
-        fstream fout(path);
+    // void saveToFile(string path) {
+    //     fstream fout(path);
 
-        fin.close();
-    }
-    void loadFromFile(string path);
+    //     fin.close();
+    // }
+    // void loadFromFile(string path);
 
     // insert a new word (word + definitions + corresponding examples) to the dictionary
     TrieNode<MAX_SIZE, getid>* insert(const Word& w) {
@@ -396,23 +374,48 @@ public:
         return ans;
     }
 
-    // save and load data structures are not done yet!!!
+    void saveSerialTrie(TrieNode<MAX_SIZE, getid>* pRoot, fstream& fout) {
+        // end of a word
+        if (pRoot->data != nullptr) {
+            fout << "]";
+            pRoot->data->saveToFile(fout);
+        }
+        // for each of next exist characters
+        for (int i = 0; i < MAX_SIZE; i++) {
+            if (pRoot->nxt[i] != nullptr) {
+                // write the character
+                fout << (char)i;
+                saveSerialTrie(pRoot->nxt[i], fout);
+            }
+        }
+        // end of a character
+        fout << ">";
+    }
+
+    void loadSerialTrie(TrieNode<MAX_SIZE, getid>* pRoot, fstream& fin) {
+        char c;
+        while (fin >> c) {
+            // if c is '>', we have reached the end of the serialized Trie
+            // so we backtrack to the parent node
+            if (c == '>') break;
+            // if c is ']', we have reached the end of a word
+            if (c == ']') {
+                Word* w = new Word();
+                w->loadFromFile(fin);
+                pRoot->data = w;
+            }
+            // if c is a valid character, we create a new node and branch to it
+            if (pRoot->nxt[c] == nullptr)
+                pRoot->nxt[c] = new TrieNode<MAX_SIZE, getid>();
+            loadSerialTrie(pRoot->nxt[c], fin);
+        }
+    }
+
+    //save and load data by serialization
     void saveDataStructures(string path) {
         ofstream fout(path);
         TrieNode<MAX_SIZE, getid>* cur {pRoot};
-        queue<TrieNode<MAX_SIZE, getid>*> nodeQueue;
-        nodeQueue.push(cur);
-
-
-        //BFS
-        while (nodeQueue.size() != 0) {
-            cur = nodeQueue.top();
-            nodeQueue.pop();
-            if (cur == nullptr) continue;
-            for (int i = 0; i < MAX_SIZE; i++) {
-                nodeQueue.push(cur[i]);
-            }
-        }
+        saveSerialTrie(cur, fout);
         
         fout.close();
     }
@@ -420,45 +423,25 @@ public:
     void loadDataStructures(string path) {
         ifstream fin(path);
         TrieNode<MAX_SIZE, getid>* cur {pRoot};
-        queue<TrieNode<MAX_SIZE, getid>*> nodeQueue;
-        nodeQueue.push(cur);
-        
-        //BFS
-        while (nodeQueue.size() != 0) {
-            cur = nodeQueue.top();
-            nodeQueue.pop();
-            int numOfChild;
-            fin >> numOfChild;
-            for (int i = 0; i < numOfChild; i++) {
-                // input a child character
-                int child; cin >> child;
-                // create child node and append that node to queue
-                cur->nxt[child] = new TrieNode<MAX_SIZE, getid>();
-                TrieNode<MAX_SIZE, getid> nChild = cur->nxt[child];
-                nodeQueue.push(nChild);
-            }
-        }
+        loadSerialTrie(cur, fin);
 
         fin.close();
     }
 };
 
-int getid(char c)
-{
+int getid(char c) {
     if ('a' <= c && c <= 'z') return c - 'a';
     else if ('A' <= c && c <= 'Z') return c - 'A';
     else if (c == '-') return 26;
     else return -1;
 }
 
-int getidEmotion(char c)
-{
+int getidEmotion(char c) {
     if (c < 0 || c >= 256) return -1;
     return c;
 }
 
-void readFromFileSlang(string path, vector <string> &slang, vector <string> &meaning)
-{
+void readFromFileSlang(string path, vector <string> &slang, vector <string> &meaning) {
     ifstream fin(path);
     string a, b, input;
 
@@ -474,10 +457,66 @@ void readFromFileSlang(string path, vector <string> &slang, vector <string> &mea
     fin.close();
 }
 
+void readFromFile(string path, vector<pair<string, vector<pair<string, string>>>>& fileData) {
+    ifstream fin(path);
+    if (!fin.is_open()) {
+        cerr << "Cannot read file." << endl;
+        return;
+    }
+
+    int numWords;
+    fin >> numWords;
+    fin.ignore();
+    for (int i = 0; i < numWords; i++) {
+        string word;
+        getline(fin, word);
+        word.erase(word.begin());
+        vector<pair<string, string>> wordData;
+        int numDefs;
+        fin >> numDefs;
+        fin.ignore();
+        for (int j = 0; j < numDefs; j++) {
+            string def;
+            getline(fin, def);
+            def.erase(def.begin());
+            int numExamples;
+            fin >> numExamples;
+            fin.ignore();
+            string examples = "";
+            for (int k = 0; k < numExamples; k++) {
+                string example;
+                getline(fin, example);
+                example.erase(example.begin());
+                examples += example + " ";
+            }
+            wordData.push_back({def, examples});
+        }
+        cerr << word << endl;
+        cerr << wordData.size() << endl;
+        fileData.push_back({word, wordData});
+    }
+
+    fin.close();
+}
+
+//inserts data to dictionary
+void insertData(Dictionary<27, getid> &dictionary, vector<pair<string, vector<pair<string, string>>>>& fileData) {
+    cout << "Inserting data to dictionary..." << endl;
+    for (auto wordData : fileData) {
+        cerr << wordData.first << endl;
+        Word word;
+        word.word = wordData.first;
+        word.data = wordData.second;
+        word.show();
+        dictionary.insert(word);
+    }
+}
+
 int main()
 {
+    /*
     // testing the data structure
-    dictionary<27, getid> myDict;
+    Dictionary<27, getid> myDict;
     cout << "0. Insert a new definition.\n"
             "1. Edit an existing definition.\n"
             "2. Remove a word.\n"
@@ -572,6 +611,23 @@ int main()
         }
         else break;
     }
+    */
+
+    // testing the data structure
+    Dictionary<27, getid> myDict;
+    vector<pair<string, vector<pair<string, string>>>> fileData;
+    readFromFile("VieEng-no-accent-test.txt", fileData);
+    insertData(myDict, fileData);
+    // string w;
+    // while (getline(cin, w)) {
+    //     auto node {myDict.find(w)};
+    //     if (node == nullptr) {
+    //         cerr << "Word does not exist." << endl;
+    //     }
+    //     else {
+    //         node->get_data()->show();
+    //     }
+    // }
 
     return 0;
-}  
+}
