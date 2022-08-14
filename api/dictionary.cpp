@@ -1,9 +1,27 @@
+/*
+
+TESTED FEATURES:
+- struct Word (except for Word::getFirstDef())
+- class TrieNode
+- Dictionary::insert()
+- Dictionary::find()
+- Dictionary::erase() as well as Dictionary::internal_erase()
+- Dictionary::add_to_favoriteList()
+- Dictionary::remove_from_favoriteList()
+- Dictionary::remove_from_searchHistory()
+- getid_EngEng()
+- readFromFile()
+- insertData()
+
+*/
+
 #include <iostream>
 #include <queue>
 #include <vector>
 #include <string>
 #include <cassert>
 #include <fstream>
+#include <set>
 
 using namespace std;
 
@@ -19,17 +37,27 @@ struct Word {
     }
 
     Word() {}
-    bool contain(const string& def) const {
-        for (auto& p : data) {
-            if (def == p.first)
-                return true;
+    // return the index of the definition in the vector "data", return -1 if the definition is not found
+    int contain(const string& def) const {
+        for (int i = 0; i < int(data.size()); ++i) {
+            if (def == data[i].first)
+                return i;
         }
-        return false;
+        return -1;
     }
+
+    // edit the definition of this word, if that definition exists.
+    bool set_def(int idx, const string& new_def) {
+        if (idx < int(data.size())) {
+            data[idx].first = new_def;
+            return true;
+        }
+        else return false;
+    }
+
     void show() const {
         std::cout << "The word is: " << word << std::endl;
         for (auto& p : data) {
-            std::cout << "-Definition\n=Example+Explanation\n";
             std::cout << '-' << p.first << "\n=" << p.second << '\n';
         }
     }
@@ -92,33 +120,55 @@ public:
                 return false;
         return true;
     }
-    const Word* get_data() const {
+    Word* get_data() const {
         return data;
     }
-    // there might be overloads of set() depending on the demands of UI team, this one is just one of them
-    // TrieNode<MAX_SIZE, getid>* set(const string& def, const string& new_def) {
-    //     assert(idx < int(data->part_of_speech[pos].size()));
-    //     data->part_of_speech[pos][idx] = new_def;
-    //     return this;
-    // }
-    // fix this later
 };
 
 // this version of Trie contains characters on it edges
 template <int MAX_SIZE, int (*getid)(char)>
 class Dictionary {
     static_assert(MAX_SIZE > 0, "Size of the trie must be positive.");
+public:
+    // note that there may be multiple entries in the search history based on the lastest search
+    vector<Word*> searchHistory;
+    vector<Word*> favoriteList;
+    // functions with favorite list
+    bool add_to_favoriteList(Word* wrd) {
+        for (Word* p : favoriteList) {
+            if (p == wrd) return false;
+        }
+        favoriteList.push_back(wrd);
+        return true;
+    }
+    bool remove_from_favoriteList(Word* wrd) {
+        for (int i = 0; i < int(favoriteList.size()); ++i) {
+            if (favoriteList[i] == wrd) {
+                favoriteList.erase(favoriteList.begin() + i);
+                return true;
+            }
+        }
+        return false;
+    }
+    // to view the favorite list, the UI can operate on the vector favoriteList
 private:
     TrieNode<MAX_SIZE, getid>* pRoot;
 
-    void add_to_searchHistory(Word* node) {
-        for (Word* p : searchHistory)
-            if (p == node) return;
-        searchHistory.push_back(node);
+    void remove_from_searchHistory(Word* wrd) {
+        for (int i = 0; i < int(searchHistory.size()); ++i) {
+            if (searchHistory[i] == wrd) {
+                searchHistory.erase(searchHistory.begin() + i);
+                --i;
+            }
+        }
     }
+    // the erasion of a node should set its pointer to nullptr for the sake of searchHistory and favoriteList
     bool internal_erase(const string& w, TrieNode<MAX_SIZE, getid>*& cur, int cur_idx) {
+        assert(cur);
         if (cur_idx == int(w.size())) {
             if (cur->data == nullptr) return false;
+            remove_from_searchHistory(cur->data);
+            remove_from_favoriteList(cur->data);
             delete cur->data;
             cur->data = nullptr;
             if (cur->isLeaf()) {
@@ -131,15 +181,19 @@ private:
         int id {getid(w[cur_idx])};
         if (id == -1 || cur->nxt[id] == nullptr) return false;
         bool res {internal_erase(w, cur->nxt[id], cur_idx+1)};
-        if (cur->data == nullptr && cur->isLeaf()) {
+        if (cur->data == nullptr && cur->isLeaf() && cur != pRoot) {
             delete cur;
             cur = nullptr;
         }
         return res;
     }
+    // the erasion of a node should set its pointer to nullptr for the sake of searchHistory and favoriteList
     bool internal_erase(const Word& w, TrieNode<MAX_SIZE, getid>*& cur, int cur_idx) {
+        assert(cur);
         if (cur_idx == int(w.word.size())) {
             if (cur->data == nullptr) return false;
+            remove_from_searchHistory(cur->data);
+            remove_from_favoriteList(cur->data);
             delete cur->data;
             cur->data = nullptr;
             if (cur->isLeaf()) {
@@ -152,15 +206,13 @@ private:
         int id {getid(w.word[cur_idx])};
         if (id == -1 || cur->nxt[id] == nullptr) return false;
         bool res {internal_erase(w, cur->nxt[id], cur_idx+1)};
-        if (cur->data == nullptr && cur->isLeaf()) {
+        if (cur->data == nullptr && cur->isLeaf() && cur != pRoot) {
             delete cur;
             cur = nullptr;
         }
         return res;
     }
 public:
-    vector<Word*> searchHistory;
-    vector<Word*> favoriteList;
     Dictionary() {
         pRoot = new TrieNode<MAX_SIZE, getid>();
     }
@@ -198,6 +250,7 @@ public:
     TrieNode<MAX_SIZE, getid>* insert(const Word& w) {
         if (w.word.empty()) return nullptr; // for the erasion's sake, inserting an empty word is not allowed!
         TrieNode<MAX_SIZE, getid>* cur {pRoot};
+        assert(cur);
         for (const char c : w.word) {
             int id {getid(c)};
             if (id == -1) return nullptr;
@@ -217,6 +270,7 @@ public:
     TrieNode<MAX_SIZE, getid>* insert(const string& w) {
         if (w.empty()) return nullptr; // for the erasion's sake, inserting an empty word is not allowed!
         TrieNode<MAX_SIZE, getid>* cur {pRoot};
+        assert(cur);
         for (const char c : w) {
             int id {getid(c)};
             if (id == -1) return nullptr;
@@ -236,6 +290,7 @@ public:
     TrieNode<MAX_SIZE, getid>* insert(const string& w, const string& def) {
         if (w.empty()) return nullptr; // for the erasion's sake, inserting an empty word is not allowed!
         TrieNode<MAX_SIZE, getid>* cur {pRoot};
+        assert(cur);
         for (const char c : w) {
             int id {getid(c)};
             if (id == -1) return nullptr;
@@ -249,7 +304,7 @@ public:
             cur->data = new Word;
             cur->data->word = w;
         }
-        if (cur->data->contain(def))
+        if (cur->data->contain(def) != -1)
             return nullptr; // this definition already exists in the node of word
         cur->data->data.push_back(make_pair(def, "")); // definition without examples
         return cur;
@@ -258,6 +313,7 @@ public:
     TrieNode<MAX_SIZE, getid>* find(const Word& w) {
         if (w.word.empty()) return nullptr;
         TrieNode<MAX_SIZE, getid>* cur {pRoot};
+        assert(cur);
         for (const char c : w.word) {
             int id {getid(c)};
             if (id == -1) return nullptr;
@@ -269,7 +325,7 @@ public:
         }
         if (cur->data == nullptr) return nullptr;
         else {
-            add_to_searchHistory(cur->data);
+            searchHistory.push_back(cur->data);
             return cur;
         }
     }
@@ -277,6 +333,7 @@ public:
     TrieNode<MAX_SIZE, getid>* find(const string& w) {
         if (w.empty()) return nullptr;
         TrieNode<MAX_SIZE, getid>* cur {pRoot};
+        assert(cur);
         for (const char c : w) {
             int id {getid(c)};
             if (id == -1) return nullptr;
@@ -288,7 +345,7 @@ public:
         }
         if (cur->data == nullptr) return nullptr;
         else {
-            add_to_searchHistory(cur->data);
+            searchHistory.push_back(cur->data);
             return cur;
         }
     }
@@ -308,6 +365,7 @@ public:
     // If there is a series of words which have at least 1 prefix in common, this algorithm chooses the longest one
     const Word* random_word() const {
         const TrieNode<MAX_SIZE, getid>* cur {pRoot};
+        assert(cur);
         while (cur) {
             if (cur->data) return cur->data;
             vector<TrieNode<MAX_SIZE, getid>*> opts; opts.reserve(MAX_SIZE);
@@ -331,25 +389,6 @@ public:
         return nullptr;
     }
 
-    // functions with favorite list
-    bool add_to_favoriteList(Word* wrd) {
-        for (Word* p : favoriteList) {
-            if (p == wrd) return false;
-        }
-        favoriteList.push_back(wrd);
-        return true;
-    }
-    bool remove_from_favoriteList(Word* wrd) {
-        for (int i = 0; i < int(favoriteList.size()); ++i) {
-            if (favoriteList[i] == wrd) {
-                favoriteList.erase(favoriteList.begin() + i);
-                return true;
-            }
-        }
-        return false;
-    }
-    // to view the favorite list, the UI can operate on the vector favoriteList
-
     void getPrefixMatch(TrieNode<MAX_SIZE, getid>* cur, vector<string>& ans, const int& maxNumOfEntries) {
         if (ans.size() == maxNumOfEntries) return;
         if (cur == nullptr) return;
@@ -368,6 +407,7 @@ public:
         vector<string> ans;
         if (word.empty()) return {};
         TrieNode<MAX_SIZE, getid>* cur {pRoot};
+        assert(cur);
 
         // traverse cur to end of word
         for (const char c : word) {
@@ -443,10 +483,21 @@ public:
     // }
 };
 
-int getid(char c) {
-    if ('a' <= c && c <= 'z') return c - 'a';
-    else if ('A' <= c && c <= 'Z') return c - 'A';
-    else if (c == '-') return 26;
+// The Eng-Eng dataset consists of 41 characters in total.
+int getid_EngEng(char c) {
+    
+    // lowercase and uppercase letters are treated as the same
+    if ('a' <= c && c <= 'z')
+        return c - 'a';
+    else if ('A' <= c && c <= 'Z')
+        return c - 'A';
+    else if ('0' <= c && c <= '9')
+        return 26 + c - '0';
+    else if (c == ' ') return 36;
+    else if (c == '-') return 37;
+    else if (c == '.') return 38;
+    else if (c == '/') return 39;
+    else if (c == '\'') return 40;
     else return -1;
 }
 
@@ -481,9 +532,14 @@ void readFromFile(string path, vector<pair<string, vector<pair<string, string>>>
     int numWords;
     fin >> numWords;
     fin.ignore();
+    // fstream fout("dataread.txt", ios::out);
+    // if (!fout.is_open())
+    //     assert(false);
     for (int i = 0; i < numWords; i++) {
         string word;
-        getline(fin, word);
+        // avoid bad input data, namely, an empty line
+        do getline(fin, word);
+        while (word.empty());
         word.erase(word.begin());
         vector<pair<string, string>> wordData;
         int numDefs;
@@ -491,7 +547,8 @@ void readFromFile(string path, vector<pair<string, vector<pair<string, string>>>
         fin.ignore();
         for (int j = 0; j < numDefs; j++) {
             string def;
-            getline(fin, def);
+            do getline(fin, def);
+            while (def.empty());
             def.erase(def.begin());
             int numExamples;
             fin >> numExamples;
@@ -499,14 +556,15 @@ void readFromFile(string path, vector<pair<string, vector<pair<string, string>>>
             string examples = "";
             for (int k = 0; k < numExamples; k++) {
                 string example;
-                getline(fin, example);
+                do getline(fin, example);
+                while (example.empty());
                 example.erase(example.begin());
                 examples += example + " ";
             }
             wordData.push_back({def, examples});
         }
-        cerr << word << endl;
-        cerr << wordData.size() << endl;
+        // cerr << word << endl;
+        // cerr << wordData.size() << endl;
         fileData.push_back({word, wordData});
     }
 
@@ -514,133 +572,128 @@ void readFromFile(string path, vector<pair<string, vector<pair<string, string>>>
 }
 
 //inserts data to dictionary
-void insertData(Dictionary<27, getid> &dictionary, vector<pair<string, vector<pair<string, string>>>>& fileData) {
-    cout << "Inserting data to dictionary..." << endl;
+template <int MAX_SIZE, int (*getid)(char)>
+void insertData(Dictionary<MAX_SIZE, getid> &dictionary, vector<pair<string, vector<pair<string, string>>>>& fileData) {
+    // cout << "Inserting data to dictionary..." << endl;
     for (auto wordData : fileData) {
-        cerr << wordData.first << endl;
         Word word;
         word.word = wordData.first;
         word.data = wordData.second;
-        word.show();
+        // word.show();
         dictionary.insert(word);
     }
 }
 
 int main()
 {
-    /*
     // testing the data structure
-    Dictionary<27, getid> myDict;
-    cout << "0. Insert a new definition.\n"
-            "1. Edit an existing definition.\n"
-            "2. Remove a word.\n"
-            "3. Show the information of a word.\n"
-            "4. Show the search history.\n"
-            "5. Exit.\n";
-    while (true) {
-        int opt;
-        cout << "\nYour option: ";
-        cin >> opt;
-        cin.get();
-        if (opt == 0) {
-            cout << "Enter the word: ";
-            string w;
-            getline(cin, w);
-            int p;
-            do {
-                cout << "Enter part of speech (0 -> 9): ";
-                cin >> p;
-                if (p < 0 || p > 9)
-                    cout << "Invalid part of speech. Please try again.\n";
-            } while (p < 0 || p > 9);
-            PoS pos {pos_val[p]};
-            cout << "Enter the word's definition: ";
-            string d;
-            cin.get();
-            getline(cin, d);
-            auto res {myDict.insert(w, pos, d)};
-            if (res) {
-                cout << "Definition is added successfully.\n";
-            }
-            else {
-                cout << "Definition is not added successfully.\n";
-            }
-        }
-        else if (opt == 1) {
-            cout << "Enter the word: ";
-            string w;
-            getline(cin, w);
-            auto node {myDict.find(w)};
-            int p;
-            do {
-                cout << "Enter part of speech (0 -> 9): ";
-                cin >> p;
-                if (p < 0 || p > 9)
-                    cout << "Invalid part of speech. Please try again.\n";
-            } while (p < 0 || p > 9);
-            PoS pos {pos_val[p]};
-            cout << "Enter the word's definition: ";
-            string d;
-            cin.get();
-            getline(cin, d);
-            if (!node->get_data()->contain(pos, d)) {
-                cout << "This definition does not exist.\n";
-            }
-            else {
-                cout << "Enter new definition: ";
-                string new_d;
-                getline(cin, new_d);
-                for (int i = 0; i < int(node->get_data()->part_of_speech[pos].size()); ++i) {
-                    if (node->get_data()->part_of_speech[pos][i] == d) {
-                        node->set(pos, i, new_d);
-                        break;
-                    }
-                }
-                cout << "The definition is edited successfully.\n";
-            }
-        }
-        else if (opt == 2) {
-            cout << "Enter the word: ";
-            string w;
-            getline(cin, w);
-            bool res {myDict.erase(w)};
-            if (res) cout << "The removal is successful.\n";
-            else cout << "The removal is unsuccessful.\n";
-        }
-        else if (opt == 3) {
-            cout << "Enter the word: ";
-            string w;
-            getline(cin, w);
-            auto res {myDict.find(w)};
-            if (!res) cout << "The word does not exist.\n";
-            else {
-                res->get_data()->show();
-            }
-        }
-        else if (opt == 4) {
-            cout << "Your search history:\n";
-            for (Word* w : myDict.searchHistory) {
-                w->show();
-            }
-        }
-        else break;
-    }
-    */
 
-    // testing the data structure
-    Dictionary<27, getid> myDict;
     vector<pair<string, vector<pair<string, string>>>> fileData;
-    readFromFile("VieEng-no-accent-test.txt", fileData);
+    readFromFile("..\\dictionary-data\\EngEng.txt", fileData);
+    Dictionary<41, getid_EngEng> myDict;
     insertData(myDict, fileData);
-    // string w;
-    // while (getline(cin, w)) {
-    //     auto node {myDict.find(w)};
-    //     if (node == nullptr) {
-    //         cerr << "Word does not exist." << endl;
+    // cout << "0. Insert a new definition.\n"
+    //         "1. Edit an existing definition.\n"
+    //         "2. Remove a word.\n"
+    //         "3. Show the information of a word.\n"
+    //         "4. Show the search history.\n"
+    //         "5. Show the favorite list.\n"
+    //         "6. Add a word to the favorite list.\n"
+    //         "7. Remove a word from the favorite list.\n"
+    //         "8. Exit.\n";
+    // while (true) {
+    //     int opt;
+    //     cout << "\nYour option: ";
+    //     (cin >> opt).get();
+    //     if (opt == 0) {
+    //         cout << "Enter the word: ";
+    //         string w;
+    //         getline(cin, w);
+    //         cout << "Enter the word's definition: ";
+    //         string d;
+    //         getline(cin, d);
+    //         auto res {myDict.insert(w, d)};
+    //         if (res) {
+    //             cout << "Definition is added successfully.\n";
+    //         }
+    //         else {
+    //             cout << "Definition is not added successfully.\n";
+    //         }
     //     }
-    //     else {
-    //         node->get_data()->show();
+    //     else if (opt == 1) {
+    //         cout << "Enter the word: ";
+    //         string w;
+    //         getline(cin, w);
+    //         auto node {myDict.find(w)};
+    //         cout << "Enter the word's definition: ";
+    //         string d;
+    //         getline(cin, d);
+    //         int idx {node->get_data()->contain(d)};
+    //         if (idx == -1) {
+    //             cout << "This definition does not exist.\n";
+    //         }
+    //         else {
+    //             cout << "Enter new definition: ";
+    //             string new_d;
+    //             getline(cin, new_d);
+    //             if (node->get_data()->set_def(idx, new_d))
+    //                 cout << "The definition is edited successfully.\n";
+    //             else cout << "The definition is not edited successfully.\n";
+    //         }
     //     }
+    //     else if (opt == 2) {
+    //         cout << "Enter the word: ";
+    //         string w;
+    //         getline(cin, w);
+    //         bool res {myDict.erase(w)};
+    //         if (res) cout << "The removal is successful.\n";
+    //         else cout << "The removal is unsuccessful.\n";
+    //     }
+    //     else if (opt == 3) {
+    //         cout << "Enter the word: ";
+    //         string w;
+    //         getline(cin, w);
+    //         auto res {myDict.find(w)};
+    //         if (!res) cout << "The word does not exist.\n";
+    //         else {
+    //             res->get_data()->show();
+    //         }
+    //     }
+    //     else if (opt == 4) {
+    //         cout << "Your search history:\n";
+    //         for (Word* w : myDict.searchHistory) {
+    //             w->show();
+    //         }
+    //     }
+    //     else if (opt == 5) {
+    //         for (Word* w : myDict.favoriteList)
+    //             w->show();
+    //     }
+    //     else if (opt == 6) {
+    //         cout << "Enter the word: ";
+    //         string w;
+    //         getline(cin, w);
+    //         auto res {myDict.find(w)};
+    //         if (!res) cout << "The word does not exist.\n";
+    //         else {
+    //             if (myDict.add_to_favoriteList(res->get_data()))
+    //                 cout << "The word is added to the favorite list successfully.\n";
+    //             else cout << "The word is not added to the favorite list successfully.\n";
+    //         }
+    //     }
+    //     else if (opt == 7) {
+    //         cout << "Enter the word: ";
+    //         string w;
+    //         getline(cin, w);
+    //         auto res {myDict.find(w)};
+    //         if (!res) cout << "The word does not exist.\n";
+    //         else {
+    //             if (myDict.remove_from_favoriteList(res->get_data()))
+    //                 cout << "The word is removed from the favorite list successfully.\n";
+    //             else cout << "The word is not removed from the favorite list successfully.\n";
+    //         }
+    //     }
+    //     else break;
     // }
 
     return 0;
