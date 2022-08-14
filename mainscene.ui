@@ -45,11 +45,94 @@ QScrollBar::sub-line:vertical {
     border: 2px solid grey;
 	background: grey;
 	height: 12px;
+}
+
+QComboBox {
+	color: orange;
+	background-color: white;
+    border: 2px solid lightgrey;
+    border-radius: 16px;
+    padding: 5px 1px 5px 12px;
+    min-width: 6em;
+}
+
+QComboBox:on { /* shift the text when the popup opens */
+    padding-top: 3px;
+    padding-left: 4px;
+}
+
+QComboBox::drop-down {
+    subcontrol-origin: padding;
+    subcontrol-position: top right;
+    width: 15px;
+
+    border-left-width: 1px;
+    border-left-color: darkgray;
+    border-left-style: solid; /* just a single line */
+    border-top-right-radius: 3px; /* same radius as the QComboBox */
+    border-bottom-right-radius: 3px;
+}
+
+QComboBox::down-arrow {
+    image: url(/usr/share/icons/crystalsvg/16x16/actions/1downarrow.png);
+}
+
+QComboBox::down-arrow:on { /* shift the arrow when popup is open */
+    top: 1px;
+    left: 1px;
 }</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout" stretch="1,1,8">
    <item>
-    <widget class="SearchBox" name="searchBox"/>
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <widget class="QComboBox" name="dictionaryBox">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+         <bold>false</bold>
+        </font>
+       </property>
+       <item>
+        <property name="text">
+         <string>English - English</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>English - Vietnamese</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Vietnamese - English</string>
+        </property>
+       </item>
+      </widget>
+     </item>
+     <item>
+      <widget class="SearchBox" name="searchBox"/>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer_2">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+    </layout>
    </item>
    <item>
     <layout class="QHBoxLayout" name="titleLayout">
@@ -98,7 +181,7 @@ QScrollBar::sub-line:vertical {
         <x>0</x>
         <y>0</y>
         <width>622</width>
-        <height>390</height>
+        <height>369</height>
        </rect>
       </property>
       <property name="styleSheet">

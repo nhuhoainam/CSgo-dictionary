@@ -12,6 +12,8 @@
 #include <QWidget>
 #include <QStackedWidget>
 
+class Dictionary;
+
 namespace Ui {
 class MainWindow;
 }
@@ -34,6 +36,8 @@ private:
     Game *game;
     QStackedWidget *container;
     Sidebar *sidebar;
+    vector<Dictionary *> dicts;
+    Dictionary *curDict;
 
     void setupUI();
     void connectSignalAndSlot();
@@ -69,6 +73,7 @@ private slots:
     void handleWordViewerFavorite(const QString&, bool on);
 
     void handleSearchRequest(const QString&);
+    void handleDictionaryChanged(const QString &);
 };
 
 #endif // MAINWINDOW_H

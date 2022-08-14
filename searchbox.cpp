@@ -7,13 +7,13 @@
 SearchBox::SearchBox(QWidget *parent)
     : QWidget{parent}
 {
-    setMaximumWidth(400);
-    auto sizePolicy = QSizePolicy(QSizePolicy::Maximum, QSizePolicy::Fixed);
+    setMinimumWidth(350);
+    auto sizePolicy = QSizePolicy(QSizePolicy::Maximum, QSizePolicy::Minimum);
     setSizePolicy(sizePolicy);
     textInp = new QLineEdit(this);
     textInp->setPlaceholderText("Type here to search...");
     textInp->setObjectName("TextInput");
-    textInp->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+    textInp->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Maximum);
 
     searchBtn = new QPushButton(this);
     searchBtn->setObjectName("SearchButton");

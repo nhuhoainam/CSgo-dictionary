@@ -133,6 +133,10 @@ void MainScene::connectSignalAndSlot() {
         if (curItem)
             ui->searchBox->setText(curItem->text());
     });
+    connect(ui->dictionaryBox,
+            &QComboBox::currentTextChanged,
+            this,
+            &MainScene::dictionaryTypeChange);
 }
 
 MainScene::~MainScene()

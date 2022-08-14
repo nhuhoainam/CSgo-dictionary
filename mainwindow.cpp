@@ -7,6 +7,9 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     setupUI();
     connectSignalAndSlot();
+
+    // TODO
+    // Initalize dicts and assign curDict
 }
 
 MainWindow::~MainWindow()
@@ -157,6 +160,10 @@ void MainWindow::connectSignalAndSlot() {
             &SingleWordView::favoriteToggle,
             this,
             &MainWindow::handleWordViewerFavorite);
+    connect(home,
+            &Home::dictionaryTypeChange,
+            this,
+            &MainWindow::handleDictionaryChanged);
 }
 
 void MainWindow::handleSearchRequest(const QString& keyword) {
