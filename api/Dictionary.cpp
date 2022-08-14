@@ -252,7 +252,7 @@ const Word* Dictionary<MAX_SIZE, getid, getchar>::random_word() const {
     const TrieNode<MAX_SIZE, getid, getchar>* cur {pRoot};
     assert(cur);
     while (cur) {
-        if (cur->data) return cur->data;
+        // if (cur->data) return cur->data;
         vector<TrieNode<MAX_SIZE, getid, getchar>*> opts; opts.reserve(MAX_SIZE);
         // we have to ensure that the random child we branch into must lead to an existing word.
         // This is why the delete operation above should be carried out with care!
