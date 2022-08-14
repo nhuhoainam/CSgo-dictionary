@@ -1,7 +1,7 @@
 #ifndef WORDCARDGROUP_H
 #define WORDCARDGROUP_H
 
-#include "api/dictionary_UI_testing.hpp"
+#include "api/Word.h"
 
 #include <QWidget>
 #include <list>
@@ -15,7 +15,7 @@ class WordCardGroup : public QWidget
 public:
     explicit WordCardGroup(QWidget *parent = nullptr);
 
-    void addCard(Word, bool favorite);
+    void addCard(const Word&, bool favorite);
     void clear();
     WordCard *getCard(const QString &keyword) const;
 private:
@@ -24,6 +24,8 @@ private:
 signals:
     void wordSelected(const QString&);
     void wordToggleFavorite(const QString &, bool on);
+    void wordFavorite(const QString &);
+    void wordUnfavorite(const QString &);
 };
 
 #endif // WORDCARDGROUP_H

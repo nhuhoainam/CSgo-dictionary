@@ -2,7 +2,7 @@
 #define SINGLEWORDVIEW_H
 
 #include <QWidget>
-#include "api/dictionary_UI_testing.hpp"
+#include "api/Word.h"
 
 namespace Ui {
 class SingleWordView;

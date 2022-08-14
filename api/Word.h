@@ -23,5 +23,3 @@ struct Word {
     void saveToFile(fstream &);
     void loadFromFile(fstream &);
 };
-
-#include "Word.cpp"

@@ -9,15 +9,31 @@ WordCardGroup::WordCardGroup(QWidget *parent)
     setLayout(layout);
 }
 
-void WordCardGroup::addCard(Word word, bool favorite) {
+void WordCardGroup::addCard(const Word &word, bool favorite) {
     auto *w = new WordCard;
     w->setKeyword(QString::fromStdString(word.word));
     for (const auto &p : word.data) {
         w->addDefinition(QString::fromStdString(p.first));
-        w->setFavoriteState(favorite);
     }
-    connect(w, &WordCard::wordSelected, this, &WordCardGroup::wordSelected);
-    connect(w, &WordCard::favoriteStateChanged, this, &WordCardGroup::wordToggleFavorite);
+    w->setFavoriteState(favorite);
+    connect(w,
+            &WordCard::wordSelected,
+            this,
+            &WordCardGroup::wordSelected);
+    connect(w,
+            &WordCard::favoriteStateChanged,
+            this,
+            &WordCardGroup::wordToggleFavorite);
+    connect(w,
+            &WordCard::favoriteStateChanged,
+            this,
+            [=](const QString& keyword, bool on) {
+        if (on) {
+            emit wordFavorite(keyword);
+        } else {
+            emit wordUnfavorite(keyword);
+        }
+    });
     wordList.push_back(w);
     layout->addWidget(w);
 }

@@ -5,7 +5,7 @@
 #include <QIcon>
 #include <string>
 #include <QTextEdit>
-#include "api/dictionary_UI_testing.hpp"
+#include "api/Word.h"
 
 using std::string;
 using std::pair;

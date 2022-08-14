@@ -1,6 +1,6 @@
 #include "mainscene.h"
 #include "ui_mainscene.h"
-#include "api/dictionary_UI_testing.hpp"
+#include "api/Word.h"
 
 #include <QKeyEvent>
 
@@ -93,6 +93,14 @@ void MainScene::connectSignalAndSlot() {
             &WordCardGroup::wordToggleFavorite,
             this,
             &MainScene::wordToggleFavorite);
+    connect(ui->wordGroup,
+            &WordCardGroup::wordFavorite,
+            this,
+            &MainScene::wordFavorite);
+    connect(ui->wordGroup,
+            &WordCardGroup::wordUnfavorite,
+            this,
+            &MainScene::wordUnfavorite);
     connect(ui->searchBox,
             &SearchBox::requestCompletion,
             this,
