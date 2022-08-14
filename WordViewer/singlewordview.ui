@@ -13,7 +13,7 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout" stretch="1,5,3">
+  <layout class="QVBoxLayout" name="verticalLayout" stretch="1,5">
    <property name="spacing">
     <number>20</number>
    </property>
@@ -22,19 +22,6 @@
    </item>
    <item>
     <widget class="WordViewer" name="widget" native="true"/>
-   </item>
-   <item>
-    <spacer name="verticalSpacer">
-     <property name="orientation">
-      <enum>Qt::Vertical</enum>
-     </property>
-     <property name="sizeHint" stdset="0">
-      <size>
-       <width>20</width>
-       <height>79</height>
-      </size>
-     </property>
-    </spacer>
    </item>
   </layout>
  </widget>
@@ -47,7 +34,7 @@
   <customwidget>
    <class>WordViewer</class>
    <extends>QWidget</extends>
-   <header>wordviewer.h</header>
+   <header>WordViewer/wordviewer.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>
