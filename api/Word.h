@@ -9,6 +9,7 @@ struct Word {
     string word;
     vector<pair<string, string>> data; // including definitions + their corresponding examples
 
+    Word() {}
     Word(const string&);
     Word(const Word&);
     // return the index of the definition in the vector "data", return -1 if the definition is not found

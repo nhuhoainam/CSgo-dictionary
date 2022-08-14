@@ -10,6 +10,7 @@
 
 using namespace std;
 
+template <int MAX_SIZE, int (*getid)(char)> class Dictionary;
 template <int MAX_SIZE, int (*getid)(char)>
 class TrieNode {
 private:
@@ -88,7 +89,7 @@ public:
     //save and load data by serialization
     void saveDataStructures(string);
 
-    void loadDataStructures(string);
+    void loadDataStructures(string path);
 };
 
 #include "Dictionary.cpp"
