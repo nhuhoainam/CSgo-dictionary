@@ -1,13 +1,16 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
-#include "api/dictionary_UI_testing.hpp"
+#include "api/Word.h"
+#include "api/Dictionary.hpp"
+#include "api/converter.h"
 
 #include <QWidget>
 #include <vector>
+#include <tuple>
+using std::tuple;
 using std::vector;
 
-class Dictionary;
 class History;
 class FavoriteList;
 class SingleWordView;
@@ -16,6 +19,11 @@ class Game;
 class QStackedWidget;
 class Sidebar;
 class Home;
+
+typedef Dictionary<41, getid_EngEng, getchar_EngEng> EngEngDictionary;
+typedef Dictionary<41, getid_EngEng, getchar_EngEng> EngVieDictionary;
+typedef Dictionary<41, getid_EngEng, getchar_EngEng> VieEngDictionary;
+typedef Dictionary<41, getidEmotion, getchar_Emotion> EmojiDictionary;
 
 namespace Ui {
 class MainWindow;
@@ -30,6 +38,12 @@ public:
     ~MainWindow();
 
 private:
+    enum DictType {
+        EngEng,
+        VieEng,
+        EngVie,
+        Emoji,
+    };
     Ui::MainWindow *ui;
     Home *home;
     FavoriteList *favoriteList;
@@ -39,8 +53,8 @@ private:
     Game *game;
     QStackedWidget *container;
     Sidebar *sidebar;
-    vector<Dictionary *> dicts;
-    Dictionary *curDict;
+    EngEngDictionary *engEngDict;
+    DictType curDict;
 
     void setupUI();
     void connectSignalAndSlot();
@@ -78,6 +92,7 @@ private slots:
 
     void handleSearchRequest(const QString&);
     void handleDictionaryChanged(const QString &);
+    void handleWordFavoriteToggle(const QString &, bool);
 };
 
 #endif // MAINWINDOW_H

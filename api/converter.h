@@ -6,4 +6,6 @@ int getid_EngEng(char);
 
 int getidEmotion(char);
 
-#include "converter.cpp"
+char getchar_EngEng(int);
+
+char getchar_Emotion(int);

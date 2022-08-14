@@ -2,16 +2,15 @@
 #define MAINSCENE_H
 
 #include "searchbox.h"
-#include "api/dictionary_UI_testing.hpp"
+#include "api/Word.h"
 
 #include <QWidget>
 #include <QListWidget>
 #include <tuple>
 #include <vector>
+using std::pair;
 using std::tuple;
 using std::vector;
-
-class Dictionary;
 
 namespace Ui {
 class MainScene;
@@ -50,6 +49,8 @@ signals:
     void completionRequest(const QString&);
     void wordSelected(const QString&);
     void wordToggleFavorite(const QString&, bool);
+    void wordFavorite(const QString&);
+    void wordUnfavorite(const QString&);
 };
 
 #endif // MAINSCENE_H

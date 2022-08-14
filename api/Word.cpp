@@ -1,4 +1,4 @@
-#include "Word.h"
+#include "api/Word.h"
 
 Word::Word(const string& w) {
     word = w;
