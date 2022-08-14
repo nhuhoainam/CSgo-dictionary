@@ -104,7 +104,15 @@ int main()
     vector<pair<string, vector<pair<string, string>>>> fileData;
     readFromFile("..\\dictionary-data\\EngEng.txt", fileData);
     Dictionary<41, getid_EngEng, getchar_EngEng> myDict;
+    cerr << fileData.size() << "\n";
     insertData(myDict, fileData);
+
+    // test save and load data structure
+    myDict.saveDataStructures("..\\dictionary-data\\rawdata.txt");
+    Dictionary<41, getid_EngEng, getchar_EngEng> myDict2;
+    myDict2.loadDataStructures("..\\dictionary-data\\rawdata.txt");
+    myDict2.saveDataStructures("..\\dictionary-data\\rawdata-after.txt");
+
     // cout << "0. Insert a new definition.\n"
     //         "1. Edit an existing definition.\n"
     //         "2. Remove a word.\n"
