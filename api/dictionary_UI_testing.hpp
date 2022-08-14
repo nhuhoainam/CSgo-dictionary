@@ -1,3 +1,5 @@
+#pragma once
+
 #include <iostream>
 #include <queue>
 #include <vector>
@@ -106,8 +108,3 @@ public:
         return ans;
     }
 };
-
-int main() {
-
-    return 0;
-}

@@ -1,16 +1,21 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
-#include "home.h"
-#include "favoritelist.h"
-#include "history.h"
-#include "dictionaryeditor.h"
-#include "WordViewer/singlewordview.h"
-#include "sidebar.h"
-#include "game.h"
+#include "api/dictionary_UI_testing.hpp"
 
 #include <QWidget>
-#include <QStackedWidget>
+#include <vector>
+using std::vector;
+
+class Dictionary;
+class History;
+class FavoriteList;
+class SingleWordView;
+class DictionaryEditor;
+class Game;
+class QStackedWidget;
+class Sidebar;
+class Home;
 
 namespace Ui {
 class MainWindow;
@@ -34,10 +39,13 @@ private:
     Game *game;
     QStackedWidget *container;
     Sidebar *sidebar;
+    vector<Dictionary *> dicts;
+    Dictionary *curDict;
 
     void setupUI();
     void connectSignalAndSlot();
     vector<QString> getCompletionChoices(const QString &);
+    void setupScene();
 
 private slots:
     void handleHomeFocus();
@@ -69,6 +77,7 @@ private slots:
     void handleWordViewerFavorite(const QString&, bool on);
 
     void handleSearchRequest(const QString&);
+    void handleDictionaryChanged(const QString &);
 };
 
 #endif // MAINWINDOW_H

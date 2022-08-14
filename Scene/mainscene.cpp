@@ -54,11 +54,6 @@ MainScene::MainScene(QString title, QWidget *parent) :
 void MainScene::setupUi() {
     ui->setupUi(this);
 
-    for (int i = 0; i < 4; i++) {
-        Word w("heightist");
-        w.data.push_back({"Hello", "It's me"});
-        ui->wordGroup->addCard(w, true);
-    }
     completePopup = new QListWidget(this);
     completePopup->hide();
     completePopup->setStyleSheet(listViewStyle);
@@ -133,6 +128,10 @@ void MainScene::connectSignalAndSlot() {
         if (curItem)
             ui->searchBox->setText(curItem->text());
     });
+    connect(ui->dictionaryBox,
+            &QComboBox::currentTextChanged,
+            this,
+            &MainScene::dictionaryTypeChange);
 }
 
 MainScene::~MainScene()

@@ -11,6 +11,8 @@
 using std::tuple;
 using std::vector;
 
+class Dictionary;
+
 namespace Ui {
 class MainScene;
 }
@@ -36,13 +38,14 @@ protected:
     Ui::MainScene *ui;
 
 private:
-    QListWidget *completePopup = nullptr;
+    QListWidget *completePopup;
 
     void adjustPopup();
     void setupUi();
     void connectSignalAndSlot();
     void handleSearch(const QString &text);
 signals:
+    void dictionaryTypeChange(const QString&);
     void searchRequest(const QString&);
     void completionRequest(const QString&);
     void wordSelected(const QString&);

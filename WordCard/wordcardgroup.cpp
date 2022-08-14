@@ -1,6 +1,6 @@
-#include "wordcardgroup.h"
-#include "wordcardlayout.h"
-#include "wordcard.h"
+#include "WordCard/wordcardgroup.h"
+#include "WordCard/wordcardlayout.h"
+#include "WordCard/wordcard.h"
 
 WordCardGroup::WordCardGroup(QWidget *parent)
     : QWidget{parent}
