@@ -39,7 +39,6 @@ protected:
 
 private:
     QListWidget *completePopup;
-    vector<Dictionary> dicts;
 
     void adjustPopup();
     void setupUi();
