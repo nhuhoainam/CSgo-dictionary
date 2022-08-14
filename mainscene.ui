@@ -45,41 +45,6 @@ QScrollBar::sub-line:vertical {
     border: 2px solid grey;
 	background: grey;
 	height: 12px;
-}
-
-QComboBox {
-	color: orange;
-	background-color: white;
-    border: 2px solid lightgrey;
-    border-radius: 16px;
-    padding: 5px 1px 5px 12px;
-    min-width: 6em;
-}
-
-QComboBox:on { /* shift the text when the popup opens */
-    padding-top: 3px;
-    padding-left: 4px;
-}
-
-QComboBox::drop-down {
-    subcontrol-origin: padding;
-    subcontrol-position: top right;
-    width: 15px;
-
-    border-left-width: 1px;
-    border-left-color: darkgray;
-    border-left-style: solid; /* just a single line */
-    border-top-right-radius: 3px; /* same radius as the QComboBox */
-    border-bottom-right-radius: 3px;
-}
-
-QComboBox::down-arrow {
-    image: url(/usr/share/icons/crystalsvg/16x16/actions/1downarrow.png);
-}
-
-QComboBox::down-arrow:on { /* shift the arrow when popup is open */
-    top: 1px;
-    left: 1px;
 }</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout" stretch="1,1,8">
@@ -98,6 +63,47 @@ QComboBox::down-arrow:on { /* shift the arrow when popup is open */
          <pointsize>10</pointsize>
          <bold>false</bold>
         </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QComboBox {
+	color: orange;
+	background-color: white;
+    border: 2px solid lightgrey;
+    border-radius: 16px;
+    padding: 4px 1px 4px 12px;
+    min-width: 6em;
+}
+
+QComboBox::drop-down {
+    subcontrol-origin: padding;
+    subcontrol-position: top right;
+    width: 15px;
+
+    border-left-color: darkgray;
+    border-left-style: solid; /* just a single line */
+    border-top-right-radius: 3px; /* same radius as the QComboBox */
+    border-bottom-right-radius: 3px;
+}
+
+QComboBox::on {
+	border-bottom-right-radius: 0;
+	border-bottom-left-radius: 0;
+}
+
+QComboBox::down-arrow {
+    image: url(/usr/share/icons/crystalsvg/16x16/actions/1downarrow.png);
+}
+
+QComboBox::down-arrow:on { /* shift the arrow when popup is open */
+    top: 1px;
+    left: 1px;
+}
+
+QComboBox QAbstractItemView {
+    border: 2px solid lightgrey;
+    selection-background-color: lightgray;
+	padding: 5px;
+}</string>
        </property>
        <item>
         <property name="text">
