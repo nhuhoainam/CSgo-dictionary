@@ -1,5 +1,6 @@
 #include "mainscene.h"
 #include "ui_mainscene.h"
+#include "api/dictionary_UI_testing.hpp"
 
 #include <QKeyEvent>
 
@@ -54,39 +55,66 @@ void MainScene::setupUi() {
     ui->setupUi(this);
 
     for (int i = 0; i < 4; i++) {
-        ui->wordGroup->addCard("heightist", "Someone who believes that people are superior to or inferior to others on account of their respective heights, or that people of differing heights have different moral qualities and intellectual capabilities.", true);
-    }
-    for (int i = 0; i < 4; i++) {
-        ui->wordGroup->addCard("heightist", "Someone who believes that people are superior to or inferior to others on account of their respective heights, or that people of differing heights have different moral qualities and intellectual capabilities.", true);
+        Word w("heightist");
+        w.data.push_back({"Hello", "It's me"});
+        ui->wordGroup->addCard(w, true);
     }
     completePopup = new QListWidget(this);
-    completePopup->addItem("Hello");
-    completePopup->addItem("Helo");
-    completePopup->addItem("Hllo");
-    completePopup->addItem("Helo");
-    completePopup->addItem("ello");
     completePopup->hide();
     completePopup->setStyleSheet(listViewStyle);
 }
 
+void MainScene::setCompletionChoices(vector<QString> choices) {
+    completePopup->clear();
+    for (const auto &item : choices) {
+        qDebug() << item;
+        completePopup->addItem(item);
+    }
+}
+
+void MainScene::setWordList(vector<pair<Word, bool>> words) {
+    ui->wordGroup->clear();
+    for (auto item : words) {
+        auto word = std::get<0>(item);
+        auto fav = std::get<1>(item);
+        ui->wordGroup->addCard(word, fav);
+    }
+}
+
 void MainScene::connectSignalAndSlot() {
-    connect(ui->searchBox, &SearchBox::searchFinished,
-            this, &MainScene::handleSearch);
-    connect(ui->searchBox, &SearchBox::searchEdit,
-            this, &MainScene::completionRequest);
-    connect(ui->wordGroup, &WordCardGroup::wordSelected,
-            this, &MainScene::wordSelected);
-    connect(ui->wordGroup, &WordCardGroup::wordToggleFavorite,
-            this, &MainScene::wordToggleFavorite);
-    connect(ui->searchBox, &SearchBox::requestCompletion, this, [=](const QString &str) {
+    connect(ui->searchBox,
+            &SearchBox::searchFinished,
+            this,
+            &MainScene::handleSearch);
+    connect(ui->searchBox,
+            &SearchBox::searchEdit,
+            this,
+            &MainScene::completionRequest);
+    connect(ui->wordGroup,
+            &WordCardGroup::wordSelected,
+            this,
+            &MainScene::wordSelected);
+    connect(ui->wordGroup,
+            &WordCardGroup::wordToggleFavorite,
+            this,
+            &MainScene::wordToggleFavorite);
+    connect(ui->searchBox,
+            &SearchBox::requestCompletion,
+            this,
+            [=](const QString &str) {
         completePopup->show();
         ui->searchBox->handleCompleterShown();
     });
-    connect(completePopup, &QListWidget::itemPressed,
-            this, [=](QListWidgetItem *item) {
+    connect(completePopup,
+            &QListWidget::itemPressed,
+            this,
+            [=](QListWidgetItem *item) {
         handleSearch(item->text());
     });
-    connect(ui->searchBox, &SearchBox::requestNextCompletion, this, [=]() {
+    connect(ui->searchBox,
+            &SearchBox::requestNextCompletion,
+            this,
+            [=]() {
         int cur = completePopup->currentRow();
         cur += 1;
         completePopup->setCurrentRow(cur);
@@ -94,7 +122,10 @@ void MainScene::connectSignalAndSlot() {
         if (curItem)
             ui->searchBox->setText(curItem->text());
     });
-    connect(ui->searchBox, &SearchBox::requestPrevCompletion, this, [=]() {
+    connect(ui->searchBox,
+            &SearchBox::requestPrevCompletion,
+            this,
+            [=]() {
         int cur = completePopup->currentRow();
         cur -= 1;
         completePopup->setCurrentRow(cur);
@@ -107,16 +138,6 @@ void MainScene::connectSignalAndSlot() {
 MainScene::~MainScene()
 {
     delete ui;
-}
-
-void MainScene::setWordList(vector<tuple<QString, QString, bool>> words) {
-    ui->wordGroup->clear();
-    for (auto item : words) {
-        auto keyword = std::get<0>(item);
-        auto meaning = std::get<1>(item);
-        auto favorite = std::get<2>(item);
-        ui->wordGroup->addCard(keyword, meaning, favorite);
-    }
 }
 
 void MainScene::mousePressEvent(QMouseEvent *event) {

@@ -5,7 +5,7 @@
 #include "favoritelist.h"
 #include "history.h"
 #include "dictionaryeditor.h"
-#include "singlewordview.h"
+#include "WordViewer/singlewordview.h"
 #include "sidebar.h"
 #include "game.h"
 
@@ -37,21 +37,25 @@ private:
 
     void setupUI();
     void connectSignalAndSlot();
+    vector<QString> getCompletionChoices(const QString &);
 
 private slots:
     void handleHomeFocus();
     void handleHomeRefresh();
     void handleHomeSearchRequest(const QString&);
+    void handleHomeCompletionRequest(const QString&);
     void handleHomeWordSelected(const QString&);
     void handleHomeWordFavorite(const QString&, bool);
 
     void handleFavoriteListFocus();
     void handleFavoriteListSearchRequest(const QString&);
     void handleFavoriteListWordSelected(const QString&);
+    void handleFavoriteListCompletionRequest(const QString&);
     void handleFavoriteListWordFavorite(const QString&, bool);
 
     void handleHistoryFocus();
     void handleHistorySearchRequest(const QString&);
+    void handleHistoryCompletionRequest(const QString&);
     void handleHistoryWordSelected(const QString&);
     void handleHistoryWordFavorite(const QString&, bool);
 
@@ -60,9 +64,11 @@ private slots:
     void handleEditorAdd(const QString&, std::vector<QString>);
     void handleGameFocus();
 
-    void handleWordViewerEdit(const QString&);
+    void handleWordViewerEdit(Word);
     void handleWordViewerDelete(const QString&);
     void handleWordViewerFavorite(const QString&, bool on);
+
+    void handleSearchRequest(const QString&);
 };
 
 #endif // MAINWINDOW_H

@@ -2,6 +2,7 @@
 #define MAINSCENE_H
 
 #include "searchbox.h"
+#include "api/dictionary_UI_testing.hpp"
 
 #include <QWidget>
 #include <QListWidget>
@@ -24,6 +25,8 @@ public:
     ~MainScene();
 
     void setWordList(vector<tuple<QString, QString, bool>>);
+    void setWordList(vector<pair<Word, bool>>);
+    void setCompletionChoices(vector<QString>);
     void mousePressEvent(QMouseEvent *event);
     void resizeEvent(QResizeEvent *event);
     void moveEvent(QMoveEvent *event);
@@ -33,7 +36,7 @@ protected:
     Ui::MainScene *ui;
 
 private:
-    QListWidget *completePopup;
+    QListWidget *completePopup = nullptr;
 
     void adjustPopup();
     void setupUi();

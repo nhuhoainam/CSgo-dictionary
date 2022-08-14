@@ -3,6 +3,13 @@
 
 #include <QWidget>
 #include <QIcon>
+#include <string>
+#include <QTextEdit>
+#include "api/dictionary_UI_testing.hpp"
+
+using std::string;
+using std::pair;
+class WordEdit;
 
 namespace Ui {
 class WordViewer;
@@ -17,9 +24,9 @@ public:
     ~WordViewer();
 
     void paintEvent(QPaintEvent*) override;
-
-public slots:
-    void setWord(const QString &key, std::vector<QString> defs, bool favState);
+    void setWord(const string &key, std::vector<pair<string, string>> defs, bool favState);
+    void setWord(Word w);
+    vector<WordEdit *> editGroup;
 
 private:
     Ui::WordViewer *ui;
@@ -27,11 +34,15 @@ private:
     QIcon off_icon;
     bool hovered = false;
     bool checked = true;
+    void clearEdits();
+    void clearDisplayEntries();
+    void removeEdit(int i);
+    void handleDoneBtnPressed();
+    void addEditEntry(const string def = "", const string example = "");
 signals:
-    void wordRequest();
+    void wordEdited(Word);
     void searchRequest(const QString&);
     void deleteRequest(const QString&);
-    void editRequest(const QString&);
     void favoriteToggle(const QString&, bool checked);
 };
 
