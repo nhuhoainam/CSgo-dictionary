@@ -239,7 +239,7 @@ Word* Dictionary<MAX_SIZE, getid, getchar>::insert(const Word& w) {
     }
     if (cur->data == nullptr) {
         cur->data = new Word(w);
-        return cur;
+        return cur->data;
     }
     else return nullptr; // the word already exists
 }
@@ -260,7 +260,7 @@ Word* Dictionary<MAX_SIZE, getid, getchar>::insert(const string& w) {
     }
     if (cur->data == nullptr) {
         cur->data = new Word(w);
-        return cur;
+        return cur->data;
     }
     else return nullptr; // the word already exists
 }

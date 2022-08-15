@@ -230,7 +230,7 @@ void MainWindow::handleSearchRequest(const QString& keyword) {
     // then set the word in singlewordview
     string s = keyword.toStdString();
     auto *q = engEngDict->find(s);
-    wordViewer->setWord(*q->get_data());
+    wordViewer->setWord(*q);
     container->setCurrentIndex(6);
 
     // Deselect the sidebar to avoid confusion
@@ -369,7 +369,7 @@ void MainWindow::handleFavoriteListCompletionRequest(const QString& word) {
 }
 
 void MainWindow::handleWordFavoriteToggle(const QString &keyword, bool state) {
-    Word *word = engEngDict->find(keyword.toStdString())->get_data();
+    Word *word = engEngDict->find(keyword.toStdString());
     if (!word)
         return;
     if (state == true) {
