@@ -217,8 +217,10 @@ void MainWindow::handleDictionaryChanged(const QString &keyword) {
         dict.curDict = DictCollection::VieEng;
     } else if (keyword == "English - Vietnamese") {
         dict.curDict = DictCollection::EngVie;
-    } else if (keyword == "Emoji") {
+    } else if (keyword == "Emotional") {
         dict.curDict = DictCollection::Emoji;
+    } else if (keyword == "Slang") {
+        dict.curDict = DictCollection::Slang;
     }
     setupScene();
 }

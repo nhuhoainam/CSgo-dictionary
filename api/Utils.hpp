@@ -38,8 +38,6 @@ void readFromFile(string path, vector<pair<string, vector<pair<string, string>>>
         // avoid bad input data, namely, an empty line
         do {
             getline(fin, word);
-            cerr << i << endl;
-            cerr << "HERE";
         } while (word.empty());
         word.erase(word.begin());
         vector<pair<string, string>> wordData;

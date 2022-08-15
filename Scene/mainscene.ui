@@ -120,6 +120,16 @@ QComboBox QAbstractItemView {
          <string>Vietnamese - English</string>
         </property>
        </item>
+       <item>
+        <property name="text">
+         <string>Emotional</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Slang</string>
+        </property>
+       </item>
       </widget>
      </item>
      <item>
