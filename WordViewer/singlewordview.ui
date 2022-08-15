@@ -18,7 +18,7 @@
     <number>20</number>
    </property>
    <item>
-    <widget class="SearchBox" name="lineEdit"/>
+    <widget class="SearchBox" name="searchBox"/>
    </item>
    <item>
     <widget class="WordViewer" name="widget" native="true"/>
