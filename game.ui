@@ -10,6 +10,12 @@
     <height>463</height>
    </rect>
   </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
   <property name="windowTitle">
    <string>Form</string>
   </property>
@@ -41,6 +47,9 @@ QPushButton::hover {
    </property>
    <item>
     <widget class="QStackedWidget" name="stackedWidget">
+     <property name="currentIndex">
+      <number>0</number>
+     </property>
      <widget class="QWidget" name="page_3">
       <widget class="QWidget" name="gridLayoutWidget">
        <property name="geometry">
@@ -48,33 +57,57 @@ QPushButton::hover {
          <x>10</x>
          <y>230</y>
          <width>651</width>
-         <height>161</height>
+         <height>171</height>
         </rect>
        </property>
        <layout class="QGridLayout" name="gridLayout">
         <item row="1" column="0">
          <widget class="TextWrapButton" name="ans1">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
           <property name="text">
            <string/>
           </property>
          </widget>
         </item>
         <item row="0" column="0">
-         <widget class="QPushButton" name="ans2">
+         <widget class="TextWrapButton" name="ans2">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
           <property name="text">
            <string/>
           </property>
          </widget>
         </item>
         <item row="0" column="1">
-         <widget class="QPushButton" name="ans3">
+         <widget class="TextWrapButton" name="ans3">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
           <property name="text">
            <string/>
           </property>
          </widget>
         </item>
         <item row="1" column="1">
-         <widget class="QPushButton" name="ans4">
+         <widget class="TextWrapButton" name="ans4">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
           <property name="text">
            <string/>
           </property>
@@ -99,6 +132,9 @@ QPushButton::hover {
           </property>
           <property name="alignment">
            <set>Qt::AlignCenter</set>
+          </property>
+          <property name="wordWrap">
+           <bool>true</bool>
           </property>
          </widget>
         </item>

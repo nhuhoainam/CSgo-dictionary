@@ -1,6 +1,8 @@
 #include "game.h"
 #include "ui_game.h"
 
+#include <cstdio>
+#include <ctime>
 #include <iostream>
 
 Game::Game(QWidget *parent) :
@@ -13,9 +15,11 @@ Game::Game(QWidget *parent) :
     m_optionButtons->addButton(ui->ans2, 2);
     m_optionButtons->addButton(ui->ans3, 3);
     m_optionButtons->addButton(ui->ans4, 4);
-    ui->ans1->setText("asdlgkna  sldgks  sldsdgkl slgkd sklg slkdgans;g sgls slkgn lssl lsgln lsgknsl sdgjknbsl k skfdgja;s sjkgd sdjg"
-                      "ASJKLGFBNASKG;sdljkg dsg");
 
+    ui->ans1->setFont(QFont("Sans", 20));
+    ui->ans2->setFont(QFont("Sans", 20));
+    ui->ans3->setFont(QFont("Sans", 20));
+    ui->ans4->setFont(QFont("Sans", 20));
     // To block input when an answer is chosen
     blocker = new QWidget(this);
     blocker->setStyleSheet("background-color: rgba(61,61, 61, 0);");
@@ -38,19 +42,9 @@ Game::Game(QWidget *parent) :
 }
 
 void Game::checkAnswer(int i) {
-
-    if (m_answer != m_optionButtons->button(i)->text()) {
-        int correctIndex = 1;
-        for (int i = 1; i <= 4; i++) {
-            if (m_optionButtons->button(i)->text() == m_answer) {
-                correctIndex = i;
-                break;
-            }
-        }
-
-        std::cout << "CORRECT" << std::endl;
-        m_optionButtons->button(correctIndex)->setProperty("ansState", true);
+    if (m_curAns != i-1) {
         m_optionButtons->button(i)->setProperty("ansState", false);
+        m_optionButtons->button(m_curAns + 1)->setProperty("ansState", true);
     } else {
         m_optionButtons->button(i)->setProperty("ansState", true);
     }
@@ -63,33 +57,35 @@ Game::~Game()
 }
 
 void Game::nextQuestion() {
-    if (m_questionSets.empty())
-        return;
-
-    auto currentSet = m_questionSets.front();
+    emit requestQSet();
     for (int i = 1; i <= 4; i++) {
-        m_optionButtons->button(i)->setText(currentSet[i+1]);
+        auto choice = ui->ans1;
+        switch(i) {
+        case 1:
+            choice = ui->ans1;
+            break;
+        case 2:
+            choice = ui->ans2;
+            break;
+        case 3:
+            choice = ui->ans3;
+            break;
+        case 4:
+            choice = ui->ans4;
+            break;
+        }
+        choice->setText(
+                    type == GuessKeyword
+                    ? QString::fromStdString(m_curQSet[i-1].first)
+                    : QString::fromStdString(m_curQSet[i-1].second));
         m_optionButtons->button(i)->setProperty("ansState", "");
     }
-    ui->questionLabel->setText(currentSet[0]);
-    m_answer = currentSet[1];
-
-    m_questionSets.pop();
-
+    ui->questionLabel->setText(
+                type == GuessKeyword
+                ? QString::fromStdString(m_curKey.second)
+                : QString::fromStdString(m_curKey.first));
     blocker->hide();
     setStyleSheet(STYLE);
-}
-
-void Game::addMeaningQSet(std::vector<std::array<QString, 6>> questions) {
-    for (const auto &a : questions) {
-        m_questionSets.push(a);
-    }
-}
-
-void Game::addKeywordQSet(std::vector<std::array<QString, 6>> questions) {
-    for (const auto &a : questions) {
-        m_questionSets.push(a);
-    }
 }
 
 void Game::mousePressEvent(QMouseEvent *event) {
@@ -129,6 +125,8 @@ void Game::prevQuestion() {
 }
 
 void Game::setMeaningGame() {
+    type = Type::GuessMeaning;
+    nextQuestion();
     ui->stackedWidget->setCurrentIndex(0);
     ui->questionLabel->setFont(QFont("Sans", 24, QFont::Bold));
     for (auto btn : m_optionButtons->buttons()) {
@@ -138,6 +136,7 @@ void Game::setMeaningGame() {
 }
 void Game::setKeywordGame() {
     type = Type::GuessKeyword;
+    nextQuestion();
     ui->stackedWidget->setCurrentIndex(0);
     ui->questionLabel->setFont(QFont("Sans", 24));
     for (auto btn : m_optionButtons->buttons()) {
@@ -146,10 +145,15 @@ void Game::setKeywordGame() {
 }
 
 void Game::start() {
-    type = Type::GuessMeaning;
     ui->stackedWidget->setCurrentIndex(1);
     blocker->hide();
-    while (!m_questionSets.empty())
-        m_questionSets.pop();
-    nextQuestion();
+}
+
+void Game::setQSet(std::vector<std::pair<string, string> > payload) {
+    for (int i = 0; i < 4; i++) {
+        m_curQSet[i] = payload[i];
+    }
+    std::srand(std::time(NULL));
+    m_curAns = rand() % 4;
+    m_curKey = m_curQSet[m_curAns];
 }

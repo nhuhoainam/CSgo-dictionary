@@ -181,6 +181,10 @@ void MainWindow::connectSignalAndSlot() {
             &Home::dictionaryTypeChange,
             this,
             &MainWindow::handleDictionaryChanged);
+    connect(game,
+            &Game::requestQSet,
+            this,
+            &MainWindow::handleQuizRequest);
 }
 
 void MainWindow::setupScene() {
@@ -328,10 +332,6 @@ void MainWindow::handleEditorAdd(const QString &keyword,
 void MainWindow::handleGameFocus() {
     qDebug() << "Game focus";
     game->start();
-    game->addKeywordQSet({
-                              { "Question", "1", "1", "2", "3", "4" },
-                              { "Question2", "1", "1", "2", "3", "4" },
-                          });
 }
 
 void MainWindow::handleWordViewerEdit(Word w) {
@@ -382,4 +382,12 @@ void MainWindow::handleWordFavoriteToggle(const QString &keyword, bool state) {
     for (auto w : engEngDict->favoriteList) {
         qDebug() << QString::fromStdString(w->word);
     }
+}
+
+void MainWindow::handleQuizRequest() {
+    std::vector<std::pair<std::string, std::string> > payload = engEngDict->randomQuiz();
+    game->setQSet(payload);
+    qDebug() << "Question set generated:\n";
+    for (int i = 0; i < 4; i++)
+        qDebug() << QString::fromStdString(payload[i].first) << " " << QString::fromStdString(payload[i].second) << "\n";
 }
