@@ -60,15 +60,17 @@ public:
     // void loadFromFile(string path);
 
     // insert a new word (word + definitions + corresponding examples) to the dictionary
-    TrieNode<MAX_SIZE, getid, getchar>* insert(const Word&);
+    Word* insert(const Word&);
     // insert a new word (only the word) to the dictionary
-    TrieNode<MAX_SIZE, getid, getchar>* insert(const string&);
+    Word* insert(const string&);
     // insert a new word (word + def) to the dictionary
-    TrieNode<MAX_SIZE, getid, getchar>* insert(const string&, const string&);
+    Word* insert(const string&, const string&);
     // find a node in the dictionary containing the word w
     Word* find(const Word&);
+    Word* query(const Word&); // the same as find but don't save to searchHistory
     // find a node in the dictionary containing the string word
     Word* find(const string&);
+    Word* query(const string&); // the same as find but don't save to searchHistory
     // this erasing feature requires that when a word is removed from the Trie, all the nodes above the removed nodes that 
     // lead nowhere should be deleted.
     // erase the node in the dictionary containing the struct w
@@ -222,7 +224,7 @@ Dictionary<MAX_SIZE, getid, getchar>::~Dictionary() {
 }
 
 template <int MAX_SIZE, int (*getid)(char), char (*getchar)(int)>
-TrieNode<MAX_SIZE, getid, getchar>* Dictionary<MAX_SIZE, getid, getchar>::insert(const Word& w) {
+Word* Dictionary<MAX_SIZE, getid, getchar>::insert(const Word& w) {
     if (w.word.empty()) return nullptr; // for the erasion's sake, inserting an empty word is not allowed!
     TrieNode<MAX_SIZE, getid, getchar>* cur {pRoot};
     assert(cur);
@@ -243,7 +245,7 @@ TrieNode<MAX_SIZE, getid, getchar>* Dictionary<MAX_SIZE, getid, getchar>::insert
 }
 
 template <int MAX_SIZE, int (*getid)(char), char (*getchar)(int)>
-TrieNode<MAX_SIZE, getid, getchar>* Dictionary<MAX_SIZE, getid, getchar>::insert(const string& w) {
+Word* Dictionary<MAX_SIZE, getid, getchar>::insert(const string& w) {
     if (w.empty()) return nullptr; // for the erasion's sake, inserting an empty word is not allowed!
     TrieNode<MAX_SIZE, getid, getchar>* cur {pRoot};
     assert(cur);
@@ -264,7 +266,7 @@ TrieNode<MAX_SIZE, getid, getchar>* Dictionary<MAX_SIZE, getid, getchar>::insert
 }
 
 template <int MAX_SIZE, int (*getid)(char), char (*getchar)(int)>
-TrieNode<MAX_SIZE, getid, getchar>* Dictionary<MAX_SIZE, getid, getchar>::insert(const string& w, const string& def) {
+Word* Dictionary<MAX_SIZE, getid, getchar>::insert(const string& w, const string& def) {
     if (w.empty()) return nullptr; // for the erasion's sake, inserting an empty word is not allowed!
     TrieNode<MAX_SIZE, getid, getchar>* cur {pRoot};
     assert(cur);
@@ -288,7 +290,7 @@ TrieNode<MAX_SIZE, getid, getchar>* Dictionary<MAX_SIZE, getid, getchar>::insert
 }
 
 template <int MAX_SIZE, int (*getid)(char), char (*getchar)(int)>
-TrieNode<MAX_SIZE, getid, getchar>* Dictionary<MAX_SIZE, getid, getchar>::find(const Word& w) {
+Word* Dictionary<MAX_SIZE, getid, getchar>::find(const Word& w) {
     if (w.word.empty()) return nullptr;
     TrieNode<MAX_SIZE, getid, getchar>* cur {pRoot};
     assert(cur);
@@ -304,12 +306,32 @@ TrieNode<MAX_SIZE, getid, getchar>* Dictionary<MAX_SIZE, getid, getchar>::find(c
     if (cur->data == nullptr) return nullptr;
     else {
         searchHistory.push_back(cur->data);
-        return cur;
+        return cur->data;
     }
 }
 
 template <int MAX_SIZE, int (*getid)(char), char (*getchar)(int)>
-TrieNode<MAX_SIZE, getid, getchar>* Dictionary<MAX_SIZE, getid, getchar>::find(const string& w) {
+Word* Dictionary<MAX_SIZE, getid, getchar>::query(const Word& w) {
+    if (w.word.empty()) return nullptr;
+    TrieNode<MAX_SIZE, getid, getchar>* cur {pRoot};
+    assert(cur);
+    for (const char c : w.word) {
+        int id {getid(c)};
+        if (id == -1) return nullptr;
+        else {
+            if (cur->nxt[id] == nullptr)
+                return nullptr;
+            cur = cur->nxt[id];
+        }
+    }
+    if (cur->data == nullptr) return nullptr;
+    else {
+        return cur->data;
+    }
+}
+
+template <int MAX_SIZE, int (*getid)(char), char (*getchar)(int)>
+Word* Dictionary<MAX_SIZE, getid, getchar>::find(const string& w) {
     if (w.empty()) return nullptr;
     TrieNode<MAX_SIZE, getid, getchar>* cur {pRoot};
     assert(cur);
@@ -325,7 +347,27 @@ TrieNode<MAX_SIZE, getid, getchar>* Dictionary<MAX_SIZE, getid, getchar>::find(c
     if (cur->data == nullptr) return nullptr;
     else {
         searchHistory.push_back(cur->data);
-        return cur;
+        return cur->data;
+    }
+}
+
+template <int MAX_SIZE, int (*getid)(char), char (*getchar)(int)>
+Word* Dictionary<MAX_SIZE, getid, getchar>::query(const string& w) {
+    if (w.empty()) return nullptr;
+    TrieNode<MAX_SIZE, getid, getchar>* cur {pRoot};
+    assert(cur);
+    for (const char c : w) {
+        int id {getid(c)};
+        if (id == -1) return nullptr;
+        else {
+            if (cur->nxt[id] == nullptr)
+                return nullptr;
+            cur = cur->nxt[id];
+        }
+    }
+    if (cur->data == nullptr) return nullptr;
+    else {
+        return cur->data;
     }
 }
 
