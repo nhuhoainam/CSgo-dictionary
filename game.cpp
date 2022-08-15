@@ -16,10 +16,7 @@ Game::Game(QWidget *parent) :
     m_optionButtons->addButton(ui->ans3, 3);
     m_optionButtons->addButton(ui->ans4, 4);
 
-    ui->ans1->setFont(QFont("Sans", 20));
-    ui->ans2->setFont(QFont("Sans", 20));
-    ui->ans3->setFont(QFont("Sans", 20));
-    ui->ans4->setFont(QFont("Sans", 20));
+    ui->chooseTitle->setFont(QFont("Sans", 24));
     // To block input when an answer is chosen
     blocker = new QWidget(this);
     blocker->setStyleSheet("background-color: rgba(61,61, 61, 0);");
