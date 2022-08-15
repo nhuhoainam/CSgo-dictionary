@@ -10637,9 +10637,6 @@
 @bo phieu
 1
 -To go to the polls
-100% cử tri đi bỏ phiếu
-100% of the voters went to the polls; the poll was 100%; the turn-out was
-100%
 1
 =bỏ phiếu cho người xứng đáng+to vote for the truly representative people
 @bo qua
