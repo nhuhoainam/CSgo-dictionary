@@ -225,8 +225,10 @@ void MainWindow::handleDictionaryChanged(const QString &type) {
         dict.curDict = DictCollection::VieEng;
     } else if (type == "English - Vietnamese") {
         dict.curDict = DictCollection::EngVie;
-    } else if (type == "Emoji") {
+    } else if (type == "Emotional") {
         dict.curDict = DictCollection::Emoji;
+    } else if (keyword == "Slang") {
+        dict.curDict = DictCollection::Slang;
     }
     home->changeDictionary(type);
     favoriteList->changeDictionary(type);

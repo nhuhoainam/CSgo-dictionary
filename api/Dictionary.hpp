@@ -239,13 +239,17 @@ template <int MAX_SIZE, int (*getid)(char), char (*getchar)(int)>
 Word* Dictionary<MAX_SIZE, getid, getchar>::insert(const Word& w) {
     if (w.word.empty()) return nullptr; // for the erasion's sake, inserting an empty word is not allowed!
     TrieNode<MAX_SIZE, getid, getchar>* cur {pRoot};
-    assert(cur);
+    cerr << w.word << endl;
     for (const char c : w.word) {
+        cerr << getid(c) << " ";
         int id {getid(c)};
         if (id == -1) return nullptr;
         else {
-            if (cur->nxt[id] == nullptr)
+            cerr << __LINE__ <<endl;
+            assert(cur);
+            if (cur->nxt[id] == nullptr) {
                 cur->nxt[id] = new TrieNode<MAX_SIZE, getid, getchar>();
+            }
             cur = cur->nxt[id];
         }
     }
