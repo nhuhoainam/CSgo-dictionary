@@ -11,6 +11,7 @@
 #include "api/utils.hpp"
 
 #include <QStackedWidget>
+#include <QDebug>
 
 MainWindow::MainWindow(QWidget *parent) :
     QWidget(parent),
@@ -24,7 +25,7 @@ MainWindow::MainWindow(QWidget *parent) :
     curDict = DictType::EngEng;
     engEngDict = new EngEngDictionary();
     vector<pair<string, vector<pair<string, string>>>> fileData;
-    readFromFile(".\\dictionary-data\\EngEng.txt", fileData);
+    readFromFile("./dictionary-data/EngEng.txt", fileData);
     insertData(*engEngDict, fileData);
     setupScene();
 }
