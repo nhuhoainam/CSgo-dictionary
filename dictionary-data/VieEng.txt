@@ -10633,6 +10633,11 @@
 -Waste
 1
 =Bỏ phí thời giờ+to waste one's time
+@bo phieu
+1
+-To go to the polls
+1
+=bỏ phiếu cho người xứng đáng+to vote for the truly representative people
 @bo qua
 3
 -To let slip, to miss

@@ -20,7 +20,7 @@
         <file>img/meaning_art.png</file>
     </qresource>
     <qresource prefix="/fonts">
-        <file>fonts/PlayfairDisplay-Italic-VariableFont_wght.ttf</file>
-        <file>fonts/PlayfairDisplay-VariableFont_wght.ttf</file>
+        <file>fonts/PlayfairDisplay-Regular.ttf</file>
+        <file>fonts/Poppins-Regular.ttf</file>
     </qresource>
 </RCC>
