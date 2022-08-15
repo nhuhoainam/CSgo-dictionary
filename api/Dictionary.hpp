@@ -90,10 +90,20 @@ public:
 
     void loadSerialTrie(TrieNode<MAX_SIZE, getid, getchar>*, fstream&);
 
-    //save and load data by serialization
+    // save and load data by serialization
     void saveDataStructures(string);
 
-    void loadDataStructures(string path);
+    void loadDataStructures(string);
+
+    // save and load favourite list
+    void saveFavouristList(string);
+
+    void loadFavouristList(string);
+
+    // save and load search history
+    void saveSearchHistoryList(string);
+
+    void loadSearchHistoryList(string);
 };
 
 template <int MAX_SIZE, int (*getid)(char), char (*getchar)(int)>
@@ -525,6 +535,69 @@ void Dictionary<MAX_SIZE, getid, getchar>::loadDataStructures(string path) {
     }
     TrieNode<MAX_SIZE, getid, getchar>* cur {pRoot};
     loadSerialTrie(cur, fin);
+
+    fin.close();
+}
+
+template <int MAX_SIZE, int (*getid)(char), char (*getchar)(int)>
+void Dictionary<MAX_SIZE, getid, getchar>::saveFavouristList(string path) {
+    fstream fout(path, ios::out);
+    if (!fout.is_open()) {
+        cerr << "Error: cannot open file " << path << endl;
+        return;
+    }
+
+    for (auto& w: favoriteList) {
+        fout << w->word << "\n";
+    }
+    
+    fout.close();
+}
+
+template <int MAX_SIZE, int (*getid)(char), char (*getchar)(int)>
+void Dictionary<MAX_SIZE, getid, getchar>::loadFavouristList(string path) {
+    fstream fin(path, ios::in);
+    if (!fin.is_open()) {
+        cerr << "Error: cannot open file " << path << endl;
+        return;
+    }
+    
+    string str;
+    while (getline(fin, str)) {
+        Word* w = query(str);
+        add_to_favoriteList(w);
+    }
+
+    fin.close();
+}
+
+template <int MAX_SIZE, int (*getid)(char), char (*getchar)(int)>
+void Dictionary<MAX_SIZE, getid, getchar>::saveSearchHistoryList(string path) {
+    fstream fout(path, ios::out);
+    if (!fout.is_open()) {
+        cerr << "Error: cannot open file " << path << endl;
+        return;
+    }
+
+    for (auto& w: searchHistory) {
+        fout << w->word << "\n";
+    }
+    
+    fout.close();
+}
+
+template <int MAX_SIZE, int (*getid)(char), char (*getchar)(int)>
+void Dictionary<MAX_SIZE, getid, getchar>::loadSearchHistoryList(string path) {
+    fstream fin(path, ios::in);
+    if (!fin.is_open()) {
+        cerr << "Error: cannot open file " << path << endl;
+        return;
+    }
+    
+    string str;
+    while (getline(fin, str)) {
+        find(str);
+    }
 
     fin.close();
 }
