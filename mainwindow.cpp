@@ -27,6 +27,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
 MainWindow::~MainWindow()
 {
+    dict.close();
     delete ui;
 }
 
