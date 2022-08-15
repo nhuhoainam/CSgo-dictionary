@@ -8,7 +8,6 @@
 #include "sidebar.h"
 #include "api/Dictionary.hpp"
 #include "game.h"
-#include "api/utils.hpp"
 
 #include <QStackedWidget>
 #include <QDebug>
@@ -17,16 +16,12 @@ MainWindow::MainWindow(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::MainWindow)
 {
+    dict.init();
     setupUI();
     connectSignalAndSlot();
 
     // TODO
     // Initalize dicts and assign curDict
-    curDict = DictType::EngEng;
-    engEngDict = new EngEngDictionary();
-    vector<pair<string, vector<pair<string, string>>>> fileData;
-    readFromFile("./dictionary-data/EngEng.txt", fileData);
-    insertData(*engEngDict, fileData);
     setupScene();
 }
 
@@ -192,39 +187,37 @@ void MainWindow::setupScene() {
     // set up Home, FavoriteList and History using current dictionary
     // get data from curDict and use setWordLists for setup
     qDebug() << "Setup Scene";
-    if (curDict == EngEng) {
-        vector<pair<Word, bool>> homeList;
-        vector<pair<Word, bool>> favList;
-        vector<pair<Word, bool>> historyList;
-        for (int i = 0; i < 8; i++) {
-            const Word *w = engEngDict->random_word();
-            homeList.push_back({*w, false});
+    vector<pair<Word, bool>> homeList;
+    vector<pair<Word, bool>> favList;
+    vector<pair<Word, bool>> historyList;
+    for (int i = 0; i < 8; i++) {
+        const Word *w = dict.random_word();
+        homeList.push_back({*w, false});
 
-            if (i < engEngDict->favoriteList.size()) {
-                const Word *f = engEngDict->favoriteList[i];
-                favList.push_back({*f, false});
-            }
-
-            if (i < engEngDict->searchHistory.size()) {
-                const Word *h = engEngDict->searchHistory[i];
-                historyList.push_back({*h, false});
-            }
+        if (i < dict.favoriteList().size()) {
+        const Word *f = dict.favoriteList()[i];
+        favList.push_back({*f, false});
         }
-        home->setWordList(homeList);
-        favoriteList->setWordList(favList);
-        history->setWordList(historyList);
+
+        if (i < dict.searchHistory().size()) {
+        const Word *h = dict.searchHistory()[i];
+        historyList.push_back({*h, false});
+        }
     }
+    home->setWordList(homeList);
+    favoriteList->setWordList(favList);
+    history->setWordList(historyList);
 }
 
 void MainWindow::handleDictionaryChanged(const QString &keyword) {
     if (keyword == "English - English") {
-        curDict = DictType::EngEng;
+        dict.curDict = DictCollection::EngEng;
     } else if (keyword == "Vietnamese - English") {
-        curDict = DictType::VieEng;
+        dict.curDict = DictCollection::VieEng;
     } else if (keyword == "English - Vietnamese") {
-        curDict = DictType::EngVie;
+        dict.curDict = DictCollection::EngVie;
     } else if (keyword == "Emoji") {
-        curDict = DictType::Emoji;
+        dict.curDict = DictCollection::Emoji;
     }
     setupScene();
 }
@@ -234,7 +227,7 @@ void MainWindow::handleSearchRequest(const QString& keyword) {
     // search word in dictionary
     // then set the word in singlewordview
     string s = keyword.toStdString();
-    auto *q = engEngDict->find(s);
+    auto *q = dict.find(s);
     wordViewer->setWord(*q);
     container->setCurrentIndex(6);
 
@@ -296,7 +289,7 @@ void MainWindow::handleHomeRefresh() {
 
 void MainWindow::handleFavoriteListFocus() {
     vector<pair<Word, bool>> ls;
-    for (Word *w : engEngDict->favoriteList) {
+    for (Word *w : dict.favoriteList()) {
         if (!w)
             return;
         ls.push_back({*w, true});
@@ -326,7 +319,7 @@ void MainWindow::handleEditorAdd(const QString &keyword,
         qDebug() << def.first << " + " << def.second;
     }
     newWord.data = newDefs;
-    engEngDict->insert(newWord);
+    dict.insert(newWord);
 }
 
 void MainWindow::handleGameFocus() {
@@ -354,7 +347,7 @@ vector<QString> MainWindow::getCompletionChoices(const QString &word) {
 void MainWindow::handleHomeCompletionRequest(const QString& word) {
     // auto choices = getCompletionChoices(word);
     vector<QString> choices;
-    auto rs = engEngDict->prefixMatch(word.toStdString(), 8);
+    auto rs = dict.prefixMatch(word.toStdString(), 8);
     for (const string& s : rs) {
         choices.push_back(QString::fromStdString(s));
     }
@@ -370,16 +363,16 @@ void MainWindow::handleFavoriteListCompletionRequest(const QString& word) {
 }
 
 void MainWindow::handleWordFavoriteToggle(const QString &keyword, bool state) {
-    Word *word = engEngDict->find(keyword.toStdString());
+    Word *word = dict.find(keyword.toStdString());
     if (!word)
         return;
     if (state == true) {
-        engEngDict->add_to_favoriteList(word);
+        dict.add_to_favoriteList(word);
     } else {
-        engEngDict->remove_from_favoriteList(word);
+        dict.remove_from_favoriteList(word);
     }
     qDebug() << "Current Favorite List";
-    for (auto w : engEngDict->favoriteList) {
+    for (auto w : dict.favoriteList()) {
         qDebug() << QString::fromStdString(w->word);
     }
 }

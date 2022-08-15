@@ -17,6 +17,9 @@ find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets LinguistTools)
 set(TS_FILES CSgo-dictionary_en_US.ts)
 
 set(PROJECT_SOURCES
+        api/dictionary_collection.hpp
+        api/dictionary_collection.cpp
+        api/Utils.hpp
         api/Dictionary.hpp
         api/Word.h
         api/Word.cpp
@@ -27,7 +30,6 @@ set(PROJECT_SOURCES
 
         textwrapbutton.cpp
         textwrapbutton.h
-        main.cpp
         sidebar.cpp
         sidebar.h
 
@@ -74,6 +76,8 @@ set(PROJECT_SOURCES
         WordViewer/wordedit.cpp
         WordViewer/wordedit.h
         WordViewer/wordedit.ui
+
+        main.cpp
         ${TS_FILES}
 )
 

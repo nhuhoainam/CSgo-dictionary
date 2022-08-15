@@ -1,7 +1,7 @@
 #include "converter.h"
 
 int getid_EngEng(char c) {
-    
+
     // lowercase and uppercase letters are treated as the same
     if ('a' <= c && c <= 'z')
         return c - 'a';

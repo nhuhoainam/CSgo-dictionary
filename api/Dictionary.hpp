@@ -1,6 +1,6 @@
 #pragma once
-#include "Word.h"
-#include "converter.h"
+#include "api/Word.h"
+#include "api/converter.h"
 
 #include <iostream>
 #include <queue>
@@ -286,7 +286,7 @@ Word* Dictionary<MAX_SIZE, getid, getchar>::insert(const string& w, const string
     if (cur->data->contain(def) != -1)
         return nullptr; // this definition already exists in the node of word
     cur->data->data.push_back(make_pair(def, "")); // definition without examples
-    return cur;
+    return cur->data;
 }
 
 template <int MAX_SIZE, int (*getid)(char), char (*getchar)(int)>

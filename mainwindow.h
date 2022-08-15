@@ -2,7 +2,7 @@
 #define MAINWINDOW_H
 
 #include "api/Word.h"
-#include "api/Dictionary.hpp"
+#include "api/dictionary_collection.hpp"
 #include "api/converter.h"
 
 #include <QWidget>
@@ -20,11 +20,6 @@ class QStackedWidget;
 class Sidebar;
 class Home;
 
-typedef Dictionary<41, getid_EngEng, getchar_EngEng> EngEngDictionary;
-typedef Dictionary<41, getid_EngEng, getchar_EngEng> EngVieDictionary;
-typedef Dictionary<41, getid_EngEng, getchar_EngEng> VieEngDictionary;
-typedef Dictionary<41, getidEmotion, getchar_Emotion> EmojiDictionary;
-
 namespace Ui {
 class MainWindow;
 }
@@ -38,12 +33,6 @@ public:
     ~MainWindow();
 
 private:
-    enum DictType {
-        EngEng,
-        VieEng,
-        EngVie,
-        Emoji,
-    };
     Ui::MainWindow *ui;
     Home *home;
     FavoriteList *favoriteList;
@@ -53,8 +42,7 @@ private:
     Game *game;
     QStackedWidget *container;
     Sidebar *sidebar;
-    EngEngDictionary *engEngDict;
-    DictType curDict;
+    DictCollection dict;
 
     void setupUI();
     void connectSignalAndSlot();
