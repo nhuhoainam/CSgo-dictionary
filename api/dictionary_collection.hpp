@@ -28,7 +28,7 @@ public:
     DictType curDict;
     DictCollection();
     void init();
-    void initRaw();
+    void reset();
     void close();
     Word *find(const Word&);
     Word *query(const Word&);
