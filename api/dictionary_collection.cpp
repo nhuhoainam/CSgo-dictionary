@@ -72,7 +72,6 @@ void DictCollection::init() {
     if (fexist(EngEngFavoritePath)) {
         engEngDict->loadFavouristList(EngEngFavoritePath);
     }
-    cerr << "Done";
 
     // Vie - Eng Dictionary
     if (fexist(VieEngSavedPath)) {
@@ -88,7 +87,6 @@ void DictCollection::init() {
     if (fexist(VieEngFavoritePath)) {
         vieEngDict->loadFavouristList(VieEngFavoritePath);
     }
-    cerr << "Done";
 
     // Emo Dictionary
     if (fexist(EmoSavedPath)) {
@@ -98,7 +96,6 @@ void DictCollection::init() {
         readFromFile(EmoRawPath, fileData);
         insertData(*emoDict, fileData);
     }
-    cerr << "Done";
 
     // Slang Dictionary
     if (fexist(SlangSavedPath)) {
@@ -108,7 +105,6 @@ void DictCollection::init() {
         readFromFile(SlangRawPath, fileData);
         insertData(*slangDict, fileData);
     }
-    cerr << "Done";
 }
 
 void DictCollection::close() {
