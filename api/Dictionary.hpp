@@ -482,7 +482,7 @@ void Dictionary<MAX_SIZE, getid, getchar>::saveSerialTrie(TrieNode<MAX_SIZE, get
 template <int MAX_SIZE, int (*getid)(char), char (*getchar)(int)>
 void Dictionary<MAX_SIZE, getid, getchar>::loadSerialTrie(TrieNode<MAX_SIZE, getid, getchar>* root, fstream& fin) {
     char c;
-    while (fin.get()) {
+    while (fin.get(c)) {
         // if c is '>', we have reached the end of the serialized Trie
         // so we backtrack to the parent node
         if (c == '>') break;
