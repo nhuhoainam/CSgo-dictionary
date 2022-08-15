@@ -28,6 +28,7 @@ private:
     void addNewDefEdit();
     void addNewExEdit();
     void removeEdit(int i);
+    void removeExample(int i);
   signals:
     void addNewWord(const QString&, std::vector<std::pair<QString, QString> >);
     void resetDictionary();

@@ -39,6 +39,7 @@ DictionaryEditor::DictionaryEditor(QWidget *parent) :
     connect(ui->addDefBtn, &QPushButton::clicked,
             this, &DictionaryEditor::addNewExEdit);
     addNewDefEdit();
+    addNewExEdit();
 }
 
 DictionaryEditor::~DictionaryEditor()
@@ -94,7 +95,7 @@ void DictionaryEditor::addNewExEdit() {
         for (int i = 0; i < exampleEditGroup.size(); i++) {
             auto item = exampleEditGroup[i];
             if (item.second == newRemoveBtn) {
-                removeEdit(i);
+                removeExample(i);
             }
         }
     });
@@ -104,7 +105,7 @@ void DictionaryEditor::resetDefEdit() {
     ui->keywordEdit->clear();
     QLayoutItem *def, *ex;
     while ((def = ui->defLayout->takeAt(0)) != nullptr
-           && (ex = ui->defLayout->takeAt(0)) != nullptr)
+           && (ex = ui->exampleLayout->takeAt(0)) != nullptr)
     {
         delete def->widget();
         delete def;
@@ -119,11 +120,14 @@ void DictionaryEditor::resetDefEdit() {
 
 void DictionaryEditor::removeEdit(int i) {
     QLayoutItem *def = ui->defLayout->takeAt(i);
-    QLayoutItem *ex = ui->exampleLayout->takeAt(i);
     delete def->widget();
     delete def;
+    defEditGroup.erase(defEditGroup.begin()+i);
+}
+
+void DictionaryEditor::removeExample(int i) {
+    QLayoutItem *ex = ui->exampleLayout->takeAt(i);
     delete ex->widget();
     delete ex;
-    defEditGroup.erase(defEditGroup.begin()+i);
     exampleEditGroup.erase(exampleEditGroup.begin()+i);
 }
