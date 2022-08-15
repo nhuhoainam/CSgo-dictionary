@@ -197,7 +197,7 @@ QComboBox QAbstractItemView {
      <property name="widgetResizable">
       <bool>true</bool>
      </property>
-     <widget class="QWidget" name="scrollContent">
+     <widget class="WordCardGroup" name="wordGroup">
       <property name="geometry">
        <rect>
         <x>0</x>
@@ -206,24 +206,19 @@ QComboBox QAbstractItemView {
         <height>369</height>
        </rect>
       </property>
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
       <property name="styleSheet">
-       <string notr="true">#scrollContent {
+       <string notr="true">#wordGroup {
 	border: none;
 	background-color: #FFF8EF;
 }</string>
       </property>
-      <layout class="QVBoxLayout" name="verticalLayout_2">
-       <item>
-        <widget class="WordCardGroup" name="wordGroup" native="true">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-        </widget>
-       </item>
-      </layout>
+      <layout class="QVBoxLayout" name="verticalLayout_2"/>
      </widget>
     </widget>
    </item>

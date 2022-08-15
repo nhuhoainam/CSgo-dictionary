@@ -299,7 +299,9 @@ void MainWindow::handleHomeFocus() {
 
 void MainWindow::handleHomeRefresh() {
     vector<pair<Word, bool>> ls;
-    for (int i = 0; i < 8; i++) {
+    QSize size = home->size();
+    int n = size.width() / 80;
+    for (int i = 0; i < n; i++) {
         const Word *w = dict.random_word();
         ls.push_back({*w, w->isFavorite});
     }
