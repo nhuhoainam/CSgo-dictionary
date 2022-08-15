@@ -371,3 +371,24 @@ Word *DictCollection::insert(const Word& w) {
         break;
     }
 }
+
+bool DictCollection::erase(const string& word) {
+    switch (curDict) {
+    case EngEng:
+        return engEngDict->erase(word);
+        break;
+    case VieEng:
+        return vieEngDict->erase(word);
+        break;
+    case EngVie:
+        return engVieDict->erase(word);
+        break;
+    case Slang:
+        return slangDict->erase(word);
+        break;
+    default:
+        return emoDict->erase(word);
+        break;
+    }
+}
+

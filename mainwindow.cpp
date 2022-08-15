@@ -311,6 +311,8 @@ void MainWindow::handleHomeFocus() {
     vector<pair<Word, bool>> ls;
     for (const auto &s : homeWordLists) {
         Word *word = dict.find(s);
+        if (!word)
+            continue;
         ls.push_back({*word, word->isFavorite});
     }
     home->setWordList(ls);
@@ -390,7 +392,22 @@ void MainWindow::handleWordViewerEdit(Word w) {
 }
 void MainWindow::handleWordViewerDelete(const QString &keyword) {
     qDebug() << "Delete " << keyword;
+    Word *word = dict.find(keyword.toStdString());
+    if (!word)
+        return;
+    curEditedWord = "";
+    int at = 0;
+    for (int i = 0; i < homeWordLists.size(); i++) {
+        if (word->word == homeWordLists[i])
+            at = i;
+    }
+    homeWordLists.erase(homeWordLists.begin()+at);
+    homeWordLists.push_back(dict.random_word()->word);
+    dict.erase(word->word);
+    container->setCurrentIndex(0);
+    handleHomeFocus();
 }
+
 void MainWindow::handleWordViewerFavorite(const QString &keyword, bool on) {
     QString state = on ? "on" : "off";
     qDebug() << "Set favorite to " << state << " " << keyword;
