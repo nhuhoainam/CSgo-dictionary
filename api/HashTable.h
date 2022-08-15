@@ -7,6 +7,15 @@
 #include <string>
 
 using namespace std;
+
+// How to use
+// 1.Init:
+// Ex: HashTable myHashTable(1e6);
+// 2.Insert:
+// Ex: myHashTable.insert("key", "value");
+// 3.Search:
+// Ex: myHashTable.find("key");
+// -> return "value"
  
 class HashTable{
 private:
