@@ -78,14 +78,10 @@ void WordViewer::paintEvent(QPaintEvent* event) {
 }
 
 void WordViewer::setWord(Word w) {
-    qDebug() << "Set word";
-
     clearEdits();
     clearDisplayEntries();
     ui->keyword->setText(QString::fromStdString(w.word));
     for (auto &p : w.data) {
-        qDebug() << QString::fromStdString(p.first);
-        qDebug() << QString::fromStdString(p.second);
         auto *w = new WordViewerEntry(p.first, p.second, this);
         ui->defLayout->addWidget(w);
         addEditEntry(p.first, p.second);
@@ -120,7 +116,6 @@ void WordViewer::addEditEntry(const string def, const string example) {
         &WordEdit::wordEditDelete,
         this,
         [=]() {
-        qDebug() << editGroup.size();
         for (int i = 0; i < editGroup.size(); i++) {
             if (editGroup[i] == edit) {
                 removeEdit(i);

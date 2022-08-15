@@ -62,7 +62,6 @@ void MainScene::setupUi() {
 void MainScene::setCompletionChoices(vector<QString> choices) {
     completePopup->clear();
     for (const auto &item : choices) {
-        qDebug() << item;
         completePopup->addItem(item);
     }
 }
