@@ -65,10 +65,10 @@ void DictCollection::init() {
         insertData(*vieEngDict, fileData);
     }
     if (fexist(VieEngHistoryPath)) {
-        engEngDict->loadSearchHistoryList(VieEngHistoryPath);
+        vieEngDict->loadSearchHistoryList(VieEngHistoryPath);
     }
     if (fexist(VieEngFavoritePath)) {
-        engEngDict->loadFavouristList(VieEngFavoritePath);
+        vieEngDict->loadFavouristList(VieEngFavoritePath);
     }
     cerr << "Done";
 }

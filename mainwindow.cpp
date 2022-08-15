@@ -313,8 +313,13 @@ void MainWindow::handleFavoriteListFocus() {
     }
     favoriteList->setWordList(ls);
 }
+
 void MainWindow::handleHistoryFocus() {
-    qDebug() << "History focus";
+    vector<pair<Word, bool>> ls;
+    for (auto *w : dict.searchHistory()) {
+        ls.push_back({*w, w->isFavorite});
+    }
+    history->setWordList(ls);
 }
 
 void MainWindow::handleEditorFocus() {
