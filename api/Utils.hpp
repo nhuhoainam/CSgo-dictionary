@@ -36,17 +36,23 @@ void readFromFile(string path, vector<pair<string, vector<pair<string, string>>>
     for (int i = 0; i < numWords; i++) {
         string word;
         // avoid bad input data, namely, an empty line
-        do getline(fin, word);
-        while (word.empty());
+        do {
+            getline(fin, word);
+            cerr << i << endl;
+            cerr << "HERE";
+        } while (word.empty());
         word.erase(word.begin());
         vector<pair<string, string>> wordData;
         int numDefs;
         fin >> numDefs;
+        if (numDefs < 0  || numDefs > 10)
+            cerr << numDefs << word << endl;
         fin.ignore();
         for (int j = 0; j < numDefs; j++) {
             string def;
-            do getline(fin, def);
-            while (def.empty());
+            do {
+                getline(fin, def);
+            } while (def.empty());
             def.erase(def.begin());
             int numExamples;
             fin >> numExamples;

@@ -11,6 +11,8 @@ const string EngVieRawPath = "./dictionary-data/EngVie.txt";
 
 const string VieEngSavedPath = "./dictionary-data/dictionary-vie-eng-saved-data.txt";
 const string VieEngRawPath = "./dictionary-data/VieEng.txt";
+const string VieEngFavoritePath = "./dictionary-data/dictionary-vie-eng-favorite-saved-data.txt";
+const string VieEngHistoryPath = "./dictionary-data/dictionary-vie-eng-history-saved-data.txt";
 
 const string EmoSavedPath = "./dictionary-data/dictionary-emoji-saved-data.txt";
 const string EmoRawPath = "./dictionary-data/Emoji.txt";
@@ -37,6 +39,8 @@ void DictCollection::initRaw() {
 
 void DictCollection::init() {
     curDict = EngEng;
+
+    // Eng - Eng Dictionary
     if (fexist(EngEngSavedPath)) {
         engEngDict->loadDataStructures(EngEngSavedPath);
     } else {
@@ -50,12 +54,33 @@ void DictCollection::init() {
     if (fexist(EngEngFavoritePath)) {
         engEngDict->loadFavouristList(EngEngFavoritePath);
     }
+    cerr << "Done";
+
+    // Vie - Eng Dictionary
+    if (fexist(VieEngSavedPath)) {
+        vieEngDict->loadDataStructures(VieEngSavedPath);
+    } else {
+        vector<pair<string, vector<pair<string, string>>>> fileData;
+        readFromFile(VieEngRawPath, fileData);
+        insertData(*vieEngDict, fileData);
+    }
+    if (fexist(VieEngHistoryPath)) {
+        engEngDict->loadSearchHistoryList(VieEngHistoryPath);
+    }
+    if (fexist(VieEngFavoritePath)) {
+        engEngDict->loadFavouristList(VieEngFavoritePath);
+    }
+    cerr << "Done";
 }
 
 void DictCollection::close() {
     engEngDict->saveDataStructures(EngEngSavedPath);
     engEngDict->saveFavouristList(EngEngFavoritePath);
     engEngDict->saveSearchHistoryList(EngEngHistoryPath);
+
+    vieEngDict->saveDataStructures(VieEngSavedPath);
+    vieEngDict->saveDataStructures(VieEngFavoritePath);
+    vieEngDict->saveDataStructures(VieEngHistoryPath);
 }
 
 Word* DictCollection::find(const Word& w) {

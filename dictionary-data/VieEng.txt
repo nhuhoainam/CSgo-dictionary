@@ -1,4 +1,4 @@
-23416
+23415
 @a
 3
 -O; oh (exclamation of surprise, regret, ect.)
@@ -2287,7 +2287,6 @@
 =cha nào con nấy, hổ phụ sinh hổ tử+like father, like son
 =chủ nào tớ nấy+like master, like man
 =anh ta đi đằng sau ấy+he is coming behind, yes, he is
-﻿
 @ba
 3
 -Papa, daddy
@@ -10634,14 +10633,6 @@
 -Waste
 1
 =Bỏ phí thời giờ+to waste one's time
-@bo phieu
-1
--To go to the polls
-100% cử tri đi bỏ phiếu
-100% of the voters went to the polls; the poll was 100%; the turn-out was
-100%
-1
-=bỏ phiếu cho người xứng đáng+to vote for the truly representative people
 @bo qua
 3
 -To let slip, to miss
@@ -20159,8 +20150,7 @@
 1
 -To treat with every possible means (a seriously ill person)
 1
-=thầy thuốc đã hết lòng chạy chữa mà bệnh vẫn không giảm
- despite the doctor's treating with every possible means, his illness did not abate
+=thầy thuốc đã hết lòng chạy chữa mà bệnh vẫn không giảm + despite the doctor's treating with every possible means, his illness did not abate
 @chay dien
 1
 -(y học,khẩu ngữ) Electrotherapy
@@ -21266,8 +21256,7 @@
 4
 -To give some handicap
 1
-=chấp bạn mười mét trong cuộc chạy thi 100 mét mà vẫn thắng
- to win a 100-meter race though having given one's opponent a 10-meter handicap
+=chấp bạn mười mét trong cuộc chạy thi 100 mét mà vẫn thắng+to win a 100-meter race though having given one's opponent a 10-meter handicap
 -To defy
 2
 =một người chấp ba người+one man defies three
@@ -49150,7 +49139,6 @@
 =Nhìn hau háu+To look with covetous eyes; to devour (with one's eyes)
 =Ngựa non háu đá+Young fighting-cook quickly ruffled
 @hay
-=trong bon hay nam ngay+in four or five day
 2
 -well; grad; interesting
 1
@@ -62587,7 +62575,6 @@
 -to drive (a car)
 0
 @lai
-=bat dau lai+to begin again
 2
 -Still; should; back
 2
@@ -66868,8 +66855,6 @@
 1
 =nghiện ma túy+to be a drug addict
 @ma
-=khong co ai ma khong hieu viec ay ca+There is no one but understands this. what; that
-=vi viec ay ma toi den+That is what I have come for
 1
 -Where
 3
@@ -68777,7 +68762,6 @@
 1
 =Ôm ấp một mộng tưởng+To nurse (nurture) afatastic dream
 @mot
-=hai muoi mot+twent one
 1
 -style;fashion
 1
