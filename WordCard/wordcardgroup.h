@@ -2,14 +2,16 @@
 #define WORDCARDGROUP_H
 
 #include "api/Word.h"
+#include "flowlayout.h"
 
 #include <QWidget>
+#include <QFrame>
 #include <list>
 using std::list;
 
 class WordCard;
 class WordCardLayout;
-class WordCardGroup : public QWidget
+class WordCardGroup : public QFrame
 {
     Q_OBJECT
 public:
@@ -20,7 +22,7 @@ public:
     WordCard *getCard(const QString &keyword) const;
 private:
     list<WordCard*> wordList;
-    WordCardLayout *layout;
+    FlowLayout *layout;
 signals:
     void wordSelected(const QString&);
     void wordToggleFavorite(const QString &, bool on);

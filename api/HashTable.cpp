@@ -32,6 +32,13 @@ void HashTable::insertString(string key, string value)
     data[hashKey] = value;
 }
 
+void HashTable::insertString(vector<string> keys, string value)
+{
+    for (auto& key: keys) {
+        insertString(key, value);
+    }
+}
+
 string HashTable::findString(string key)
 {
     int hashKey = hashString(key);

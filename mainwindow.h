@@ -80,6 +80,7 @@ private slots:
     void handleWordViewerDelete(const QString&);
     void handleWordViewerFavorite(const QString&, bool on);
     void handleWordViewerFocus();
+    void handleWordViewerCompletionRequest(const QString &word);
 
     void handleSearchRequest(const QString&);
     void handleDictionaryChanged(const QString &);

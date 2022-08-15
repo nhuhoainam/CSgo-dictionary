@@ -39,6 +39,7 @@ public:
         delete [] data;
     }
 
-    void insertString(string key, string value);
-    string findString(string key);
+    void insertString(string, string);
+    void insertString(vector<string>, string);
+    string findString(string);
 };

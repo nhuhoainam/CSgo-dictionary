@@ -173,6 +173,15 @@ void MainWindow::connectSignalAndSlot() {
             &SingleWordView::favoriteToggle,
             this,
             &MainWindow::handleWordViewerFavorite);
+    connect(wordViewer,
+            &SingleWordView::searchRequest,
+            this,
+            &MainWindow::handleSearchRequest);
+    connect(wordViewer,
+            &SingleWordView::completionRequest,
+            this,
+            &MainWindow::handleWordViewerCompletionRequest);
+
     connect(favoriteList,
             &MainScene::dictionaryTypeChange,
             this,
@@ -309,7 +318,9 @@ void MainWindow::handleHomeFocus() {
 
 void MainWindow::handleHomeRefresh() {
     vector<pair<Word, bool>> ls;
-    for (int i = 0; i < 8; i++) {
+    QSize size = home->size();
+    int n = size.width() / 80;
+    for (int i = 0; i < n; i++) {
         const Word *w = dict.random_word();
         ls.push_back({*w, w->isFavorite});
         homeWordLists.push_back(w->word);
@@ -404,6 +415,11 @@ void MainWindow::handleHomeCompletionRequest(const QString& word) {
         choices.push_back(QString::fromStdString(s));
     }
     home->setCompletionChoices(choices);
+}
+
+void MainWindow::handleWordViewerCompletionRequest(const QString &word) {
+    auto choices = getCompletionChoices(word);
+    wordViewer->setCompletionChoices(choices);
 }
 void MainWindow::handleHistoryCompletionRequest(const QString& word) {
     auto choices = getCompletionChoices(word);
