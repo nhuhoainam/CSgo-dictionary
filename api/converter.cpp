@@ -17,7 +17,7 @@ int getid_EngEng(char c) {
     else return -1;
 }
 
-int getid_Emotion(char c) {
+int getidEmotion(char c) {
     if (c < 0 || c >= 256) return -1;
     return c;
 }

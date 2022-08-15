@@ -1,6 +1,6 @@
 #pragma once
-#include "Word.h"
-#include "converter.h"
+#include "api/Word.h"
+#include "api/converter.h"
 
 #include <iostream>
 #include <queue>
@@ -79,7 +79,7 @@ public:
     bool erase(const string&);
     
     // If there is a series of words which have at least 1 prefix in common, this algorithm chooses the longest one
-    const Word* random_word() const;
+    Word* random_word() const;
 
     void getPrefixMatch(TrieNode<MAX_SIZE, getid, getchar>*, vector<string>&, const int&);
     vector<string> prefixMatch(const string&, const int&);
@@ -286,7 +286,7 @@ Word* Dictionary<MAX_SIZE, getid, getchar>::insert(const string& w, const string
     if (cur->data->contain(def) != -1)
         return nullptr; // this definition already exists in the node of word
     cur->data->data.push_back(make_pair(def, "")); // definition without examples
-    return cur;
+    return cur->data;
 }
 
 template <int MAX_SIZE, int (*getid)(char), char (*getchar)(int)>
@@ -384,7 +384,7 @@ bool Dictionary<MAX_SIZE, getid, getchar>::erase(const string& w) {
 }
 
 template <int MAX_SIZE, int (*getid)(char), char (*getchar)(int)>
-const Word* Dictionary<MAX_SIZE, getid, getchar>::random_word() const {
+Word* Dictionary<MAX_SIZE, getid, getchar>::random_word() const {
     const TrieNode<MAX_SIZE, getid, getchar>* cur {pRoot};
     assert(cur);
     while (cur) {

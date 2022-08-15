@@ -1,4 +1,4 @@
-#include "utils.h"
+#pragma once
 
 #include "Dictionary.hpp"
 #include "converter.h"
