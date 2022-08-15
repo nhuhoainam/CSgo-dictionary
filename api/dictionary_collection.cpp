@@ -1,6 +1,8 @@
 #include "api/dictionary_collection.hpp"
 #include "api/Utils.hpp"
 
+#include <cstdio>
+
 const string EngEngSavedPath = "./dictionary-data/dictionary-eng-eng-saved-data.txt";
 const string EngEngRawPath = "./dictionary-data/EngEng.txt";
 const string EngEngHistoryPath = "./dictionary-data/dictionary-eng-eng-history-saved-data.txt";
@@ -29,12 +31,20 @@ DictCollection::DictCollection() {
     emoDict = new EmojiDictionary;
 }
 
-void DictCollection::initRaw() {
+void DictCollection::reset() {
+    remove(EngEngSavedPath.c_str());
+    remove(EngEngFavoritePath.c_str());
+    remove(EngEngHistoryPath.c_str());
+    remove(VieEngSavedPath.c_str());
+    remove(VieEngFavoritePath.c_str());
+    remove(VieEngHistoryPath.c_str());
+
     delete engEngDict;
     engEngDict = new EngEngDictionary;
-    vector<pair<string, vector<pair<string, string>>>> fileData;
-    readFromFile(EngEngRawPath, fileData);
-    insertData(*engEngDict, fileData);
+    delete vieEngDict;
+    vieEngDict = new VieEngDictionary;
+
+    init();
 }
 
 void DictCollection::init() {

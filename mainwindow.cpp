@@ -329,6 +329,8 @@ void MainWindow::handleEditorFocus() {
 
 void MainWindow::handleEditorReset() {
     qDebug() << "Reset dictionary";
+    dict.reset();
+    setupScene();
 }
 
 void MainWindow::handleEditorAdd(const QString &keyword,
