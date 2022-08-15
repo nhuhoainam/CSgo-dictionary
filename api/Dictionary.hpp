@@ -131,6 +131,7 @@ bool Dictionary<MAX_SIZE, getid, getchar>::add_to_favoriteList(Word* wrd) {
     for (Word* p : favoriteList) {
         if (p == wrd) return false;
     }
+    wrd->isFavorite = true;
     favoriteList.push_back(wrd);
     return true;
 }
@@ -139,6 +140,7 @@ template <int MAX_SIZE, int (*getid)(char), char (*getchar)(int)>
 bool Dictionary<MAX_SIZE, getid, getchar>::remove_from_favoriteList(Word* wrd) {
     for (int i = 0; i < int(favoriteList.size()); ++i) {
         if (favoriteList[i] == wrd) {
+            wrd->isFavorite = false;
             favoriteList.erase(favoriteList.begin() + i);
             return true;
         }
