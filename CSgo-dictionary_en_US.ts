@@ -62,12 +62,12 @@
 <context>
     <name>Game</name>
     <message>
-        <location filename="game.ui" line="14"/>
+        <location filename="game.ui" line="20"/>
         <source>Form</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="game.ui" line="179"/>
+        <location filename="game.ui" line="215"/>
         <source>Choose gamemode</source>
         <translation type="unfinished"></translation>
     </message>

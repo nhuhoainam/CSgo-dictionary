@@ -378,7 +378,7 @@ void MainWindow::handleWordFavoriteToggle(const QString &keyword, bool state) {
 }
 
 void MainWindow::handleQuizRequest() {
-    std::vector<std::pair<std::string, std::string> > payload = engEngDict->randomQuiz();
+    std::vector<std::pair<std::string, std::string> > payload = dict.randomQuiz();
     game->setQSet(payload);
     qDebug() << "Question set generated:\n";
     for (int i = 0; i < 4; i++)
