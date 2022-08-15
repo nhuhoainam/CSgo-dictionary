@@ -9,6 +9,7 @@
 #include <queue>
 #include <stack>
 #include <string>
+#include "api/Dictionary.hpp"
 
 const QString STYLE =
         "QPushButton {"
@@ -45,9 +46,8 @@ public:
     };
     explicit Game(QWidget *parent = nullptr);
     ~Game();
-    void addMeaningQSet(std::vector<std::array<QString, 6>> questions);
-    void addKeywordQSet(std::vector<std::array<QString, 6>> questions);
     void start();
+    void setQSet(std::vector<std::pair<string, string> > payload);
 
 private slots:
     void checkAnswer(int i);
@@ -59,24 +59,21 @@ private slots:
 public slots:
 
 signals:
-    void requestMeaningQSet(int n=1);
-    void requestKeywordQSet(int n=1);
+    void requestQSet();
 
 private:
     Type type;
-    void connectSignalAndSlot();
     void mousePressEvent(QMouseEvent *event) override;
     void keyPressEvent(QKeyEvent *event) override;
     void resizeEvent(QResizeEvent *event) override;
 
-    QString m_answer;
     QButtonGroup *m_optionButtons;
 
     QWidget *emptyScreen;
     QWidget *blocker;
-    std::vector<std::array<QString, 6>> m_polledQuestionSets;
-    std::queue<std::array<QString, 6>> m_questionSets;
-    int m_requestThreshold = 5;
+    std::array<std::pair<std::string, std::string>, 4> m_curQSet;
+    std::pair<std::string, std::string> m_curKey;
+    int m_curAns;
     Ui::Game *ui;
 };
 

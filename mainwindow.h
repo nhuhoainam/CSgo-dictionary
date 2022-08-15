@@ -93,6 +93,8 @@ private slots:
     void handleSearchRequest(const QString&);
     void handleDictionaryChanged(const QString &);
     void handleWordFavoriteToggle(const QString &, bool);
+
+    void handleQuizRequest();
 };
 
 #endif // MAINWINDOW_H

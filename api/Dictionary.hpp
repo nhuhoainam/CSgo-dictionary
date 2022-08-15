@@ -79,7 +79,7 @@ public:
     bool erase(const string&);
     
     // If there is a series of words which have at least 1 prefix in common, this algorithm chooses the longest one
-    const Word* random_word() const;
+    Word* random_word() const;
 
     void getPrefixMatch(TrieNode<MAX_SIZE, getid, getchar>*, vector<string>&, const int&);
     vector<string> prefixMatch(const string&, const int&);
@@ -384,7 +384,7 @@ bool Dictionary<MAX_SIZE, getid, getchar>::erase(const string& w) {
 }
 
 template <int MAX_SIZE, int (*getid)(char), char (*getchar)(int)>
-const Word* Dictionary<MAX_SIZE, getid, getchar>::random_word() const {
+Word* Dictionary<MAX_SIZE, getid, getchar>::random_word() const {
     const TrieNode<MAX_SIZE, getid, getchar>* cur {pRoot};
     assert(cur);
     while (cur) {
