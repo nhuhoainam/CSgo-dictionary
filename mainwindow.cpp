@@ -173,6 +173,15 @@ void MainWindow::connectSignalAndSlot() {
             &SingleWordView::favoriteToggle,
             this,
             &MainWindow::handleWordViewerFavorite);
+    connect(wordViewer,
+            &SingleWordView::searchRequest,
+            this,
+            &MainWindow::handleSearchRequest);
+    connect(wordViewer,
+            &SingleWordView::completionRequest,
+            this,
+            &MainWindow::handleWordViewerCompletionRequest);
+
     connect(favoriteList,
             &MainScene::dictionaryTypeChange,
             this,
@@ -385,6 +394,11 @@ void MainWindow::handleHomeCompletionRequest(const QString& word) {
         choices.push_back(QString::fromStdString(s));
     }
     home->setCompletionChoices(choices);
+}
+
+void MainWindow::handleWordViewerCompletionRequest(const QString &word) {
+    auto choices = getCompletionChoices(word);
+    wordViewer->setCompletionChoices(choices);
 }
 void MainWindow::handleHistoryCompletionRequest(const QString& word) {
     auto choices = getCompletionChoices(word);
