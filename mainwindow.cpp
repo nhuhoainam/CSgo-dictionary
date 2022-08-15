@@ -296,7 +296,12 @@ void MainWindow::handleHomeFocus() {
 }
 
 void MainWindow::handleHomeRefresh() {
-    qDebug() << "Home refresh request";
+    vector<pair<Word, bool>> ls;
+    for (int i = 0; i < 8; i++) {
+        const Word *w = dict.random_word();
+        ls.push_back({*w, w->isFavorite});
+    }
+    home->setWordList(ls);
 }
 
 void MainWindow::handleFavoriteListFocus() {
