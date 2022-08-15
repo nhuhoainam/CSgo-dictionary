@@ -193,11 +193,12 @@ void MainWindow::setupScene() {
     vector<pair<Word, bool>> historyList;
     for (int i = 0; i < 8; i++) {
         const Word *w = dict.random_word();
-        homeList.push_back({*w, false});
+        Word *s = dict.find(w->word);
+        homeList.push_back({*s, s->isFavorite});
 
         if (i < dict.favoriteList().size()) {
         const Word *f = dict.favoriteList()[i];
-        favList.push_back({*f, false});
+        favList.push_back({*f, true});
         }
 
         if (i < dict.searchHistory().size()) {

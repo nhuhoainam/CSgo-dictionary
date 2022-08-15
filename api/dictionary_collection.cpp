@@ -3,6 +3,8 @@
 
 const string EngEngSavedPath = "./dictionary-data/dictionary-eng-eng-saved-data.txt";
 const string EngEngRawPath = "./dictionary-data/EngEng.txt";
+const string EngEngHistoryPath = "./dictionary-data/dictionary-eng-eng-history-saved-data.txt";
+const string EngEngFavoritePath = "./dictionary-data/dictionary-eng-eng-favorite-saved-data.txt";
 
 const string EngVieSavedPath = "./dictionary-data/dictionary-eng-vie-saved-data.txt";
 const string EngVieRawPath = "./dictionary-data/EngVie.txt";
@@ -42,18 +44,18 @@ void DictCollection::init() {
         readFromFile(EngEngRawPath, fileData);
         insertData(*engEngDict, fileData);
     }
-
-    if (fexist(EngVieSavedPath)) {
-        engVieDict->loadDataStructures(EngVieSavedPath);
-    } else {
-        vector<pair<string, vector<pair<string, string>>>> fileData;
-        readFromFile(EngVieRawPath, fileData);
-        insertData(*engVieDict, fileData);
+    if (fexist(EngEngHistoryPath)) {
+        engEngDict->loadSearchHistoryList(EngEngHistoryPath);
+    }
+    if (fexist(EngEngFavoritePath)) {
+        engEngDict->loadFavouristList(EngEngFavoritePath);
     }
 }
 
 void DictCollection::close() {
-    engEngDict->saveDataStructures("./dictionary-data/dictionary-eng-eng-saved-data.txt");
+    engEngDict->saveDataStructures(EngEngSavedPath);
+    engEngDict->saveFavouristList(EngEngFavoritePath);
+    engEngDict->saveSearchHistoryList(EngEngHistoryPath);
 }
 
 Word* DictCollection::find(const Word& w) {
