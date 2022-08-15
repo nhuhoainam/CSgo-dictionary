@@ -16,7 +16,7 @@ Game::Game(QWidget *parent) :
     m_optionButtons->addButton(ui->ans3, 3);
     m_optionButtons->addButton(ui->ans4, 4);
 
-    ui->chooseTitle->setFont(QFont("Sans", 24));
+    ui->chooseTitle->setFont(QFont("Poppins", 24));
     // To block input when an answer is chosen
     blocker = new QWidget(this);
     blocker->setStyleSheet("background-color: rgba(61,61, 61, 0);");
@@ -125,9 +125,9 @@ void Game::setMeaningGame() {
     type = Type::GuessMeaning;
     nextQuestion();
     ui->stackedWidget->setCurrentIndex(0);
-    ui->questionLabel->setFont(QFont("Sans", 24, QFont::Bold));
+    ui->questionLabel->setFont(QFont("Playfair Display", 24, QFont::Bold));
     for (auto btn : m_optionButtons->buttons()) {
-        btn->setFont(QFont("Sans", 16));
+        btn->setFont(QFont("Poppins", 16));
     }
 
 }
@@ -135,9 +135,9 @@ void Game::setKeywordGame() {
     type = Type::GuessKeyword;
     nextQuestion();
     ui->stackedWidget->setCurrentIndex(0);
-    ui->questionLabel->setFont(QFont("Sans", 24));
+    ui->questionLabel->setFont(QFont("Playfair Display", 24));
     for (auto btn : m_optionButtons->buttons()) {
-        btn->setFont(QFont("Sans", 24, QFont::Bold));
+        btn->setFont(QFont("Poppins", 24, QFont::Bold));
     }
 }
 

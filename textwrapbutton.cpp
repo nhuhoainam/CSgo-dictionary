@@ -13,7 +13,7 @@ TextWrapButton::TextWrapButton(QWidget *parent) : QPushButton(parent) {
     label->setWordWrap(true);
     label->setMouseTracking(false);
     label->setTextInteractionFlags(Qt::NoTextInteraction);
-    label->setFont(QFont("Sans", 12));
+    label->setFont(QFont("Poppins", 12));
     label->setAlignment(Qt::AlignCenter);
     label->setContentsMargins(10,3,10,3);
 }
