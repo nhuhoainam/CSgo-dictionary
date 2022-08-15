@@ -1,0 +1,2741 @@
+685
+@%-)
+1
+-User has been staring at a green screen for 15 hours straight.
+0
+@(-:
+1
+-User is left handed.
+0
+@(8-o
+1
+-It's Mr. Bill!
+0
+@(:I
+1
+-User is an egghead.
+0
+@*:o)
+1
+-And Bozo the Clown!
+0
+@*<:-)
+1
+-User is wearing a Santa Claus Hat.
+0
+@+-:-)
+1
+-User is the Pope or holds some other religious office.
+0
+@,-)
+1
+-Ditto...but he's winking.
+0
+@,:-)
+1
+-Same thing...other side.
+0
+@-6%
+1
+-User is braindead.
+0
+@-:-(
+1
+-Real punk rockers don't smile.
+0
+@-:-)
+1
+-User is a punk rocker.
+0
+@-=* :-)
+1
+-User is a TeX wizard.
+0
+@.-)
+1
+-User only has one eye.
+0
+@2MFM
+1
+-To much for me
+0
+@2U2
+1
+-To you too
+0
+@3:[
+1
+-Mean Pet smiley.
+0
+@3:]
+1
+-Pet smiley.
+0
+@4AYN
+1
+-For all you know
+0
+@4COL
+1
+-For crying out loud
+0
+@4SALE
+1
+-For sale
+0
+@4U
+1
+-For you
+0
+@8 :-)
+1
+-User is a wizard.
+0
+@8 :-I
+1
+-Net.unix-wizards
+0
+@8-)
+1
+-User is wearing sunglasses.
+0
+@8:-)
+1
+-User is a little girl.
+0
+@:'-(
+1
+-User is crying.
+0
+@:'-)
+1
+-User is so happy, s/he is crying.
+0
+@:(
+1
+-Sad.
+0
+@:)
+1
+-Happy.
+0
+@:*
+1
+-Kisses.
+0
+@:*)
+1
+-User is drunk.
+0
+@:,(
+1
+-Crying.
+0
+@:-#
+1
+-User wears braces.
+0
+@:-&
+1
+-User is tongue tied.
+0
+@:-(
+1
+-boo hoo
+0
+@:-)
+1
+-ha ha
+0
+@:-)-8
+1
+-User is a Big girl.
+0
+@:-)~
+1
+-User drools.
+0
+@:-*
+1
+-User just ate something sour.
+0
+@:-/
+1
+-User is skeptical.
+0
+@:-0
+1
+-No Yelling!(Quiet Lab)
+0
+@:-7
+1
+-User juust made a wry statement.
+0
+@:-9
+1
+-User is licking his/her lips.
+0
+@:-:
+1
+-Mutant smiley; the invisible smiley.
+0
+@:->
+1
+-hey hey
+0
+@:-?
+1
+-User smokes a pipe.
+0
+@:-@
+1
+-User is screaming.
+0
+@:-C
+1
+-User is really bummed.
+0
+@:-D
+1
+-User is laughing (at you!)
+0
+@:-E
+1
+-Bucktoothed vampire.
+0
+@:-F
+1
+-Bucktoothed vampire with one tooth missing.
+0
+@:-I
+1
+-hmmm
+0
+@:-O
+1
+-oops
+0
+@:-P
+1
+-nyahhhh!
+0
+@:-Q
+1
+-User is a smoker.
+0
+@:-S
+1
+-User just made an incoherent statement.
+0
+@:-X
+1
+-User's lips are sealed.
+0
+@:-[
+1
+-User is a vampire.
+0
+@:-`
+1
+-User spitting out its chewing tobacco.
+0
+@:-o
+1
+-Uh oh!
+0
+@:-{)
+1
+-User has a mustache.
+0
+@:-{}
+1
+-User wears lipstick.
+0
+@:-~)
+1
+-User has a cold.
+0
+@::-)
+1
+-User wears normal glasses.
+0
+@:<
+1
+-What?
+0
+@:<)
+1
+-User is from an Ivy League School.
+0
+@:=)
+1
+-User has two noses.
+0
+@:>
+1
+-What?
+0
+@:@
+1
+-What?
+0
+@:C
+1
+-What?
+0
+@:D
+1
+-Laughter.
+0
+@:I
+1
+-Hmmm...
+0
+@:O
+1
+-Yelling.
+0
+@:Q
+1
+-What?
+0
+@:[
+1
+-Real Downer.
+0
+@:]
+1
+-Gleep...a friendly midget smiley who will gladly be your friend.
+0
+@:^)
+1
+-User has a broken nose.
+0
+@:_)
+1
+-User's nose is sliding off of his face.
+0
+@:v)
+1
+-User has a broken nose, but it's the other way.
+0
+@:{
+1
+-What?
+0
+@:}
+1
+-What should we call these? (what?)
+0
+@;-)
+1
+-Winky smiley. User just made a flirtatious and/or sarcastic remark.More of a "don't hit me for what I just said" smiley.
+0
+@<:-I
+1
+-User is a dunce.
+0
+@<|-(
+1
+-User is Chinese and doesn't like these kind of jokes.
+0
+@<|-)
+1
+-User is Chinese.
+0
+@=)
+1
+-Variation on a theme...
+0
+@=))
+1
+-Full of laughing
+0
+@=:-)
+1
+-User is a hosehead.
+0
+@=W=
+1
+-Whatever
+0
+@>:->
+1
+-User just made a really devilish remark.
+0
+@>;->
+1
+-Winky and devil combined. A very lewd remark was just made.
+0
+@>U
+1
+-Screw you!
+0
+@?
+1
+-Huh?
+0
+@?4U
+1
+-Question for you
+0
+@@:-)
+1
+-User is wearing a turban.
+0
+@@=
+1
+-User is pro-nuclear war.
+0
+@A/S/L
+1
+-Age/Sex/Location
+0
+@AAMOF
+1
+-As a matter of fact
+0
+@ABFL
+1
+-A big fat lady
+0
+@ABT
+1
+-About
+0
+@ADN
+1
+-Any day now
+0
+@AFAIC
+1
+-As far as I'm concerned
+0
+@AFAICS
+1
+-As far as I can see
+0
+@AFAICT
+1
+-As far as I can tell
+0
+@AFAIK
+1
+-As far as I know
+0
+@AFAYC
+1
+-As far as you're concerned
+0
+@AFK
+1
+-Away from computer keyboard (for wireless users)
+0
+@AIM
+1
+-AOL Instant Messenger; also verb for FTP'ing files via AIM
+0
+@AISI
+1
+-As I see it
+0
+@AIUI
+1
+-As I understand it
+0
+@AKA
+1
+-Also known as
+0
+@AML
+1
+-All my love
+0
+@ANFSCD
+1
+-And now for something completely different
+0
+@ASAP
+1
+-As soon as possible
+0
+@ASL
+1
+-Assistant section leader
+0
+@ASOP
+1
+-Assistant system operator
+0
+@ATM
+1
+-At the moment
+0
+@AWA
+1
+-As well as
+0
+@AWGTHTGTTA
+1
+-Are we going to have to go trough this again?
+0
+@AWHFY
+1
+-Are we having fun yet?
+0
+@AWOL
+1
+-Absent without leave
+0
+@AYOR
+1
+-At your own risk
+0
+@AYPI?
+1
+-And your point is?
+0
+@B
+1
+-Back
+0
+@B-)
+1
+-User wears horn-rimmed glasses.
+0
+@B/C
+1
+-Because
+0
+@B/F
+1
+-Boyfriend
+0
+@B4
+1
+-Before
+0
+@B4N
+1
+-Bye for now
+0
+@B:-)
+1
+-Sunglasses on head.
+0
+@BAC
+1
+-Back at computer
+0
+@BAG
+1
+-Busting a gut
+0
+@BAK
+1
+-Back at the keyboard
+0
+@BBIAB
+1
+-Be back in a bit
+0
+@BBL
+1
+-Be back later
+0
+@BBLBNTSBO...
+1
+-Be back later but not to soon because of...
+0
+@BBR
+1
+-Burnt beyond repair
+0
+@BBS
+1
+-Be back soon
+0
+@BC
+1
+-Because
+0
+@BCNU
+1
+-Be Seein' You
+0
+@BEG
+1
+-Big evil grin
+0
+@BF
+1
+-Boyfriend
+0
+@BFN
+1
+-Bye for now
+0
+@BG
+1
+-Big grin
+0
+@BICBW
+1
+-But I could be wrong
+0
+@BION
+1
+-Believe it or not
+0
+@BIOYIOB
+1
+-Blow it out your I/O port
+0
+@BITMT
+1
+-But in the meantime
+0
+@BKA
+1
+-Better known as
+0
+@BL
+1
+-Belly laughing
+0
+@BM
+1
+-Bite me
+0
+@BMB
+1
+-bite my bum
+0
+@BMG
+1
+-Be my guest
+0
+@BMTIPG
+1
+-Brilliant minds think in parallel gutters
+0
+@BOB
+1
+-Back off bastard
+0
+@BOL
+1
+-Be on later
+0
+@BOM
+1
+-Bitch of mine
+0
+@BOT
+1
+-Back on topic
+0
+@BRB
+1
+-Be right back
+0
+@BRBB
+1
+-Be right back bitch
+0
+@BRBS
+1
+-Be right back soon
+0
+@BRH
+1
+-Be right here
+0
+@BRS
+1
+-Big red switch
+0
+@BS
+1
+-Big smile
+0
+@BSF
+1
+-But seriously folks
+0
+@BST
+1
+-But seriously though
+0
+@BTA
+1
+-But then again
+0
+@BTAIM
+1
+-Be that as it may
+0
+@BTDT
+1
+-Been there done that
+0
+@BTOBD
+1
+-Be there or be dead
+0
+@BTOBS
+1
+-Be there or be square
+0
+@BTSOOM
+1
+-Beats the shit out of me
+0
+@BTW
+1
+-By the way
+0
+@BUDWEISER
+1
+-Because you deserve what every individual should ever receive
+0
+@BWQ
+1
+-Buzz word quotient
+0
+@BWTHDIK
+1
+-But what the heck do I know
+0
+@BYOB
+1
+-Bring your own bottle
+0
+@BYOH
+1
+-Bat You Onna Head
+0
+@C&G
+1
+-Chuckle and grin
+0
+@C=:-)
+1
+-User is a chef.
+0
+@C=}>;*{))
+1
+-A drunk, devilish chef with a toupee in an updraft, a mustache, and a double chin.
+0
+@CAD
+1
+-Ctrl-alt-delete
+0
+@CADET
+1
+-Can't add, doesn't even try
+0
+@CDIWY
+1
+-Couldn't do it without you
+0
+@CFN
+1
+-Ciao for now
+0
+@CFS
+1
+-Care for secret?
+0
+@CFV
+1
+-Call for votes
+0
+@CFY
+1
+-Calling for you
+0
+@CID
+1
+-Consider it done
+0
+@CIM
+1
+-CompuServe information manager
+0
+@CLM
+1
+-Career limiting move
+0
+@CM@TW
+1
+-Catch me at the web
+0
+@CMIIW
+1
+-Correct me if I'm wrong
+0
+@CNP
+1
+-Continue in next post
+0
+@CO
+1
+-Conference
+0
+@CRAFT
+1
+-Can't remember a frighten thing
+0
+@CRS
+1
+-Can�t remember shit
+0
+@CSG
+1
+-Chuckle snicker grin
+0
+@CTS
+1
+-Changing the subject
+0
+@CU
+1
+-See you
+0
+@CU2
+1
+-See you too
+0
+@CUL
+1
+-See you later
+0
+@CUL8R
+1
+-See you later
+0
+@CWOT
+1
+-Complete waste of time
+0
+@CWYL
+1
+-Chat with you later
+0
+@CYA
+1
+-See ya
+0
+@CYAL8R
+1
+-See ya later
+0
+@CYO
+1
+-See you online
+0
+@DBA
+1
+-Doing business as
+0
+@DCED
+1
+-Disconnected
+0
+@DFLA
+1
+-Disenhanced four-letter acronym
+0
+@DGA
+1
+-Digital guardian angel
+0
+@DH
+1
+-Darling husband
+0
+@DIIK
+1
+-Darn if i know
+0
+@DIKU
+1
+-Do I know you?
+0
+@DITYID
+1
+-Did I tell you I'm distressed
+0
+@DIY
+1
+-Do it yourself
+0
+@DL
+1
+-Dead link
+0
+@DLTBBB
+1
+-Don't let the bad bugs bite
+0
+@DMMGH
+1
+-Don't make me get hostile
+0
+@DND
+1
+-Do not disturb
+0
+@DQMOT
+1
+-Don't quote me on this
+0
+@DTC
+1
+-Damn this computer
+0
+@DTRT
+1
+-Do the right thing
+0
+@DUCT
+1
+-Did you see that?
+0
+@DWAI
+1
+-Don't worry about it
+0
+@DWIM
+1
+-Do what I mean
+0
+@DWIMC
+1
+-Do what I mean, correctly
+0
+@DWISNWID
+1
+-Do what I say, not what I do
+0
+@DYJHIW
+1
+-Don't you just hate it when...
+0
+@DYK
+1
+-Do you know
+0
+@DYOH
+1
+-Do your own homework
+0
+@E-:-)
+1
+-User is a Ham radio operator.
+0
+@E-:-I
+1
+-Net.ham-radio
+0
+@EAK
+1
+-Eating at keyboard
+0
+@EG
+1
+-Evil grin
+0
+@EIE
+1
+-Enough is enough
+0
+@EMFJI
+1
+-Excuse me for jumping in
+0
+@EMSG
+1
+-Email message
+0
+@EOD
+1
+-End of discussion
+0
+@EOF
+1
+-End of file
+0
+@EOL
+1
+-End of lecture
+0
+@EOM
+1
+-End of message
+0
+@EOT
+1
+-End of thread
+0
+@ETLA
+1
+-Extended three letter acronym
+0
+@F
+1
+-Female
+0
+@F/F
+1
+-Face to face
+0
+@F2F
+1
+-Face to face
+0
+@FAQ
+1
+-Frequently asked questions
+0
+@FAWC
+1
+-For anyone who cares
+0
+@FBOW
+1
+-For better or worse
+0
+@FBTW
+1
+-Fine, be that way
+0
+@FCFS
+1
+-First come, first served
+0
+@FCOL
+1
+-For crying out loud
+0
+@FIFO
+1
+-First in, first out
+0
+@FISH
+1
+-First in, still here
+0
+@FLA
+1
+-Four-letter acronym
+0
+@FOAD
+1
+-Fight over and die
+0
+@FOAF
+1
+-Friend of a friend
+0
+@FOB
+1
+-Full of bless
+0
+@FOC
+1
+-Free of charge
+0
+@FOCL
+1
+-Falling of chair laughing
+0
+@FOFL
+1
+-Falling on the floor laughing
+0
+@FOS
+1
+-Freedom of speech
+0
+@FOTCL
+1
+-Falling of the chair laughing
+0
+@FTF
+1
+-Face to face
+0
+@FTTT
+1
+-From time to time
+0
+@FU
+1
+-F*cked up
+0
+@FUBAR
+1
+-F*cked up beyond all recognition
+0
+@FUD
+1
+-Fear, uncertainty and doubt
+0
+@FURTB
+1
+-Full up ready to burst (about hard disk drives)
+0
+@FW
+1
+-Forward
+0
+@FWIW
+1
+-For what it's worth
+0
+@FYA
+1
+-For your amusement
+0
+@FYE
+1
+-For your entertainment
+0
+@FYEO
+1
+-For your eyes only
+0
+@FYI
+1
+-For your information
+0
+@G
+1
+-Grin
+0
+@G&BIT
+1
+-Grin and bear it
+0
+@G2B
+1
+-Going to bed
+0
+@G2G
+1
+-Got to go
+0
+@G2GGS2D
+1
+-Got to go get something to drink
+0
+@GA
+1
+-Good afternoon
+0
+@GAFIA
+1
+-Get away from it all
+0
+@GAL
+1
+-Get a life
+0
+@GAS
+1
+-Greetings and salutations
+0
+@GBH
+1
+-Great big hug
+0
+@GBH&K
+1
+-Great big huh and kisses
+0
+@GBR
+1
+-Garbled beyond recovery
+0
+@GBY
+1
+-God bless you
+0
+@GD&H
+1
+-Grinning, ducking and hiding
+0
+@GD&R
+1
+-Grinning, ducking and running
+0
+@GD&RAFAP
+1
+-Grinning, ducking and running as fast as possible
+0
+@GD&REF&F
+1
+-grinning, ducking and running even further and faster
+0
+@GD&RF
+1
+-Grinning, ducking and running fast
+0
+@GD&RVF
+1
+-Grinning, ducking and running very
+0
+@GD&W
+1
+-Grin, duck and wave
+0
+@GDW
+1
+-Grin, duck and wave
+0
+@GE
+1
+-Good evening
+0
+@GF
+1
+-Girlfriend
+0
+@GFETE
+1
+-Grinning from ear to ear
+0
+@GFN
+1
+-Gone for now
+0
+@GFU
+1
+-Good for you
+0
+@GG
+1
+-Good game
+0
+@GGU2
+1
+-Good game you two
+0
+@GIGO
+1
+-Garbage in garbage out
+0
+@GJ
+1
+-Good job
+0
+@GL
+1
+-Good luck
+0
+@GL&GH
+1
+-Good luck and good hunting
+0
+@GM
+1
+-Good morning
+0
+@GMAB
+1
+-Give me a break
+0
+@GMTA
+1
+-Great minds think alike
+0
+@GN
+1
+-Good night
+0
+@GOK
+1
+-God only knows
+0
+@GOWI
+1
+-Get on with it
+0
+@GPF
+1
+-General protection fault
+0
+@GR&D
+1
+-Grinning, running and ducking
+0
+@GR8
+1
+-Great
+0
+@GRA
+1
+-Go right ahead
+0
+@GTG
+1
+-Got to go
+0
+@GTSY
+1
+-Glad to see you
+0
+@GW
+1
+-Good work
+0
+@H
+1
+-Hug
+0
+@H&K
+1
+-Hug and kiss
+0
+@H/O
+1
+-Hold on
+0
+@HAG1
+1
+-Have a good one
+0
+@HAGD
+1
+-Have a good day
+0
+@HAGN
+1
+-Have a good night
+0
+@HAGS
+1
+-Have a good summer
+0
+@HAHA
+1
+-Having a heart attack
+0
+@HAK
+1
+-Hug and kiss
+0
+@HAND
+1
+-Have a nice day
+0
+@HB
+1
+-Hug back
+0
+@HDYWTDT
+1
+-How do you work this dratted thing
+0
+@HF
+1
+-Have fun
+0
+@HH
+1
+-Holding hands
+0
+@HHIS
+1
+-Hanging head in shame
+0
+@HHJK
+1
+-Ha ha, just kidding
+0
+@HHOJ
+1
+-Ha ha, only joking
+0
+@HHOK
+1
+-Ha ha, only kidding
+0
+@HHOS
+1
+-Ha ha, only seriously
+0
+@HIH
+1
+-Hope it helps
+0
+@HILIACACLO
+1
+-Help I lapsed into a coma and can�t log off
+0
+@HIWTH
+1
+-Hate it when that happens
+0
+@HLM
+1
+-He loves me
+0
+@HMS
+1
+-Home made smiley
+0
+@HMT
+1
+-Here�s my try
+0
+@HMWK
+1
+-Homework
+0
+@HOAS
+1
+-Hold on a second
+0
+@HSIK
+1
+-How should i know
+0
+@HT
+1
+-Hi there
+0
+@HTH
+1
+-Hope this helps
+0
+@HTHBE
+1
+-Hope this has been enlightening
+0
+@HYLMS
+1
+-Hate you like my sister
+0
+@IAAA
+1
+-I am an accountant
+0
+@IAAL
+1
+-I am a lawyer
+0
+@IAC
+1
+-In any case
+0
+@IAE
+1
+-In any event
+0
+@IAG
+1
+-It's all good
+0
+@IAIM
+1
+-In an Irish minute
+0
+@IANAA
+1
+-I am not an accountant
+0
+@IANAL
+1
+-I am not a lawyer
+0
+@IBN
+1
+-I'm bucked naked
+0
+@IC
+1
+-I see
+0
+@ICOCBW
+1
+-I could of course be wrong
+0
+@IDC
+1
+-I don't care
+0
+@IDGI
+1
+-I don't get it
+0
+@IDGW
+1
+-In a good way
+0
+@IDI
+1
+-I doubt it
+0
+@IDK
+1
+-I don't know
+0
+@IDTT
+1
+-I'll drink to that
+0
+@IFVB
+1
+-I feel very bad
+0
+@IGP
+1
+-I gotta pee
+0
+@IGTP
+1
+-I get the point
+0
+@IHTFP
+1
+-I hate this fountain place
+0
+@IHU
+1
+-I hate you
+0
+@IHY
+1
+-I hate you
+0
+@II
+1
+-I�m impressed
+0
+@IIR
+1
+-If I recall
+0
+@IIRC
+1
+-If I recall correctly
+0
+@IIT
+1
+-I�m impressed too
+0
+@IJWTK
+1
+-I just want to know
+0
+@IJWTS
+1
+-I just want to say
+0
+@IK
+1
+-I know
+0
+@IKWUM
+1
+-I know what you mean
+0
+@ILBCNU
+1
+-I"ll be seeing you
+0
+@ILU
+1
+-I love you
+0
+@ILY
+1
+-I love you
+0
+@ILYFAE
+1
+-I love you forever and ever
+0
+@IM
+1
+-Instant message
+0
+@IMAO
+1
+-In my arrogant opinion
+0
+@IMBO
+1
+-In my bloody opinion
+0
+@IMCO
+1
+-In my considered opinion
+0
+@IME
+1
+-In my experience
+0
+@IMFAO
+1
+-In my fooling arrogant opinion
+0
+@IMHO
+1
+-In my humble opinion
+0
+@IMNSHO
+1
+-In my, not so humble opinion
+0
+@IMO
+1
+-In my opinion
+0
+@IMOBO
+1
+-In my own biased opinion
+0
+@IMP
+1
+-I might be pregnant
+0
+@IMPOV
+1
+-In my point of view
+0
+@IMS
+1
+-I am sorry
+0
+@INAL
+1
+-I'm not a lawyer
+0
+@INPO
+1
+-In no particular order
+0
+@IOIT
+1
+-I'm on Irish Time
+0
+@IOW
+1
+-In other words
+0
+@IRC
+1
+-Internet Relay Chat; an multiuser, multinetwork conversing platform (http://www.irc.org)
+0
+@IRL
+1
+-In real life
+0
+@IRMFI
+1
+-I reply merely for information
+0
+@IS
+1
+-I'm sorry
+0
+@ISTM
+1
+-It seems to me
+0
+@ISTR
+1
+-I seem to recall
+0
+@ISWYM
+1
+-I see what you mean
+0
+@ITFA
+1
+-In the final analysis
+0
+@ITRO
+1
+-In the reality of
+0
+@ITRW
+1
+-In the real world
+0
+@ITSFWI
+1
+-If the shoe fits, wear it
+0
+@IVL
+1
+-In virtual live
+0
+@IWALY
+1
+-I will always love you
+0
+@IWBNI
+1
+-It would be nice if
+0
+@IYKWIM
+1
+-If you know what I mean
+0
+@IYSWIM
+1
+-If you see what I mean
+0
+@J/K
+1
+-Just kidding
+0
+@J/P
+1
+-Just playing
+0
+@JAM
+1
+-Just a minute
+0
+@JAS
+1
+-Just a second
+0
+@JASE
+1
+-Just another system error
+0
+@JAWS
+1
+-Just another windows shell
+0
+@JIC
+1
+-Just in case
+0
+@JJWY
+1
+-Just joking with you
+0
+@JK
+1
+-Just kidding
+0
+@JMHO
+1
+-Just my humble opinion
+0
+@JMO
+1
+-Just my opinion
+0
+@JP
+1
+-Just playing
+0
+@JTLYK
+1
+-Just to let you know
+0
+@JW
+1
+-Just wondering
+0
+@K
+1
+-Kiss (rarely used)
+0
+@K:P
+1
+-User is a little kid with a propeller beenie.
+0
+@KB
+1
+-Kiss back
+0
+@KHYF
+1
+-Know how you feel
+0
+@KIS
+1
+-Keep it simple
+0
+@KISS
+1
+-Keeping it sweetly simple
+0
+@KIT
+1
+-Keep in touch
+0
+@KOTC
+1
+-Kiss on the cheek
+0
+@KOTL
+1
+-Kiss on the lips
+0
+@KUTGW
+1
+-Keep up the good work
+0
+@KWIM
+1
+-Know what I mean?
+0
+@L
+1
+-Laugh
+0
+@L8R
+1
+-Later
+0
+@L8R G8R
+1
+-Later gator
+0
+@LAB
+1
+-Life's a bitch
+0
+@LBR
+1
+-Little boys room
+0
+@LD
+1
+-Long distance
+0
+@LGR
+1
+-Little girls room
+0
+@LHM
+1
+-Lord help me
+0
+@LHU
+1
+-Lord help us
+0
+@LL&P
+1
+-Live long & prosper
+0
+@LMA
+1
+-Leave me alone
+0
+@LMHO
+1
+-Laughing my head off
+0
+@LMK
+1
+-Let me know
+0
+@LNK
+1
+-Love and kisses
+0
+@LOL
+1
+-Lots of love
+0
+@LOLA
+1
+-Laughing out loud again
+0
+@LOML
+1
+-Light of my life (or love of my life)
+0
+@LOMLILY
+1
+-Light of my life, I love you
+0
+@LOOL
+1
+-Laughing out outrageously loud
+0
+@LSHIPMP
+1
+-Laughing so hard I pissed my pants
+0
+@LSHMBB
+1
+-Laughing so hard my belly is bouncing
+0
+@LSHMBH
+1
+-Laughing so hard my belly hurts
+0
+@LTNS
+1
+-Long time no see
+0
+@LTR
+1
+-Long term relationship
+0
+@LTS
+1
+-Laughing to self
+0
+@LULAS
+1
+-Love you like a sister
+0
+@LUWAMH
+1
+-Love you with all my heart
+0
+@LY
+1
+-Love ya
+0
+@LYK
+1
+-Let you know
+0
+@LYL
+1
+-Love ya lots
+0
+@LYLAB
+1
+-Love ya like a brother
+0
+@LYLAS
+1
+-Love ya like a sister
+0
+@M
+1
+-Male
+0
+@M8
+1
+-Mate
+0
+@MB
+1
+-Maybe
+0
+@MYOB
+1
+-Mind your own business
+0
+@N
+1
+-In
+0
+@N/C
+1
+-Not cool
+0
+@N/M
+1
+-Never mind / nothing much
+0
+@N/S
+1
+-No shit
+0
+@N2M
+1
+-Not too much
+0
+@NBD
+1
+-No big deal
+0
+@NE1
+1
+-Anyone
+0
+@NETUA
+1
+-Nobody ever tells us anything
+0
+@NFI
+1
+-No found idea
+0
+@NL
+1
+-Not likely
+0
+@NM
+1
+-Never mind / nothing much
+0
+@NMH
+1
+-Not much here
+0
+@NMJC
+1
+-Nothing much, just chillin'
+0
+@NOM
+1
+-No offense meant
+0
+@NOTTOMH
+1
+-Not of the top of my mind
+0
+@NOYB
+1
+-None of your business
+0
+@NOYFB
+1
+-None of your failing business
+0
+@NP
+1
+-No problem
+0
+@NRN
+1
+-No response necessary
+0
+@NS
+1
+-No shit
+0
+@NTA
+1
+-Non-technical acronym
+0
+@NVM
+1
+-Nevermind
+0
+@O :-)
+1
+-User is an angel (at heart, at least).
+0
+@O |-)
+1
+-Net.religion
+0
+@O-)
+1
+-Megaton Man On Patrol!(or else, user is a scuba diver)
+0
+@OBTW
+1
+-Oh, by the way
+0
+@OF
+1
+-On fire
+0
+@OFIS
+1
+-On floor with stitches
+0
+@OH
+1
+-Off hand
+0
+@OIC
+1
+-Oh I see
+0
+@OK
+1
+-Abbreviation of oll korrect (all correct)
+0
+@OL
+1
+-Old lady (wife, girlfriend)
+0
+@OM
+1
+-Old man (husband, boyfriend)
+0
+@OMG
+1
+-Oh my god / gosh / goodness
+0
+@OOC
+1
+-Out of character
+0
+@OT
+1
+-Off topic / other topic
+0
+@OTOH
+1
+-On the other hand
+0
+@OTP
+1
+-On the phone
+0
+@OTTOMH
+1
+-Off the top of my head
+0
+@PAW
+1
+-Parents are watching
+0
+@PDS
+1
+-Please don't shoot
+0
+@PEBCAK
+1
+-Problem exists between chair and keyboard
+0
+@PLS
+1
+-Please
+0
+@PLZ
+1
+-Please
+0
+@PM
+1
+-Private message
+0
+@PMFJI
+1
+-Pardon me for jumping in
+0
+@PMJI
+1
+-Pardon my jumping in (Another way for PMFJI)
+0
+@PMP
+1
+-Peed my pants
+0
+@POAHF
+1
+-Put on a happy face
+0
+@POC
+1
+-Point of contact
+0
+@POOF
+1
+-I have left the chat
+0
+@POS
+1
+-Parents over shoulder
+0
+@POTB
+1
+-Pats on the back
+0
+@POV
+1
+-Point of view
+0
+@PPL
+1
+-People
+0
+@PS
+1
+-Post script
+0
+@PSA
+1
+-Public show of affection
+0
+@Q4U
+1
+-Question for you
+0
+@QSL
+1
+-Reply
+0
+@QSO
+1
+-Conversation
+0
+@QT
+1
+-Cutie
+0
+@RCED
+1
+-Reconnected
+0
+@RE
+1
+-Hi again (same as re's)
+0
+@ROFL
+1
+-Rolling on floor laughing
+0
+@ROFLOLAY
+1
+-Rolling on floor laughing out loud at you
+0
+@ROFLOLTSDMC
+1
+-Rolling on floor laughing out loud tears streaming down my cheeks
+0
+@ROFLOLUTS
+1
+-Rolling on floor laughing out loud unable to speak
+0
+@ROFLOLWTIME
+1
+-Rolling on floor laughing out loud with tears in my eyes
+0
+@ROTFL
+1
+-Rolling on the floor laughing
+0
+@RSN
+1
+-Real soon now
+0
+@RTF
+1
+-Read the FAQ
+0
+@RTSM
+1
+-Read the stupid manual
+0
+@RUOK?
+1
+-Are you okay?
+0
+@RUTTM
+1
+-Are you talking to me
+0
+@RVD
+1
+-Really very dumb
+0
+@S
+1
+-Smile
+0
+@S2R
+1
+-Send to receive
+0
+@SAMAGAL
+1
+-Stop annoying me and get a live
+0
+@SCNR
+1
+-Sorry, could not resist
+0
+@SETE
+1
+-Smiling ear to ear
+0
+@SH
+1
+-So hot
+0
+@SHICPMP
+1
+-So happy I could piss my pants
+0
+@SHID
+1
+-Slaps head in disgust
+0
+@SHMILY
+1
+-See how much I love you
+0
+@SIM
+1
+-Shit, it's Monday
+0
+@SITWB
+1
+-Sorry, in the wrong box
+0
+@SNAFU
+1
+-Situation normal, all fed up
+0
+@SO
+1
+-Significant other
+0
+@SOHF
+1
+-Sense of humor failure
+0
+@SOMY
+1
+-Sick of me yet?
+0
+@SPAM
+1
+-Stupid persons' advertisement
+0
+@SRY
+1
+-Sorry
+0
+@STW
+1
+-Search the web
+0
+@SWAK
+1
+-Sealed with a kiss
+0
+@SWALK
+1
+-Sweet, with all love, kisses
+0
+@SWL
+1
+-Screaming with laughter
+0
+@SYS
+1
+-See you soon
+0
+@SYSOP
+1
+-System operator
+0
+@T
+1
+-Tickle
+0
+@TA
+1
+-Thanks again
+0
+@TAFN
+1
+-That's all for now
+0
+@TBA
+1
+-To be announced
+0
+@TBH
+1
+-To be honest
+0
+@TCO
+1
+-Taken care of
+0
+@TGIF
+1
+-Thank god its Friday
+0
+@THTH
+1
+-To hot to handle
+0
+@THX
+1
+-Thanks
+0
+@TIA
+1
+-Thanks in advance
+0
+@TIIC
+1
+-The idiots in charge
+0
+@TJM
+1
+-That's just me
+0
+@TLA
+1
+-Three-letter acronym
+0
+@TMA
+1
+-Take my advice
+0
+@TMI
+1
+-To much information
+0
+@TNSTAAFL
+1
+-There's no such thing as a free lunch
+0
+@TNX
+1
+-Thanks
+0
+@TOH
+1
+-To other half
+0
+@TOY
+1
+-Thinking of you
+0
+@TPTB
+1
+-The powers that be
+0
+@TSDMC
+1
+-Tears streaming down my cheeks
+0
+@TT2T
+1
+-To tired to talk
+0
+@TTFN
+1
+-Ta ta for now
+0
+@TTT
+1
+-Thought that, too
+0
+@TTUL
+1
+-Talk to you later
+0
+@TTYL
+1
+-Talk to you later
+0
+@TTYLMF
+1
+-Talk to you later my friend
+0
+@TU
+1
+-Thank you
+0
+@TWMA
+1
+-Till we meet again
+0
+@TX
+1
+-Thanx
+0
+@TY
+1
+-Thank you
+0
+@TYVM
+1
+-Thank you very much
+0
+@U2
+1
+-You too
+0
+@UR
+1
+-Your
+0
+@URAQT!
+1
+-You are a cutie!
+0
+@UW
+1
+-You're welcom
+0
+@VBG
+1
+-Very big grin
+0
+@VBS
+1
+-Very big smile
+0
+@W
+1
+-Wink
+0
+@W/E
+1
+-Whatever
+0
+@W8
+1
+-Wait
+0
+@W8AM
+1
+-Wait a minute
+0
+@WAY
+1
+-Who are you
+0
+@WB
+1
+-Welcome back
+0
+@WBS
+1
+-Write back soon
+0
+@WDHLM
+1
+-Why doesn't he love me
+0
+@WE
+1
+-Whatever
+0
+@WFM
+1
+-Works for me
+0
+@WNDITWB
+1
+-We never did it this way before
+0
+@WP
+1
+-Wrong person
+0
+@WRT
+1
+-With respect to
+0
+@WTF
+1
+-What/who the fool?
+0
+@WTG
+1
+-Way to go
+0
+@WTGP
+1
+-Want to go private?
+0
+@WTH
+1
+-What/who the heck?
+0
+@WTMI
+1
+-Way to much information
+0
+@WU
+1
+-What's up?
+0
+@WU?
+1
+-What's up?
+0
+@WUD
+1
+-What's up dog?
+0
+@WUF
+1
+-Where are you from?
+0
+@WUWT
+1
+-Whats up with that
+0
+@WYMM
+1
+-Will you marry me?
+0
+@WYSIWYG
+1
+-What you see is what you get
+0
+@X-(
+1
+-Net.suicide
+0
+@XTLA
+1
+-Extended three letter acronym
+0
+@Y
+1
+-Why?
+0
+@Y2K
+1
+-You're too kind
+0
+@YATB
+1
+-You are the best
+0
+@YBS
+1
+-You'll be sorry
+0
+@YG
+1
+-Young gentleman
+0
+@YHBBYBD
+1
+-You'd have better bet your bottom dollar
+0
+@YL
+1
+-You 'll live
+0
+@YM
+1
+-You mean
+0
+@YMMD
+1
+-You've made my day
+0
+@YMMV
+1
+-Your mileage may vary
+0
+@YOYO
+1
+-You're on your own
+0
+@YT?
+1
+-You there?
+0
+@YVW
+1
+-You're very welcome
+0
+@YW
+1
+-You are welcome
+0
+@YWIA
+1
+-You're welcome in advance
+0
+@YWTKM
+1
+-You want to kiss me
+0
+@YWTLM
+1
+-You want to love me
+0
+@YY4U
+1
+-Two wise for you
+0
+@[:-)
+1
+-User is wearing a walkman.
+0
+@[:]
+1
+-User is a robot.
+0
+@[]
+1
+-Hugs and ...
+0
+@^-^
+1
+-Satisfied Smile
+0
+@^-~
+1
+-Wink
+0
+@^_-
+1
+-Wink
+0
+@^_^
+1
+-Smile
+0
+@^o
+1
+-Snoring.
+0
+@`:-)
+1
+-User shaved one of his eyebrows off this morning.
+0
+@d8=
+1
+-Your pet beaver is wearing goggles and a hard hat.
+0
+@n00b
+1
+-Leetspeak for beginner
+0
+@{:-)
+1
+-User wears a toupee.
+0
+@|-)
+1
+-hee hee
+0
+@|-D
+1
+-ho ho
+0
+@|-I
+1
+-User is asleep.
+0
+@|-O
+1
+-User is yawning/snoring.
+0
+@|I
+1
+-Asleep.
+0
+@}:-(
+1
+-Toupee in an updraft.
+0
+@}:^#})
+1
+-Updrafted bushy-mustached pointy nosed smiley with a double-chin.
+0
+@~~:-(
+1
+-Net.flame
+0

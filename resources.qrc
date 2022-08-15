@@ -16,9 +16,11 @@
         <file>img/search.svg</file>
         <file>img/delete.svg</file>
         <file>img/word-edit.svg</file>
+        <file>img/keyword_art.png</file>
+        <file>img/meaning_art.png</file>
     </qresource>
     <qresource prefix="/fonts">
-        <file>fonts/PlayfairDisplay-Italic-VariableFont_wght.ttf</file>
-        <file>fonts/PlayfairDisplay-VariableFont_wght.ttf</file>
+        <file>fonts/PlayfairDisplay-Regular.ttf</file>
+        <file>fonts/Poppins-Regular.ttf</file>
     </qresource>
 </RCC>

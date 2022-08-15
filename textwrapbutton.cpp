@@ -13,6 +13,9 @@ TextWrapButton::TextWrapButton(QWidget *parent) : QPushButton(parent) {
     label->setWordWrap(true);
     label->setMouseTracking(false);
     label->setTextInteractionFlags(Qt::NoTextInteraction);
+    label->setFont(QFont("Poppins", 12));
+    label->setAlignment(Qt::AlignCenter);
+    label->setContentsMargins(10,3,10,3);
 }
 
 TextWrapButton::TextWrapButton(const QString &text,
@@ -29,7 +32,6 @@ TextWrapButton::TextWrapButton(const QString &text,
 }
 
 void TextWrapButton::setText(const QString &text) {
-    qDebug() << "SET TEXT";
     label->setText(text);
 }
 
@@ -47,7 +49,6 @@ void TextWrapButton::paintEvent(QPaintEvent *pe)
 };
 
 void TextWrapButton::resizeEvent(QResizeEvent*event) {
-    qDebug() << "RESIZE";
     QPushButton::resizeEvent(event);
     label->resize(event->size());
 }

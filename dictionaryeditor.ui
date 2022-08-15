@@ -38,7 +38,7 @@ QLineEdit {
 	padding: 10px;
 }</string>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout_3" stretch="1,5,1,2,3">
+  <layout class="QVBoxLayout" name="verticalLayout_3" stretch="1,0,1,2,3">
    <item>
     <widget class="QLabel" name="label">
      <property name="font">
@@ -60,7 +60,7 @@ QLineEdit {
      <property name="frameShadow">
       <enum>QFrame::Raised</enum>
      </property>
-     <layout class="QVBoxLayout" name="verticalLayout_4">
+     <layout class="QVBoxLayout" name="verticalLayout">
       <item>
        <widget class="QLabel" name="label_3">
         <property name="sizePolicy">
@@ -110,6 +110,31 @@ QLineEdit {
       </item>
       <item>
        <layout class="QVBoxLayout" name="defLayout"/>
+      </item>
+      <item>
+       <widget class="QLabel" name="label_8">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>12</pointsize>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">color: orange;</string>
+        </property>
+        <property name="text">
+         <string>Example</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <layout class="QVBoxLayout" name="exampleLayout"/>
       </item>
       <item>
        <widget class="QPushButton" name="addDefBtn">

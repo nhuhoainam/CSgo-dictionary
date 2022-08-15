@@ -10,6 +10,7 @@ public:
   explicit Sidebar(QWidget *parent = nullptr);
   void addAction(QAction *action);
   QAction *addAction(const QString &text, const QIcon &icon = QIcon());
+  QAction *addDefaultAction(const QString &text, const QIcon &icon);
   void setSidebarIcon(QIcon &icon);
   QSize minimumSizeHint() const;
 

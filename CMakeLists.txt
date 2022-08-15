@@ -17,48 +17,67 @@ find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets LinguistTools)
 set(TS_FILES CSgo-dictionary_en_US.ts)
 
 set(PROJECT_SOURCES
-        mainscene.cpp
-        mainscene.ui
-        mainscene.h
+        api/dictionary_collection.hpp
+        api/dictionary_collection.cpp
+        api/Utils.hpp
+        api/Dictionary.hpp
+        api/Word.h
+        api/Word.cpp
+        api/converter.h
+        api/converter.cpp
+
+        resources.qrc
+
         textwrapbutton.cpp
         textwrapbutton.h
-        main.cpp
         sidebar.cpp
         sidebar.h
-        widget.cpp
-        widget.h
-        widget.ui
-        resources.qrc
+
         game.h
         game.cpp
         game.ui
-        wordcard.cpp
-        wordcard.h
-        wordcard.ui
-        home.h
-        home.cpp
-        favoritelist.cpp
-        favoritelist.h
+
+        Scene/mainscene.cpp
+        Scene/mainscene.ui
+        Scene/mainscene.h
+        Scene/home.h
+        Scene/home.cpp
+        Scene/favoritelist.cpp
+        Scene/favoritelist.h
+        Scene/history.cpp
+        Scene/history.h
+
         searchbox.cpp
         searchbox.h
-        history.cpp
-        history.h
         dictionaryeditor.cpp
         dictionaryeditor.h
         dictionaryeditor.ui
         mainwindow.h
         mainwindow.ui
         mainwindow.cpp
-        wordcardlayout.h
-        wordcardlayout.cpp
-        wordcardgroup.cpp
-        wordcardgroup.h
-        wordviewer.cpp
-        wordviewer.h
-        wordviewer.ui
-        singlewordview.cpp
-        singlewordview.h
-        singlewordview.ui
+
+        WordCard/wordcard.cpp
+        WordCard/wordcard.h
+        WordCard/wordcard.ui
+        WordCard/wordcardlayout.h
+        WordCard/wordcardlayout.cpp
+        WordCard/wordcardgroup.cpp
+        WordCard/wordcardgroup.h
+
+        WordViewer/wordviewer.cpp
+        WordViewer/wordviewer.h
+        WordViewer/wordviewer.ui
+        WordViewer/wordviewerentry.cpp
+        WordViewer/wordviewerentry.h
+        WordViewer/wordviewerentry.ui
+        WordViewer/singlewordview.cpp
+        WordViewer/singlewordview.h
+        WordViewer/singlewordview.ui
+        WordViewer/wordedit.cpp
+        WordViewer/wordedit.h
+        WordViewer/wordedit.ui
+
+        main.cpp
         ${TS_FILES}
 )
 
