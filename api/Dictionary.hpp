@@ -462,9 +462,9 @@ vector<pair<string, string>> Dictionary<MAX_SIZE, getid, getchar>::randomQuiz() 
 
 template <int MAX_SIZE, int (*getid)(char), char (*getchar)(int)>
 void Dictionary<MAX_SIZE, getid, getchar>::saveSerialTrie(TrieNode<MAX_SIZE, getid, getchar>* root, fstream& fout) {
-    // end of a word
+    // end of a word 255
     if (root->data != nullptr) {
-        fout << "]";
+        fout << char(255);
         root->data->saveToFile(fout);
     }
     // for each of next exist characters
@@ -475,19 +475,19 @@ void Dictionary<MAX_SIZE, getid, getchar>::saveSerialTrie(TrieNode<MAX_SIZE, get
             saveSerialTrie(root->nxt[i], fout);
         }
     }
-    // end of a character
-    fout << ">";
+    // end of a character 254
+    fout << char(254);
 }
 
 template <int MAX_SIZE, int (*getid)(char), char (*getchar)(int)>
 void Dictionary<MAX_SIZE, getid, getchar>::loadSerialTrie(TrieNode<MAX_SIZE, getid, getchar>* root, fstream& fin) {
     char c;
-    while (fin.get()) {
-        // if c is '>', we have reached the end of the serialized Trie
+    while (fin.get(c)) {
+        // if c is '>'254, we have reached the end of the serialized Trie
         // so we backtrack to the parent node
-        if (c == '>') break;
-        // if c is ']', we have reached the end of a word
-        if (c == ']') {
+        if (int(c) == 254) break;
+        // if c is ']'255, we have reached the end of a word
+        if (int(c) == 255) {
             Word* w = new Word();
             w->loadFromFile(fin);
             root->data = w;
