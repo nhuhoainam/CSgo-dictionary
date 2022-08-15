@@ -35,10 +35,13 @@ void WordCard::setupUi() {
 }
 
 void WordCard::setFavoriteState(bool on) {
-    if (on)
+    if (on) {
         ui->favBtn->setIcon(on_icon);
-    else
+        ui->favBtn->setChecked(on);
+    } else {
         ui->favBtn->setIcon(off_icon);
+        ui->favBtn->setChecked(on);
+    }
 }
 
 WordCard::~WordCard()
