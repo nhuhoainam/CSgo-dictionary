@@ -227,7 +227,7 @@ void MainWindow::handleDictionaryChanged(const QString &type) {
         dict.curDict = DictCollection::EngVie;
     } else if (type == "Emotional") {
         dict.curDict = DictCollection::Emoji;
-    } else if (keyword == "Slang") {
+    } else if (type == "Slang") {
         dict.curDict = DictCollection::Slang;
     }
     home->changeDictionary(type);
