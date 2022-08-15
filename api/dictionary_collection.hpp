@@ -7,7 +7,7 @@
 typedef Dictionary<41, getid_EngEng, getchar_EngEng> EngEngDictionary;
 typedef Dictionary<41, getid_EngEng, getchar_EngEng> EngVieDictionary;
 typedef Dictionary<41, getid_EngEng, getchar_EngEng> VieEngDictionary;
-typedef Dictionary<41, getidEmotion, getchar_Emotion> EmojiDictionary;
+typedef Dictionary<41, getid_Emotion, getchar_Emotion> EmojiDictionary;
 
 class DictCollection {
     EngEngDictionary *engEngDict;

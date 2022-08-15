@@ -1,7 +1,7 @@
 #include "converter.h"
 
 int getid_EngEng(char c) {
-    
+
     // lowercase and uppercase letters are treated as the same
     if ('a' <= c && c <= 'z')
         return c - 'a';
@@ -17,7 +17,7 @@ int getid_EngEng(char c) {
     else return -1;
 }
 
-int getidEmotion(char c) {
+int getid_Emotion(char c) {
     if (c < 0 || c >= 256) return -1;
     return c;
 }
