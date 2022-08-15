@@ -493,11 +493,11 @@ template <int MAX_SIZE, int (*getid)(char), char (*getchar)(int)>
 void Dictionary<MAX_SIZE, getid, getchar>::loadSerialTrie(TrieNode<MAX_SIZE, getid, getchar>* root, fstream& fin) {
     char c;
     while (fin.get(c)) {
-        // if c is '>'254, we have reached the end of the serialized Trie
+        // if c is '>'254 = -2, we have reached the end of the serialized Trie
         // so we backtrack to the parent node
-        if (int(c) == 254) break;
-        // if c is ']'255, we have reached the end of a word
-        if (int(c) == 255) {
+        if (int(c) == -2) break;
+        // if c is ']'255 = -1, we have reached the end of a word
+        if (int(c) == -1) {
             Word* w = new Word();
             w->loadFromFile(fin);
             root->data = w;
