@@ -1,6 +1,23 @@
 #include "api/dictionary_collection.hpp"
 #include "api/Utils.hpp"
 
+const string EngEngSavedPath = "./dictionary-data/dictionary-eng-eng-saved-data.txt";
+const string EngEngRawPath = "./dictionary-data/EngEng.txt";
+
+const string EngVieSavedPath = "./dictionary-data/dictionary-eng-vie-saved-data.txt";
+const string EngVieRawPath = "./dictionary-data/EngVie.txt";
+
+const string VieEngSavedPath = "./dictionary-data/dictionary-vie-eng-saved-data.txt";
+const string VieEngRawPath = "./dictionary-data/VieEng.txt";
+
+const string EmoSavedPath = "./dictionary-data/dictionary-emoji-saved-data.txt";
+const string EmoRawPath = "./dictionary-data/Emoji.txt";
+
+bool fexist(const string &path) {
+    ifstream f(path);
+    return f.good();
+}
+
 DictCollection::DictCollection() {
     engEngDict = new EngEngDictionary;
     engVieDict = new EngVieDictionary;
@@ -8,12 +25,35 @@ DictCollection::DictCollection() {
     emoDict = new EmojiDictionary;
 }
 
+void DictCollection::initRaw() {
+    delete engEngDict;
+    engEngDict = new EngEngDictionary;
+    vector<pair<string, vector<pair<string, string>>>> fileData;
+    readFromFile(EngEngRawPath, fileData);
+    insertData(*engEngDict, fileData);
+}
 
 void DictCollection::init() {
     curDict = EngEng;
-    vector<pair<string, vector<pair<string, string>>>> fileData;
-    readFromFile("./dictionary-data/EngEng.txt", fileData);
-    insertData(*engEngDict, fileData);
+    if (fexist(EngEngSavedPath)) {
+        engEngDict->loadDataStructures(EngEngSavedPath);
+    } else {
+        vector<pair<string, vector<pair<string, string>>>> fileData;
+        readFromFile(EngEngRawPath, fileData);
+        insertData(*engEngDict, fileData);
+    }
+
+    if (fexist(EngVieSavedPath)) {
+        engVieDict->loadDataStructures(EngVieSavedPath);
+    } else {
+        vector<pair<string, vector<pair<string, string>>>> fileData;
+        readFromFile(EngVieRawPath, fileData);
+        insertData(*engVieDict, fileData);
+    }
+}
+
+void DictCollection::close() {
+    engEngDict->saveDataStructures("./dictionary-data/dictionary-eng-eng-saved-data.txt");
 }
 
 Word* DictCollection::find(const Word& w) {
