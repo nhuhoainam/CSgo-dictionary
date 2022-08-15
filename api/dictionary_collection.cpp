@@ -79,8 +79,8 @@ void DictCollection::close() {
     engEngDict->saveSearchHistoryList(EngEngHistoryPath);
 
     vieEngDict->saveDataStructures(VieEngSavedPath);
-    vieEngDict->saveDataStructures(VieEngFavoritePath);
-    vieEngDict->saveDataStructures(VieEngHistoryPath);
+    vieEngDict->saveFavouristList(VieEngFavoritePath);
+    vieEngDict->saveSearchHistoryList(VieEngHistoryPath);
 }
 
 Word* DictCollection::find(const Word& w) {
