@@ -11,7 +11,7 @@ Home::Home(QWidget *parent)
 
 void Home::setupRefreshBtn() {
     refreshBtn = new QPushButton;
-    ui->titleLayout->insertWidget(1, refreshBtn);
+    ui->titleLayout->addWidget(refreshBtn);
     connect(refreshBtn, &QPushButton::clicked,
             this, &Home::refreshRequest);
     refreshBtn->setStyleSheet("QPushButton {"

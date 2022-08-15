@@ -173,6 +173,14 @@ void MainWindow::connectSignalAndSlot() {
             &SingleWordView::favoriteToggle,
             this,
             &MainWindow::handleWordViewerFavorite);
+    connect(favoriteList,
+            &MainScene::dictionaryTypeChange,
+            this,
+            &MainWindow::handleDictionaryChanged);
+    connect(history,
+            &MainScene::dictionaryTypeChange,
+            this,
+            &MainWindow::handleDictionaryChanged);
     connect(home,
             &Home::dictionaryTypeChange,
             this,
@@ -210,16 +218,19 @@ void MainWindow::setupScene() {
     history->setWordList(historyList);
 }
 
-void MainWindow::handleDictionaryChanged(const QString &keyword) {
-    if (keyword == "English - English") {
+void MainWindow::handleDictionaryChanged(const QString &type) {
+    if (type == "English - English") {
         dict.curDict = DictCollection::EngEng;
-    } else if (keyword == "Vietnamese - English") {
+    } else if (type == "Vietnamese - English") {
         dict.curDict = DictCollection::VieEng;
-    } else if (keyword == "English - Vietnamese") {
+    } else if (type == "English - Vietnamese") {
         dict.curDict = DictCollection::EngVie;
-    } else if (keyword == "Emoji") {
+    } else if (type == "Emoji") {
         dict.curDict = DictCollection::Emoji;
     }
+    home->changeDictionary(type);
+    favoriteList->changeDictionary(type);
+    history->changeDictionary(type);
     setupScene();
 }
 
@@ -285,7 +296,12 @@ void MainWindow::handleHomeFocus() {
 }
 
 void MainWindow::handleHomeRefresh() {
-    qDebug() << "Home refresh request";
+    vector<pair<Word, bool>> ls;
+    for (int i = 0; i < 8; i++) {
+        const Word *w = dict.random_word();
+        ls.push_back({*w, w->isFavorite});
+    }
+    home->setWordList(ls);
 }
 
 void MainWindow::handleFavoriteListFocus() {
@@ -297,8 +313,13 @@ void MainWindow::handleFavoriteListFocus() {
     }
     favoriteList->setWordList(ls);
 }
+
 void MainWindow::handleHistoryFocus() {
-    qDebug() << "History focus";
+    vector<pair<Word, bool>> ls;
+    for (auto *w : dict.searchHistory()) {
+        ls.push_back({*w, w->isFavorite});
+    }
+    history->setWordList(ls);
 }
 
 void MainWindow::handleEditorFocus() {
@@ -308,6 +329,8 @@ void MainWindow::handleEditorFocus() {
 
 void MainWindow::handleEditorReset() {
     qDebug() << "Reset dictionary";
+    dict.reset();
+    setupScene();
 }
 
 void MainWindow::handleEditorAdd(const QString &keyword,
@@ -342,7 +365,12 @@ void MainWindow::handleWordViewerFavorite(const QString &keyword, bool on) {
 
 vector<QString> MainWindow::getCompletionChoices(const QString &word) {
     // search dictionary for similar word
-    return {};
+    vector<QString> choices;
+    auto rs = dict.prefixMatch(word.toStdString(), 8);
+    for (const string& s : rs) {
+        choices.push_back(QString::fromStdString(s));
+    }
+    return choices;
 }
 
 void MainWindow::handleHomeCompletionRequest(const QString& word) {
@@ -356,11 +384,11 @@ void MainWindow::handleHomeCompletionRequest(const QString& word) {
 }
 void MainWindow::handleHistoryCompletionRequest(const QString& word) {
     auto choices = getCompletionChoices(word);
-    favoriteList->setCompletionChoices(choices);
+    history->setCompletionChoices(choices);
 }
 void MainWindow::handleFavoriteListCompletionRequest(const QString& word) {
     auto choices = getCompletionChoices(word);
-    history->setCompletionChoices(choices);
+    favoriteList->setCompletionChoices(choices);
 }
 
 void MainWindow::handleWordFavoriteToggle(const QString &keyword, bool state) {
