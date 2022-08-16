@@ -107,7 +107,7 @@ bool Dictionary<MAX_SIZE, getid, getchar>::is_valid_input(const string& s) const
             return false;
         }
     }
-    return true;
+    return s.length();
 }
 
 template <int MAX_SIZE, int (*getid)(char), char (*getchar)(int)>
