@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>692</width>
-    <height>463</height>
+    <width>738</width>
+    <height>525</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -54,10 +54,10 @@ QPushButton::hover {
       <widget class="QWidget" name="gridLayoutWidget">
        <property name="geometry">
         <rect>
-         <x>10</x>
-         <y>230</y>
+         <x>30</x>
+         <y>240</y>
          <width>651</width>
-         <height>171</height>
+         <height>191</height>
         </rect>
        </property>
        <layout class="QGridLayout" name="gridLayout">
@@ -118,10 +118,10 @@ QPushButton::hover {
       <widget class="QWidget" name="horizontalLayoutWidget_3">
        <property name="geometry">
         <rect>
-         <x>9</x>
-         <y>59</y>
+         <x>30</x>
+         <y>50</y>
          <width>651</width>
-         <height>101</height>
+         <height>131</height>
         </rect>
        </property>
        <layout class="QHBoxLayout" name="horizontalLayout_3">
