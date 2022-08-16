@@ -10,6 +10,8 @@ const string EngEngFavoritePath = "./dictionary-data/dictionary-eng-eng-favorite
 
 const string EngVieSavedPath = "./dictionary-data/dictionary-eng-vie-saved-data.txt";
 const string EngVieRawPath = "./dictionary-data/EngVie.txt";
+const string EngVieHistoryPath = "./dictionary-data/dictionary-eng-vie-history-saved-data.txt";
+const string EngVieFavoritePath = "./dictionary-data/dictionary-eng-vie-favorite-saved-data.txt";
 
 const string VieEngSavedPath = "./dictionary-data/dictionary-vie-eng-saved-data.txt";
 const string VieEngRawPath = "./dictionary-data/VieEng.txt";
@@ -43,14 +45,33 @@ void DictCollection::reset() {
     remove(EngEngSavedPath.c_str());
     remove(EngEngFavoritePath.c_str());
     remove(EngEngHistoryPath.c_str());
+
     remove(VieEngSavedPath.c_str());
     remove(VieEngFavoritePath.c_str());
     remove(VieEngHistoryPath.c_str());
 
+    remove(EngVieSavedPath.c_str());
+    remove(EngVieFavoritePath.c_str());
+    remove(EngVieHistoryPath.c_str());
+
+    remove(SlangSavedPath.c_str());
+    remove(SlangFavoritePath.c_str());
+    remove(SlangHistoryPath.c_str());
+
+    remove(EmoSavedPath.c_str());
+    remove(EmoFavoritePath.c_str());
+    remove(EmoHistoryPath.c_str());
+
     delete engEngDict;
-    engEngDict = new EngEngDictionary;
     delete vieEngDict;
+    delete engVieDict;
+    delete emoDict;
+    delete slangDict;
+    engEngDict = new EngEngDictionary;
     vieEngDict = new VieEngDictionary;
+    engVieDict = new EngVieDictionary;
+    emoDict = new EmojiDictionary;
+    slangDict = new SlangDictionary;
 
     init();
 }
@@ -96,6 +117,12 @@ void DictCollection::init() {
         readFromFile(EmoRawPath, fileData);
         insertData(*emoDict, fileData);
     }
+    if (fexist(EmoHistoryPath)) {
+        emoDict->loadSearchHistoryList(EmoHistoryPath);
+    }
+    if (fexist(EmoFavoritePath)) {
+        emoDict->loadFavouristList(EmoFavoritePath);
+    }
 
     // Slang Dictionary
     if (fexist(SlangSavedPath)) {
@@ -104,6 +131,28 @@ void DictCollection::init() {
         vector<pair<string, vector<pair<string, string>>>> fileData;
         readFromFile(SlangRawPath, fileData);
         insertData(*slangDict, fileData);
+    }
+    if (fexist(SlangHistoryPath)) {
+        slangDict->loadSearchHistoryList(SlangHistoryPath);
+    }
+    if (fexist(SlangFavoritePath)) {
+        slangDict->loadFavouristList(SlangFavoritePath);
+    }
+
+    // Eng - Vie Dictionary
+    if (fexist(EngVieSavedPath)) {
+        engVieDict->loadDataStructures(EngVieSavedPath);
+    } else {
+        vector<pair<string, vector<pair<string, string>>>> fileData;
+        readFromFile(EngVieRawPath, fileData);
+        insertData(*engVieDict, fileData);
+        cerr << fileData.size();
+    }
+    if (fexist(EngVieHistoryPath)) {
+        engVieDict->loadSearchHistoryList(EngVieHistoryPath);
+    }
+    if (fexist(EngVieFavoritePath)) {
+        engVieDict->loadFavouristList(EngVieFavoritePath);
     }
 }
 
@@ -115,6 +164,10 @@ void DictCollection::close() {
     vieEngDict->saveDataStructures(VieEngSavedPath);
     vieEngDict->saveFavouristList(VieEngFavoritePath);
     vieEngDict->saveSearchHistoryList(VieEngHistoryPath);
+
+    engVieDict->saveDataStructures(EngVieSavedPath);
+    engVieDict->saveFavouristList(EngVieFavoritePath);
+    engVieDict->saveSearchHistoryList(EngVieHistoryPath);
 
     emoDict->saveDataStructures(EmoSavedPath);
     emoDict->saveFavouristList(EmoFavoritePath);
