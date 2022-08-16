@@ -95,6 +95,11 @@ void WordViewer::setWord(Word w) {
         ui->defLayout->addWidget(w);
         addEditEntry(p.first, p.second);
     }
+    ui->favBtn->setChecked(w.isFavorite);
+    if (w.isFavorite)
+        ui->favBtn->setIcon(on_icon);
+    else
+        ui->favBtn->setIcon(off_icon);
 }
 
 void WordViewer::removeEdit(int i) {
