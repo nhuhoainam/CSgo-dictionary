@@ -20,8 +20,6 @@ MainWindow::MainWindow(QWidget *parent) :
     setupUI();
     connectSignalAndSlot();
 
-    // TODO
-    // Initalize dicts and assign curDict
     setupScene();
 }
 
