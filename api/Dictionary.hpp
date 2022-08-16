@@ -352,7 +352,7 @@ Word* Dictionary<MAX_SIZE, getid, getchar>::query(const Word& w) {
 template <int MAX_SIZE, int (*getid)(char), char (*getchar)(int)>
 Word* Dictionary<MAX_SIZE, getid, getchar>::find(const string& w) {
     if (w.empty()) return nullptr;
-    if (!is_valid_input(w.word)) return nullptr;
+    if (!is_valid_input(w)) return nullptr;
     TrieNode<MAX_SIZE, getid, getchar>* cur {pRoot};
     assert(cur);
     for (const char c : w) {
