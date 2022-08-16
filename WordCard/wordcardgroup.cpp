@@ -3,9 +3,9 @@
 #include "WordCard/wordcard.h"
 
 WordCardGroup::WordCardGroup(QWidget *parent)
-    : QWidget{parent}
+    : QFrame{parent}
 {
-    layout = new WordCardLayout;
+    layout = new FlowLayout(40, 30, 20);
     setLayout(layout);
 }
 
@@ -40,7 +40,7 @@ void WordCardGroup::addCard(const Word &word, bool favorite) {
 
 void WordCardGroup::clear() {
     wordList.clear();
-    layout->clearWidgets();
+    layout->clear();
 }
 
 WordCard *WordCardGroup::getCard(const QString &keyword) const {

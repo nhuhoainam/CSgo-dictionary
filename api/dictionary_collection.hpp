@@ -7,13 +7,15 @@
 typedef Dictionary<41, getid_EngEng, getchar_EngEng> EngEngDictionary;
 typedef Dictionary<41, getid_EngEng, getchar_EngEng> EngVieDictionary;
 typedef Dictionary<41, getid_EngEng, getchar_EngEng> VieEngDictionary;
-typedef Dictionary<41, getid_Emotion, getchar_Emotion> EmojiDictionary;
+typedef Dictionary<256, getid_Emotion, getchar_Emotion> EmojiDictionary;
+typedef Dictionary<256, getid_Emotion, getchar_Emotion> SlangDictionary;
 
 class DictCollection {
     EngEngDictionary *engEngDict;
     EngVieDictionary *engVieDict;
     VieEngDictionary *vieEngDict;
     EmojiDictionary *emoDict;
+    SlangDictionary *slangDict;
 
 public:
     enum DictType {
@@ -21,11 +23,12 @@ public:
         VieEng,
         EngVie,
         Emoji,
+        Slang,
     };
     DictType curDict;
     DictCollection();
     void init();
-    void initRaw();
+    void reset();
     void close();
     Word *find(const Word&);
     Word *query(const Word&);

@@ -239,13 +239,14 @@ template <int MAX_SIZE, int (*getid)(char), char (*getchar)(int)>
 Word* Dictionary<MAX_SIZE, getid, getchar>::insert(const Word& w) {
     if (w.word.empty()) return nullptr; // for the erasion's sake, inserting an empty word is not allowed!
     TrieNode<MAX_SIZE, getid, getchar>* cur {pRoot};
-    assert(cur);
     for (const char c : w.word) {
         int id {getid(c)};
         if (id == -1) return nullptr;
         else {
-            if (cur->nxt[id] == nullptr)
+            assert(cur);
+            if (cur->nxt[id] == nullptr) {
                 cur->nxt[id] = new TrieNode<MAX_SIZE, getid, getchar>();
+            }
             cur = cur->nxt[id];
         }
     }
@@ -552,7 +553,7 @@ void Dictionary<MAX_SIZE, getid, getchar>::saveFavouristList(string path) {
     for (auto& w: favoriteList) {
         fout << w->word << "\n";
     }
-    
+
     fout.close();
 }
 

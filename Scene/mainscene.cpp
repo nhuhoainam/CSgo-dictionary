@@ -65,6 +65,9 @@ void MainScene::setCompletionChoices(vector<QString> choices) {
         completePopup->addItem(item);
     }
 }
+void MainScene::changeDictionary(const QString &dict) {
+    ui->dictionaryBox->setCurrentText(dict);
+}
 
 void MainScene::setWordList(vector<pair<Word, bool>> words) {
     ui->wordGroup->clear();

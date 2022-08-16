@@ -32,6 +32,7 @@ public:
     void resizeEvent(QResizeEvent *event);
     void moveEvent(QMoveEvent *event);
     void keyPressEvent(QKeyEvent *event);
+    void changeDictionary(const QString &);
 
 protected:
     Ui::MainScene *ui;

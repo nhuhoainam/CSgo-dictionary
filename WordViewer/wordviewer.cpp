@@ -11,6 +11,8 @@ WordViewer::WordViewer(QWidget *parent) :
     ui(new Ui::WordViewer)
 {
     ui->setupUi(this);
+    on_icon = QIcon(":/images/img/bookmark_solid.svg");
+    off_icon = QIcon(":/images/img/bookmark_hollow.svg");
 
     connect(ui->deleteBtn,
             &QPushButton::clicked,
@@ -36,6 +38,13 @@ WordViewer::WordViewer(QWidget *parent) :
             this,
             [=](bool state) {
         auto keyword = ui->keyword->text();
+        if (state == true) {
+            ui->favBtn->setIcon(on_icon);
+            ui->favBtn->setChecked(true);
+        } else {
+            ui->favBtn->setIcon(off_icon);
+            ui->favBtn->setChecked(false);
+        }
         emit favoriteToggle(keyword, state);
     });
     connect(ui->addEntryBtn,

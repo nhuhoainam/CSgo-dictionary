@@ -95,7 +95,17 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Scene/mainscene.ui" line="157"/>
+        <location filename="Scene/mainscene.ui" line="125"/>
+        <source>Emotional</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Scene/mainscene.ui" line="130"/>
+        <source>Slang</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Scene/mainscene.ui" line="167"/>
         <source>Random new words</source>
         <translation type="unfinished"></translation>
     </message>
