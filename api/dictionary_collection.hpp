@@ -5,7 +5,7 @@
 #include "converter.h"
 
 typedef Dictionary<41, getid_EngEng, getchar_EngEng> EngEngDictionary;
-typedef Dictionary<41, getid_EngEng, getchar_EngEng> EngVieDictionary;
+typedef Dictionary<256, getid_Emotion, getchar_Emotion> EngVieDictionary;
 typedef Dictionary<41, getid_EngEng, getchar_EngEng> VieEngDictionary;
 typedef Dictionary<256, getid_Emotion, getchar_Emotion> EmojiDictionary;
 typedef Dictionary<256, getid_Emotion, getchar_Emotion> SlangDictionary;
