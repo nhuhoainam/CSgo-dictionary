@@ -20,5 +20,13 @@ WordViewerEntry::WordViewerEntry(const string &def, const string &example, QWidg
     ui->setupUi(this);
 
     ui->defLb->setText(QString::fromStdString(def));
-    ui->exampleLb->setText(QString::fromStdString(example));
+    string tmp = example;
+    if (example == "")
+        ui->exampleWidget->hide();
+    else {
+        size_t index = tmp.find('+');
+        if(index != std::string::npos)
+            tmp[index] = '\n';
+        ui->exampleLb->setText(QString::fromStdString(tmp));
+    }
 }

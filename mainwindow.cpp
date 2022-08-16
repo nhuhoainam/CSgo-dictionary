@@ -20,8 +20,6 @@ MainWindow::MainWindow(QWidget *parent) :
     setupUI();
     connectSignalAndSlot();
 
-    // TODO
-    // Initalize dicts and assign curDict
     setupScene();
 }
 
@@ -173,6 +171,15 @@ void MainWindow::connectSignalAndSlot() {
             &SingleWordView::favoriteToggle,
             this,
             &MainWindow::handleWordViewerFavorite);
+    connect(wordViewer,
+            &SingleWordView::searchRequest,
+            this,
+            &MainWindow::handleSearchRequest);
+    connect(wordViewer,
+            &SingleWordView::completionRequest,
+            this,
+            &MainWindow::handleWordViewerCompletionRequest);
+
     connect(favoriteList,
             &MainScene::dictionaryTypeChange,
             this,
@@ -199,9 +206,11 @@ void MainWindow::setupScene() {
     vector<pair<Word, bool>> homeList;
     vector<pair<Word, bool>> favList;
     vector<pair<Word, bool>> historyList;
+    homeWordLists.clear();
     for (int i = 0; i < 8; i++) {
         const Word *w = dict.random_word();
         homeList.push_back({*w, w->isFavorite});
+        homeWordLists.push_back(w->word);
 
         if (i < dict.favoriteList().size()) {
         const Word *f = dict.favoriteList()[i];
@@ -230,6 +239,7 @@ void MainWindow::handleDictionaryChanged(const QString &type) {
     } else if (type == "Slang") {
         dict.curDict = DictCollection::Slang;
     }
+    handleHomeRefresh();
     home->changeDictionary(type);
     favoriteList->changeDictionary(type);
     history->changeDictionary(type);
@@ -242,8 +252,9 @@ void MainWindow::handleSearchRequest(const QString& keyword) {
     // then set the word in singlewordview
     string s = keyword.toStdString();
     auto *q = dict.find(s);
-    wordViewer->setWord(*q);
+    curEditedWord = q->word;
     container->setCurrentIndex(6);
+    handleWordViewerFocus();
 
     // Deselect the sidebar to avoid confusion
     sidebar->setSelected(0, false);
@@ -295,13 +306,24 @@ void MainWindow::handleHistoryWordFavorite(const QString &keyword, bool on) {
 
 void MainWindow::handleHomeFocus() {
     qDebug() << "Home focus";
+    vector<pair<Word, bool>> ls;
+    for (const auto &s : homeWordLists) {
+        Word *word = dict.find(s);
+        if (!word)
+            continue;
+        ls.push_back({*word, word->isFavorite});
+    }
+    home->setWordList(ls);
 }
 
 void MainWindow::handleHomeRefresh() {
     vector<pair<Word, bool>> ls;
-    for (int i = 0; i < 8; i++) {
+    QSize size = home->size();
+    int n = size.width() / 80;
+    for (int i = 0; i < n; i++) {
         const Word *w = dict.random_word();
         ls.push_back({*w, w->isFavorite});
+        homeWordLists.push_back(w->word);
     }
     home->setWordList(ls);
 }
@@ -317,8 +339,12 @@ void MainWindow::handleFavoriteListFocus() {
 }
 
 void MainWindow::handleHistoryFocus() {
+    int count = 0;
     vector<pair<Word, bool>> ls;
     for (auto *w : dict.searchHistory()) {
+        count++;
+        if (count >= 50)
+            break;
         ls.push_back({*w, w->isFavorite});
     }
     history->setWordList(ls);
@@ -355,14 +381,35 @@ void MainWindow::handleGameFocus() {
 
 void MainWindow::handleWordViewerEdit(Word w) {
     qDebug() << "Edit " << QString::fromStdString(w.word);
+    Word *word = dict.find(w);
+    if (!word)
+        return;
+
+    *word = w;
     wordViewer->setWord(w);
 }
 void MainWindow::handleWordViewerDelete(const QString &keyword) {
     qDebug() << "Delete " << keyword;
+    Word *word = dict.find(keyword.toStdString());
+    if (!word)
+        return;
+    curEditedWord = "";
+    int at = 0;
+    for (int i = 0; i < homeWordLists.size(); i++) {
+        if (word->word == homeWordLists[i])
+            at = i;
+    }
+    homeWordLists.erase(homeWordLists.begin()+at);
+    homeWordLists.push_back(dict.random_word()->word);
+    dict.erase(word->word);
+    container->setCurrentIndex(0);
+    handleHomeFocus();
 }
+
 void MainWindow::handleWordViewerFavorite(const QString &keyword, bool on) {
     QString state = on ? "on" : "off";
     qDebug() << "Set favorite to " << state << " " << keyword;
+    handleWordFavoriteToggle(keyword, on);
 }
 
 vector<QString> MainWindow::getCompletionChoices(const QString &word) {
@@ -383,6 +430,11 @@ void MainWindow::handleHomeCompletionRequest(const QString& word) {
         choices.push_back(QString::fromStdString(s));
     }
     home->setCompletionChoices(choices);
+}
+
+void MainWindow::handleWordViewerCompletionRequest(const QString &word) {
+    auto choices = getCompletionChoices(word);
+    wordViewer->setCompletionChoices(choices);
 }
 void MainWindow::handleHistoryCompletionRequest(const QString& word) {
     auto choices = getCompletionChoices(word);
@@ -414,4 +466,13 @@ void MainWindow::handleQuizRequest() {
     qDebug() << "Question set generated:\n";
     for (int i = 0; i < 4; i++)
         qDebug() << QString::fromStdString(payload[i].first) << " " << QString::fromStdString(payload[i].second) << "\n";
+}
+
+void MainWindow::handleWordViewerFocus() {
+    Word *word = dict.find(curEditedWord);
+    if (!word) {
+        return;
+    }
+
+    wordViewer->setWord(*word);
 }

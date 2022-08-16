@@ -43,8 +43,6 @@ void readFromFile(string path, vector<pair<string, vector<pair<string, string>>>
         vector<pair<string, string>> wordData;
         int numDefs;
         fin >> numDefs;
-        if (numDefs < 0  || numDefs > 10)
-            cerr << numDefs << word << endl;
         fin.ignore();
         for (int j = 0; j < numDefs; j++) {
             string def;

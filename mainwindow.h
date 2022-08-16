@@ -42,6 +42,8 @@ private:
     Game *game;
     QStackedWidget *container;
     Sidebar *sidebar;
+    vector<string> homeWordLists;
+    string curEditedWord;
     DictCollection dict;
 
     void setupUI();
@@ -77,6 +79,8 @@ private slots:
     void handleWordViewerEdit(Word);
     void handleWordViewerDelete(const QString&);
     void handleWordViewerFavorite(const QString&, bool on);
+    void handleWordViewerFocus();
+    void handleWordViewerCompletionRequest(const QString &word);
 
     void handleSearchRequest(const QString&);
     void handleDictionaryChanged(const QString &);

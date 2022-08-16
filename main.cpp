@@ -26,6 +26,8 @@ int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
     MainWindow w;
+    w.setWindowTitle(QString("CSgo Dictionary"));
+    w.setWindowIcon(QIcon(":/images/img/CSgo.png"));
     w.show();
     return a.exec();
 }

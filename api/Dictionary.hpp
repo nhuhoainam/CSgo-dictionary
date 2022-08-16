@@ -50,14 +50,8 @@ public:
     Dictionary();
     ~Dictionary();
 
-    // file structure:
-    // 
-    // void saveToFile(string path) {
-    //     fstream fout(path);
-
-    //     fin.close();
-    // }
-    // void loadFromFile(string path);
+    // check bad input
+    bool is_valid_input(const string&) const;
 
     // insert a new word (word + definitions + corresponding examples) to the dictionary
     Word* insert(const Word&);
@@ -105,6 +99,16 @@ public:
 
     void loadSearchHistoryList(string);
 };
+
+template <int MAX_SIZE, int (*getid)(char), char (*getchar)(int)>
+bool Dictionary<MAX_SIZE, getid, getchar>::is_valid_input(const string& s) const {
+    for (int i = 0; i < s.length(); i++) {
+        if (getid(s[i]) == -1) {
+            return false;
+        }
+    }
+    return s.length();
+}
 
 template <int MAX_SIZE, int (*getid)(char), char (*getchar)(int)>
 TrieNode<MAX_SIZE, getid, getchar>::TrieNode() {
@@ -239,13 +243,10 @@ template <int MAX_SIZE, int (*getid)(char), char (*getchar)(int)>
 Word* Dictionary<MAX_SIZE, getid, getchar>::insert(const Word& w) {
     if (w.word.empty()) return nullptr; // for the erasion's sake, inserting an empty word is not allowed!
     TrieNode<MAX_SIZE, getid, getchar>* cur {pRoot};
-    cerr << w.word << endl;
     for (const char c : w.word) {
-        cerr << getid(c) << " ";
         int id {getid(c)};
         if (id == -1) return nullptr;
         else {
-            cerr << __LINE__ <<endl;
             assert(cur);
             if (cur->nxt[id] == nullptr) {
                 cur->nxt[id] = new TrieNode<MAX_SIZE, getid, getchar>();
@@ -308,6 +309,7 @@ Word* Dictionary<MAX_SIZE, getid, getchar>::insert(const string& w, const string
 template <int MAX_SIZE, int (*getid)(char), char (*getchar)(int)>
 Word* Dictionary<MAX_SIZE, getid, getchar>::find(const Word& w) {
     if (w.word.empty()) return nullptr;
+    if (!is_valid_input(w.word)) return nullptr;
     TrieNode<MAX_SIZE, getid, getchar>* cur {pRoot};
     assert(cur);
     for (const char c : w.word) {
@@ -329,6 +331,7 @@ Word* Dictionary<MAX_SIZE, getid, getchar>::find(const Word& w) {
 template <int MAX_SIZE, int (*getid)(char), char (*getchar)(int)>
 Word* Dictionary<MAX_SIZE, getid, getchar>::query(const Word& w) {
     if (w.word.empty()) return nullptr;
+    if (!is_valid_input(w.word)) return nullptr;
     TrieNode<MAX_SIZE, getid, getchar>* cur {pRoot};
     assert(cur);
     for (const char c : w.word) {
@@ -349,6 +352,7 @@ Word* Dictionary<MAX_SIZE, getid, getchar>::query(const Word& w) {
 template <int MAX_SIZE, int (*getid)(char), char (*getchar)(int)>
 Word* Dictionary<MAX_SIZE, getid, getchar>::find(const string& w) {
     if (w.empty()) return nullptr;
+    if (!is_valid_input(w)) return nullptr;
     TrieNode<MAX_SIZE, getid, getchar>* cur {pRoot};
     assert(cur);
     for (const char c : w) {
@@ -556,7 +560,7 @@ void Dictionary<MAX_SIZE, getid, getchar>::saveFavouristList(string path) {
     for (auto& w: favoriteList) {
         fout << w->word << "\n";
     }
-    
+
     fout.close();
 }
 

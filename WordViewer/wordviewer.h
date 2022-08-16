@@ -24,7 +24,6 @@ public:
     ~WordViewer();
 
     void paintEvent(QPaintEvent*) override;
-    void setWord(const string &key, std::vector<pair<string, string>> defs, bool favState);
     void setWord(Word w);
     vector<WordEdit *> editGroup;
 

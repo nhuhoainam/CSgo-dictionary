@@ -1,4 +1,4 @@
-23415
+23396
 @a
 3
 -O; oh (exclamation of surprise, regret, ect.)
@@ -328,12 +328,6 @@
 -To feel compassion for
 1
 =thấy lũ trẻ bơ vơ, ai cũng ái ngại+at the sight of those waifs and strays, everyone feels compassion for them
-@
-2
--ái nữ
-0
--Daughter
-0
 @ai nhi lan
 1
 -Ireland
@@ -906,12 +900,6 @@
 -Glowing tunic, dress
 1
 =áo dài cứ tưởng là sang bởi không áo ngắn phải mang áo dài+tunics are no status symbol, they wear them for they have no short jackets
-@
-2
--áo giáp
-0
--Armour
-0
 @ao giap
 1
 -cuirass; armour
@@ -1139,14 +1127,6 @@
 1
 -To take stealthy rake off, to get pickings, to appropriate part of profits
 0
-@
-2
--ăn cánh
-0
--To be in collusion with, to be in confederacy with, to be in cahoots with, to be hand in glove with
-2
-=người ta đồn rằng một vài nhân viên thuế vụ đã ăn cánh với một băng buôn lậu để làm bậy+it is rumoured that some taxmen have been in collusion with a band of smugglers for evil-doing
-=những kẻ bất lương này rất ăn cánh với nhau+these evildoers are as thick as thieves
 @an ca
 1
 -to win a bet
@@ -6472,13 +6452,6 @@
 2
 =tật bẩm sinh+an innate defect
 =thiên tài là do cố gắng bền bỉ lâu dài, đâu phải một thứ bẩm sinh+genius is the result of long and enduring efforts and not something innate
-@
-2
--bẩm tính
-0
--Innate character
-1
-=bẩm tính hiền lành+to be innately good-natured
 @bam tinh
 1
 -disposition; innate character
@@ -9858,12 +9831,6 @@
 @binh doan
 1
 -Multi-battalion (multi-regiment, multi-division, multi-army), corps (unit)
-0
-@
-2
--binh đội
-0
--từ cũ, nghĩa cũ) Troops
 0
 @binh gia
 1
@@ -14980,13 +14947,6 @@
 -To cut off, to separate, to isolate
 1
 =vì ở cách bức nhau nên ít khi lui tới+their houses being cut off from one another, they see little of each other
-@
-2
--cách chức
-0
--To dismiss from office, to relieve of one's function
-1
-=cách chức một giám đốc không làm tròn trách nhiệm+to dismiss a director for lack of the sense of responsibility
 @cach cau tao
 1
 -structure
@@ -17835,12 +17795,6 @@
 1
 -To take the helm, to be at the wheel, to hold the steering wheel, to steer
 0
-@
-2
--cẩm lai
-0
--Barian kingwood
-0
 @cam long
 1
 -To hold back one's feeling
@@ -18023,12 +17977,6 @@
 -Forbidden citadel
 1
 ="Cấm thành bỗng chốc xôn xao chiến trường " the forbidden citadel was all of a sudden seized by the flurry of fighting
-@
-2
--cấm vận
-0
--To put an embargo on
-0
 @cam vao
 1
 -No entry; No admittance
@@ -21342,12 +21290,6 @@
 =sợi len chập bốn+four-ply wool thread
 -To put in direct contact (electric wire); to tangle (a watch hairspring..)
 0
-@
-2
--chạp mả
-0
--Visit one's ancestor tombs (at the end of the Lunar Year)
-0
 @chap cha chap choang
 1
 -xem chập choạng
@@ -21777,18 +21719,6 @@
 =quán này chém tợn+this inn sticks it on
 =chém to kho mặn+to attach more importance to substance than to form
 =chém tre không dè đầu mặt+to do something with little regard for the feeling of the people concerned
-@
-4
--chêm
-0
--To wedge
-1
-=chêm cán cuốc+to wedge a hoe handle
--To cut in
-1
-=ngồi nghe thỉnh thoảng chêm vào một câu+to listen and cut in from time to time with a sentence
--Wedge
-0
 @chem giet
 1
 -To massacre, to slaughter
@@ -22881,12 +22811,6 @@
 @chien dau
 1
 -To fight, to combat, to struggle, to militate
-0
-@
-2
--chiến địa
-0
--Battlefield
 0
 @chien ham
 1
@@ -25548,20 +25472,6 @@
 -To drop (slip) quickly and neatly
 1
 =chuồi gói quà vào túi+to drop quickly and neatly a present in a wrapping into (someone's) pocket
-@
-4
--chuỗi
-0
--String
-2
-=chuỗi ngọc+a string of pearls
-=một chuỗi tiền xu+a string of coins
--Succession, round, peal
-2
-=chuỗi ngày thơ ấu+a succession (round) of childhood days
-=vang lên những chuỗi cười+to ring with peals of laughter
--Series
-0
 @chuoi
 1
 -chain; string; series
@@ -29891,13 +29801,6 @@
 1
 -Bring wedding offerings (according to traditional rituals) to the bridés
 0
-@
-2
--dẫn dắt
-0
--Guide, conduct, lead up to, direct
-1
-=Biết cách dẫn dắt câu chuyện+To know how to direct(to lead) the conversation up to (some subject)
 @dan dau
 1
 -to lead; to come foremost
@@ -32668,12 +32571,6 @@
 -Give full scope to one's abilities
 1
 =Đất dụng võ+a wide field of action (where one can give full scope to one's abilities)
-@
-2
--dụng ý
-0
--to intend to
-0
 @dung y
 1
 -to intend to
@@ -34597,12 +34494,6 @@
 -Make up one's mind t, reconcile oneself to, resign oneself tọ
 1
 =Không có áo bông đành chịu rét+For want of a cotton-padded coat, he resigned himself to suffer from cold
-@
-2
--đanh đá
-0
--Sharp-tongued, shrewish
-0
 @danh da
 1
 -Feel easy
@@ -38784,13 +38675,6 @@
 -Infer (fro what is known)
 1
 =Cũng đoán chừng thế thôi, chưa chắc đã đúng+To infer a conclusion just like that without any certainly of correctness
-@
-2
--đoán định
-0
--Udge and decide
-1
-=Giữ toàn quyền đoán định+To hold a full right to udge ad decide
 @doan gia
 1
 -Make a positive affirmation o uncertainn grounds
@@ -44217,12 +44101,6 @@
 -lay down one's arms
 1
 =Thà chết không chịu giải giáp+Would rather die than lay down one''s arms; to perfer death to surrennder
-@
-2
--giải hạn
-0
--Relieve (someone) of his run of bad luck
-0
 @giai hoa
 1
 -Mediate a peace (between two parties), act a peace-marker
@@ -44622,14 +44500,6 @@
 -Streamline a staff by reducing it
 1
 =Giản chính bộ máy hành chính cồng kềnh+To streamline a cumbersome administrative machinery br reducing its staff
-@
-2
--giản dị
-0
--easy; simple; plain
-2
-=đời sống giản dị+The simple life
-=giản dị hóa+To simplity
 @gian di
 1
 -easy; simple; plain
@@ -53351,13 +53221,6 @@
 1
 -Resuscitative, having a resuscitative virtue (nói về phương thuốc)
 0
-@
-2
--Hồi giáo
-0
--Mohammedanism, Islam
-1
-=Nhà thờ Hồi giáo+An Islam temple, a mosque
 @hoi giao
 1
 -Mohammedanism, Islam
@@ -53486,13 +53349,6 @@
 -Show repentance and desire to redeem one's faults
 1
 =Khoan dung đối với người biết hối cải+To lenient to those who show repentance and desire to redeem their faults
-@
-2
--hối đoái
-0
--exchange
-1
-=sở hối đoái+Foreign exchange office
 @hoi doai
 1
 -exchange
@@ -65374,7 +65230,7 @@
 1
 -(từ cũ; nghĩa cũ) Prostitues' medical service (thời thuộc pháp)
 0
-@ lui
+@lui
 1
 -to move back; to fall back
 3
@@ -65974,7 +65830,7 @@
 2
 =bốc lửa+to catch fire
 =lửa tắt+dead fire
-@ lua binh
+@lua binh
 1
 -(từ cũ; nghĩa cũ) Fine and sword, war, warfare
 0
@@ -71787,7 +71643,7 @@
 1
 -Various ranks and grades (in a classification scale of civil servants...)
 0
-@ ngai
+@ngai
 1
 -throne
 0
@@ -71951,7 +71807,7 @@
 1
 -(Do something) in one's own sweet time (way); at will; fearless of nobody
 0
-@ ngang diem
+@ngang diem
 1
 -Be equal in score
 0
@@ -74751,7 +74607,7 @@
 0
 -The Vietnamese language belongs to a language group which was established quite a long time ago in East Asia. However, changes in material conditions over many centuries and the increasing demands of cultural life increased the development of the Vietnamese language, both spoken and written. While adopting many elements of the Chinese language, the Vietnamese people creatively Vietnamized many Chinese words, and they gradually became Han-Viet (Chinese-Vietnamese), incorporated alongside purely Vietnamese words. The Vietnamization was not only applied to the Chinese language however, but also to the French and other languages to create a great, diversified, vital vocabulary for the Vietnamese language
 0
-@ ngon ngu hoc
+@ngon ngu hoc
 1
 -Linguistics
 1
@@ -75535,7 +75391,7 @@
 0
 -Be itching to strike (someone)
 0
-@ ngua tiet
+@ngua tiet
 1
 -(khẩu ngữ) Have one's blood up, be fiare by one's anger to action, flare up
 1
@@ -94012,7 +93868,7 @@
 1
 -navel
 0
-@ ron lai
+@ron lai
 1
 -Make another effort and stay on, sit on and wait
 0
@@ -107170,7 +107026,7 @@
 0
 -damage
 0
-@ ton that
+@ton that
 1
 -loss
 0
