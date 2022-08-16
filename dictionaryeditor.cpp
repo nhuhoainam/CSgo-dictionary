@@ -69,6 +69,7 @@ void DictionaryEditor::addNewDefEdit() {
             auto item = defEditGroup[i];
             if (item.second == newRemoveBtn) {
                 removeEdit(i);
+                removeExample(i);
             }
         }
     });
@@ -95,6 +96,7 @@ void DictionaryEditor::addNewExEdit() {
         for (int i = 0; i < exampleEditGroup.size(); i++) {
             auto item = exampleEditGroup[i];
             if (item.second == newRemoveBtn) {
+                removeEdit(i);
                 removeExample(i);
             }
         }
